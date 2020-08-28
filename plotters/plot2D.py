@@ -121,20 +121,21 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
         line.set_alpha(1.0)
     
     # Save plot as pdf
-    if "pdf" in fileFormat:
-        plt.savefig(dir_fileName + ".pdf", format="pdf", transparent=transparent) 
-    
-    # Save plot as png
-    elif "png" in fileFormat:
-        plt.savefig(dir_fileName + ".png", format="png", transparent=transparent)  
+    if not fileFormat == None:
+        if "pdf" in fileFormat:
+            plt.savefig(dir_fileName + ".pdf", format="pdf", transparent=transparent) 
+        
+        # Save plot as png
+        elif "png" in fileFormat:
+            plt.savefig(dir_fileName + ".png", format="png", transparent=transparent)  
 
-    # Save plot as 
-    elif "svg" in fileFormat:
-        plt.savefig(dir_fileName + ".svg", format="svg", transparent=transparent)
+        # Save plot as 
+        elif "svg" in fileFormat:
+            plt.savefig(dir_fileName + ".svg", format="svg", transparent=transparent)
 
-    # Save plot with pickle
-    elif "pkl" in fileFormat:
-        pkl.dump(ax, open(dir_fileName + ".pickle", "wb"))
+        # Save plot with pickle
+        elif "pkl" in fileFormat:
+            pkl.dump(ax, open(dir_fileName + ".pickle", "wb"))
     
     # Show plot in interactive mode
     else:
