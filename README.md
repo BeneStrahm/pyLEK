@@ -22,9 +22,10 @@ When adding new functions always respect the following template and the style gu
 
     # Example
     def getList(dict): 
-        """Get keys of a dictionary				# Description of function
+        """Get keys of a dictionary				    # Description of function
+
         :param dict: Dictonary to read from			# Type & description of input
-        :rtype keys: List of keys in the dictionary		# Type & description of return
+        :rtype keys: List of keys in the dictionary	# Type & description of return
         """
         return dict.keys() 					# Actual Function statements
 
