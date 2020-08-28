@@ -1,7 +1,32 @@
 # ILEK-py-helpers
 
 # I. Template
-When adding new functions always respect the template file and the style guideline. Otherwise you're file will be rejected. Keep the functions simple, short and comment when necessary.
+When adding new functions always respect the following template and the style guideline. Otherwise you're file will be rejected. Keep the functions simple, short and comment when necessary.
+
+    # ------------------------------------------------------------------------------
+    # Description:  ** Add here short description **
+    # Author:       ** Add here author's e-mail adress **
+    # Created:      ** Add here the date of creation **
+    # Execution:    Import functions / collections (from helpers.util import func)
+    # ------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------
+    # Libraries
+    # ------------------------------------------------------------------------------                                                          
+
+    # Example
+    import scipy.io
+
+    # ------------------------------------------------------------------------------
+    # Functions
+    # ------------------------------------------------------------------------------
+
+    # Example
+    def getList(dict): 
+        """Get keys of a dictionary				# Description of function
+        :param dict: Dictonary to read from			# Type & description of input
+        :rtype keys: List of keys in the dictionary		# Type & description of return
+        """
+        return dict.keys() 					# Actual Function statements
 
 # II. Style guideline:
 https://www.python.org/dev/peps/pep-0008/
