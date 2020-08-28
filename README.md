@@ -1,7 +1,7 @@
 # ILEK-py-helpers
 
 # I. Template
-When adding new functions always respect the template file and the style guideline in II.
+When adding new functions always respect the template file and the style guideline. Otherwise you're file will be rejected. Keep the functions simple, short and comment when necessary.
 
 # II. Style guideline:
 https://www.python.org/dev/peps/pep-0008/
