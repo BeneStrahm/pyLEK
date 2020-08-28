@@ -9,6 +9,8 @@
 # ------------------------------------------------------------------------------  
 
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pickle as pkl
 import numpy as np
 
 # ----------------------------------------------------------------------
@@ -25,6 +27,7 @@ import plotters.pythonHelperPlot2DStyle as pltstyle
 # - 'linestyle'
 #
 # colorScheme
+# - 'UniS'
 # - 'Monochrome'
 #
 # ----------------------------------------------------------------------
@@ -33,8 +36,8 @@ import plotters.pythonHelperPlot2DStyle as pltstyle
 
 def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None, 
            xlim=[], ylim=[], xscale='linear', yscale='linear',
-           colorScheme='Monochrome', variation='color',
-           fileFormat=None, transparent=True, alphaLines=1.0):
+           style_dict={}, colorScheme='Monochrome', variation='color',
+           fileFormat=None, transparent=True, usetex=False, alphaLines=1.0):
 
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
 
@@ -50,12 +53,20 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param ylim: list w/ limits  for y axis [ymin, ymax]
     :param xscale: string w/ scales acc. to matplotlib
     :param yscale: string w/ scales acc. to matplotlib
+    :param style_dict: dict w/ settings to overwrite mplstyle-template
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
-    :param fileFormat: string ('svg', 'png', 'pdf', None)
-    :param transparent: bool true if background should be transparent
+    :param fileFormat: list w/ strings ('svg', 'png', 'pdf', 'pkl', None)
+    :param usetex: bool true if background should be transparent
+    :param transparent: bool true to use Latex-text layout
     :param alphaLines: float w/ line thickness
     """
+
+    # Modify plot styles 
+    pltstyle.modifyPlotStyle(style_dict)
+
+    # Get the plot styles
+    pltstyle.retrievePlotStyle(style_dict)
 
     # Create color / linestyles
     customCycler = pltstyle.setLineStyle(colorScheme, variation)
@@ -63,6 +74,9 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
     # Prepare Plots
     x = np.transpose(x)
     y = np.transpose(y)
+
+    # Set to use Latex-text layout
+    mpl.rc('text', usetex=usetex)
 
     # An empty figure with one axe 
     fig, ax = plt.subplots()  
@@ -107,21 +121,55 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
         line.set_alpha(1.0)
     
     # Save plot as pdf
-    if fileFormat=="pdf":
+    if "pdf" in fileFormat:
         plt.savefig(dir_fileName + ".pdf", format="pdf", transparent=transparent) 
     
     # Save plot as png
-    elif fileFormat=="png":
+    elif "png" in fileFormat:
         plt.savefig(dir_fileName + ".png", format="png", transparent=transparent)  
 
     # Save plot as 
-    elif fileFormat=="svg":
+    elif "svg" in fileFormat:
         plt.savefig(dir_fileName + ".svg", format="svg", transparent=transparent)
+
+    # Save plot with pickle
+    elif "pkl" in fileFormat:
+        pkl.dump(ax, open(dir_fileName + ".pickle", "wb"))
     
     # Show plot in interactive mode
     else:
         plt.show()
+    
+    # Clean up mplstyles
+    pltstyle.cleanPlotStyle()
 
     # Clean up everything
     plt.clf()
     plt.close()
+    
+
+# ----------------------------------------------------------------------
+# Tests
+# ----------------------------------------------------------------------
+
+def testPlot():
+    x = np.linspace(0, 2 * np.pi, 50)
+    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
+    y = np.transpose([np.sin(x + phi) for phi in offsets])
+
+    xlabel = "Test X Axis"
+    ylabel = "Test Y Axis"
+
+    title = "Test Title"
+
+    legend = ["testdata1","testdata2","testdata3","testdata4"]
+
+    dir_fileName = "Testfile.svg"
+
+    # Test dictionary for parameters
+    style_dict = {"lines.linewidth":1.5}
+
+    plot2D([x], [y[:,0],y[:,1],y[:,2],y[:,3]], xlabel, ylabel, title, legend, dir_fileName, 
+           style_dict=style_dict)
+
+    plt.show()
