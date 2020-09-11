@@ -17,27 +17,17 @@ import numpy as np
 # Imported functions
 # ----------------------------------------------------------------------
 
-import plotters.pythonHelperPlot2DStyle as pltstyle
+import plotters.plotStyle.colorCycler as colorCycler
+import plotters.plotStyle.mplStyle as mplStyle
 
-# ----------------------------------------------------------------------
-# Parameter List
-# ----------------------------------------------------------------------
-# variation
-# - 'color'
-# - 'linestyle'
-#
-# colorScheme
-# - 'UniS'
-# - 'Monochrome'
-#
 # ----------------------------------------------------------------------
 # Functions
 # ----------------------------------------------------------------------
 
-def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None, 
+def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None, 
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, colorScheme='Monochrome', variation='color',
-           fileFormat=None, transparent=True, usetex=False, alphaLines=1.0):
+           savePlt=True, savePkl=False, showPlt=False):
 
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
 
@@ -48,7 +38,7 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param title: string w/ plot title
     :param legend: list w/ legends [n]
     :param dir_fileName: string w/ Directory / Filename to save to,  
-                         must be specified when fileFormat is specified
+                         must be specified when savePlt is specified
     :param xlim: list w/ limits  for x axis [xmin, xmax]
     :param ylim: list w/ limits  for y axis [ymin, ymax]
     :param xscale: string w/ scales acc. to matplotlib
@@ -56,27 +46,23 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param style_dict: dict w/ settings to overwrite mplstyle-template
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
-    :param fileFormat: list w/ strings ('svg', 'png', 'pdf', 'pkl', None)
-    :param usetex: bool true if background should be transparent
-    :param transparent: bool true to use Latex-text layout
-    :param alphaLines: float w/ line thickness
+    :param savePkl: bool true to save plot 
+    :param savePkl: bool true to save as .pickle
+    :param showPlt: bool true show plot in interactive mode
     """
 
     # Modify plot styles 
-    pltstyle.modifyPlotStyle(style_dict)
+    mplStyle.modifyPlotStyle(style_dict)
 
     # Get the plot styles
-    pltstyle.retrievePlotStyle(style_dict)
+    mplStyle.retrievePlotStyle(style_dict)
 
     # Create color / linestyles
-    customCycler = pltstyle.setLineStyle(colorScheme, variation)
+    customCycler = colorCycler.createCycler(colorScheme, variation)
 
     # Prepare Plots
     x = np.transpose(x)
     y = np.transpose(y)
-
-    # Set to use Latex-text layout
-    mpl.rc('text', usetex=usetex)
 
     # An empty figure with one axe 
     fig, ax = plt.subplots()  
@@ -102,7 +88,7 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
     ax.set_prop_cycle(customCycler)
 
     # 2D - Plot of the axe-object  
-    ax.plot(x,y,label ='label', alpha=alphaLines) 
+    ax.plot(x,y,label ='label') 
 
     # Correctly ordering legend entries by replacing labels with entries 
     # from the legend list. If this is not done there is not order in
@@ -120,29 +106,26 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
         line.set_linewidth(1.5)
         line.set_alpha(1.0)
     
-    # Save plot as pdf
-    if not fileFormat == None:
-        if "pdf" in fileFormat:
-            plt.savefig(dir_fileName + ".pdf", format="pdf", transparent=transparent) 
-        
-        # Save plot as png
-        elif "png" in fileFormat:
-            plt.savefig(dir_fileName + ".png", format="png", transparent=transparent)  
-
-        # Save plot as 
-        elif "svg" in fileFormat:
-            plt.savefig(dir_fileName + ".svg", format="svg", transparent=transparent)
-
-        # Save plot with pickle
-        elif "pkl" in fileFormat:
+    # Save plot 
+    if savePlt == True:
+        try:
+            plt.savefig(dir_fileName)
+        except ValueError:
+            print("Error saving plot: To save plot specify a file name")
+    
+    # Save plot with pickle
+    if savePkl == True:
+        try:
             pkl.dump(ax, open(dir_fileName + ".pickle", "wb"))
+        except TypeError:
+            print("Error dumping pickle: To dump pickle specify a file name")
     
     # Show plot in interactive mode
-    else:
+    if showPlt == True:
         plt.show()
     
     # Clean up mplstyles
-    pltstyle.cleanPlotStyle()
+    mplStyle.cleanPlotStyle()
 
     # Clean up everything
     plt.clf()
@@ -156,7 +139,7 @@ def plot2D(x,y, xlabel, ylabel, title, legend, dir_fileName=None,
 def testPlot():
     x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = np.transpose([np.sin(x + phi) for phi in offsets])
+    y = [np.sin(x + phi) for phi in offsets]
 
     xlabel = "Test X Axis"
     ylabel = "Test Y Axis"
@@ -165,12 +148,15 @@ def testPlot():
 
     legend = ["testdata1","testdata2","testdata3","testdata4"]
 
-    dir_fileName = "Testfile.svg"
-
     # Test dictionary for parameters
-    style_dict = {"lines.linewidth":1.5}
+    style_dict = {"lines.linewidth":5, "savefig.format":"pdf"}
 
-    plot2D([x], [y[:,0],y[:,1],y[:,2],y[:,3]], xlabel, ylabel, title, legend, dir_fileName, 
-           style_dict=style_dict)
+    dir_fileName = "test"
 
-    plt.show()
+    plot2D([x, x, x, x] , y, xlabel, ylabel, title, legend, dir_fileName=None, 
+           xlim=[], ylim=[], xscale='linear', yscale='linear',
+           style_dict=style_dict, colorScheme='Monochrome', variation='color',
+           savePlt=True, savePkl=True, showPlt=True)
+
+testPlot()
+
