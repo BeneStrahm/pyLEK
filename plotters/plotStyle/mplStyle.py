@@ -15,22 +15,22 @@ import os
 # Functions
 # ----------------------------------------------------------------------
 
-def retrievePlotStyle(style_dict):
+def retrievePlotStyle(style_dict, mpl):
     # Retrieving the current plot settings
     scriptDir = os.path.dirname(os.path.realpath(__file__))
     if bool(style_dict):
-        plt.style.use(scriptDir + '/temp.mplstyle')
+        plt.style.use(scriptDir + '/' + mpl + '_temp.mplstyle')
     else:
-        plt.style.use(scriptDir + '/default.mplstyle')
+        plt.style.use(scriptDir + '/' + mpl + '.mplstyle')
 
-def modifyPlotStyle(style_dict):
+def modifyPlotStyle(style_dict, mpl):
     scriptDir = os.path.dirname(os.path.realpath(__file__))
     # Modify the plot settings
     # mplstyle-format:  key : val # optional comment
 
     # Read in the file and replace lines by key - values pair
     filedata = []
-    with open(scriptDir + '/default.mplstyle', 'r') as file :
+    with open(scriptDir + '/' + mpl + '.mplstyle', 'r') as file :
         for line in file:
             skipline = False
             for key, value in style_dict.items():
@@ -41,11 +41,11 @@ def modifyPlotStyle(style_dict):
                 filedata.append(line)    
 
     # Write the file out again
-    with open(scriptDir + '/temp.mplstyle', 'w') as file:
+    with open(scriptDir + '/' + mpl + '_temp.mplstyle', 'w') as file:
         for line in filedata:
             file.write(line)
 
-def cleanPlotStyle():
+def cleanPlotStyle(mpl):
     scriptDir = os.path.dirname(os.path.realpath(__file__))
     # delete temporary mplstyles
-    os.remove(scriptDir + '/temp.mplstyle') 
+    os.remove(scriptDir + '/' + mpl + '_temp.mplstyle') 

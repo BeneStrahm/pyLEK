@@ -26,7 +26,7 @@ import plotters.plotStyle.mplStyle as mplStyle
 
 def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None, 
            xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict={}, colorScheme='Monochrome', variation='color',
+           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=True, savePkl=False, showPlt=False):
 
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
@@ -44,6 +44,7 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param xscale: string w/ scales acc. to matplotlib
     :param yscale: string w/ scales acc. to matplotlib
     :param style_dict: dict w/ settings to overwrite mplstyle-template
+    :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
     :param savePkl: bool true to save plot 
@@ -52,10 +53,10 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     """
 
     # Modify plot styles 
-    mplStyle.modifyPlotStyle(style_dict)
+    mplStyle.modifyPlotStyle(style_dict, mpl)
 
     # Get the plot styles
-    mplStyle.retrievePlotStyle(style_dict)
+    mplStyle.retrievePlotStyle(style_dict, mpl)
 
     # Create color / linestyles
     customCycler = colorCycler.createCycler(colorScheme, variation)
@@ -125,7 +126,7 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
         plt.show()
     
     # Clean up mplstyles
-    mplStyle.cleanPlotStyle()
+    mplStyle.cleanPlotStyle(mpl)
 
     # Clean up everything
     plt.clf()
@@ -153,10 +154,8 @@ def testPlot():
 
     dir_fileName = "test"
 
-    plot2D([x, x, x, x] , y, xlabel, ylabel, title, legend, dir_fileName=None, 
-           xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict=style_dict, colorScheme='Monochrome', variation='color',
+    plot2D([x, x, x, x] , y, xlabel, ylabel, title, legend, dir_fileName=dir_fileName,
+           style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=True, savePkl=True, showPlt=True)
 
 testPlot()
-
