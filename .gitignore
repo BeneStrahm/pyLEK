@@ -500,3 +500,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Plot Styles, except custom one
+*.mplstyle
+!custom.mplstyle
