@@ -39,7 +39,7 @@ https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-wind
 2. import modules, z.B: from helper import pyExtras
 
 # IV. Linked Repositories (Submodules)
-The repository is using linked repositories created by third-party authors. In order to setup these submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
+The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
 ## a) robbievanleeuwen/feastruct
 Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
