@@ -22,12 +22,12 @@ When adding new functions always respect the following template and the style gu
 
     # Example
     def getList(dict): 
-        """Get keys of a dictionary				    # Description of function
+        """Get keys of a dictionary				        # Description of function
 
-        :param dict: Dictonary to read from			# Type & description of input
-        :rtype keys: List of keys in the dictionary	# Type & description of return
+        :param dict: Dictonary to read from			    # Type & description of input
+        :rtype keys: List of keys in the dictionary	    # Type & description of return
         """
-        return dict.keys() 					# Actual Function statements
+        return dict.keys() 					            # Actual Function statements
 
 # II. Style guideline:
 https://www.python.org/dev/peps/pep-0008/
@@ -38,3 +38,16 @@ https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-wind
 
 2. import modules, z.B: from helper import pyExtras
 
+# IV. Linked Repositories (Submodules)
+The repository is using linked repositories created by third-party authors. In order to setup these submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+## a) robbievanleeuwen/feastruct
+Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
+
+In order to use the module:
+
+1. Open "cmd" as Administrator
+2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\ILEK-py-helpers\feastruct) 
+3. Install with py setup.py install
+
+For the usage check out feastruct/examples
