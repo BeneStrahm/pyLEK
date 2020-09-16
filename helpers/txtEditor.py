@@ -12,7 +12,7 @@ import csv
 # Functions
 # ------------------------------------------------------------------------------
       
-def writeToTxt(fname, txtline, writeMode='w'):
+def writeToTxt(fname, txtline, writeMode='a'):
     """Writing lines to .txt files
     :param fname: str w/ name of .txt file to write to
     :param txtline: str w/ text content
