@@ -18,7 +18,7 @@ def writeToTxt(fname, txtline, writeMode='a'):
     :param txtline: str w/ text content
     :param writeMode: str w/ how to open file ('a', 'w')
     """
-    with open(fname, writeMode) as txt:
+    with open(fname, writeMode, newline='\n') as txt:
         txt_writer = csv.writer(txt, delimiter='\t', quotechar='"', quoting=csv.QUOTE_NONE)
         txt_writer.writerow([txtline])
 
