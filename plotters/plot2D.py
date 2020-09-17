@@ -27,7 +27,7 @@ import plotters.plotStyle.mplStyle as mplStyle
 def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None, 
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
-           savePlt=True, savePkl=False, showPlt=False):
+           savePlt=False, savePkl=False, showPlt=False):
 
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
 
@@ -158,4 +158,3 @@ def testPlot():
            style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=True, savePkl=True, showPlt=True)
 
-testPlot()
