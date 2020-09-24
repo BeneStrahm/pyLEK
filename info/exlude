@@ -4,5 +4,7 @@
 # exclude patterns (uncomment them if you want to use them):
 # *.[oa]
 # *~
+
 custom_test.py
 testing.py
+third.py
