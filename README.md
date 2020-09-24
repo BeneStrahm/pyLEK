@@ -38,21 +38,7 @@ https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-wind
 
 2. import modules, z.B: from helper import pyExtras
 
-# IV. Linked Repositories (Submodules)
-The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
-
-## a) robbievanleeuwen/feastruct
-Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
-
-In order to use the module:
-
-1. Open "cmd" as Administrator
-2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\ILEK-py-helpers\feastruct) 
-3. Install with py setup.py install
-
-For the usage check out feastruct/examples
-
-# V. .gitignore / Custom scripts
+# IV. .gitignore / Custom scripts
 
 Ignored files are usually build artifacts and machine generated files that can be derived from your repository source or should otherwise not be committed. Some common examples are:
 
@@ -66,3 +52,17 @@ Ignored files are usually build artifacts and machine generated files that can b
 Ignored files are tracked in a special file named .gitignore that is checked in at the root of your repository. There is no explicit git ignore command: instead the .gitignore file must be edited and committed by hand when you have new files that you wish to ignore. .gitignore files contain patterns that are matched against file names in your repository to determine whether or not they should be ignored.
 
 .gitignore also offers support for custom files. All files named with the prefix *custom*, eg "custom_plot2D.py" will be ignored for upload but will remain on your local machine. Saying you want to create your own plot2D.py, just copy the file and rename it as "custom_plot2D.py", and it will not be uploaded to the repository.
+
+# V. Linked Repositories (Submodules)
+The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+## a) robbievanleeuwen/feastruct
+Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
+
+In order to use the module:
+
+1. Open "cmd" as Administrator
+2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\ILEK-py-helpers\feastruct) 
+3. Install with py setup.py install
+
+For the usage check out feastruct/examples
