@@ -51,3 +51,18 @@ In order to use the module:
 3. Install with py setup.py install
 
 For the usage check out feastruct/examples
+
+# V. .gitignore / Custom scripts
+
+Ignored files are usually build artifacts and machine generated files that can be derived from your repository source or should otherwise not be committed. Some common examples are:
+
+- dependency caches, such as the contents of /node_modules or /packages
+- compiled code, such as .o, .pyc, and .class files
+- build output directories, such as /bin, /out, or /target
+- files generated at runtime, such as .log, .lock, or .tmp
+- hidden system files, such as .DS_Store or Thumbs.db
+- personal IDE config files, such as .idea/workspace.xml
+
+Ignored files are tracked in a special file named .gitignore that is checked in at the root of your repository. There is no explicit git ignore command: instead the .gitignore file must be edited and committed by hand when you have new files that you wish to ignore. .gitignore files contain patterns that are matched against file names in your repository to determine whether or not they should be ignored.
+
+.gitignore also offers support for custom files. All files named with the prefix *custom*, eg "custom_plot2D.py" will be ignored for upload. Saying you want to create your own plot2D.py, just copy the file and rename it as "custom_plot2D.py", and it will not be uploaded to the repository.

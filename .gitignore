@@ -504,3 +504,6 @@ FodyWeavers.xsd
 # Plot Styles, except default one
 *.mplstyle
 !default.mplstyle
+
+# Support for custom scripts
+*custom*
