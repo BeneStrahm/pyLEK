@@ -176,5 +176,3 @@ def testPlot():
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=False, savePkl=False, showPlt=True)
-
-testPlot()
