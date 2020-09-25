@@ -24,7 +24,8 @@ import plotters.plotStyle.mplStyle as mplStyle
 # Functions
 # ----------------------------------------------------------------------
 
-def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None, 
+def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
+           vLines = None, vTexts = None,  
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=False, savePkl=False, showPlt=False):
@@ -107,6 +108,19 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
         line.set_linewidth(1.5)
         line.set_alpha(1.0)
     
+    # Add vertical line
+    if vLines:
+        for vLine in vLines:
+            # Add vertical line to ax
+            ax.axvline(vLine, linestyle="-", linewidth=1.5, marker="None", color='black')
+
+    if vTexts:
+        for vLine, vText in zip(vLines, vTexts):
+            # Add Text to lines
+                ax.text(vLine, 0.98 * (ax.get_ylim()[1] - ax.get_ylim()[0]) + ax.get_ylim()[0], \
+                    vText, rotation=90, rotation_mode='anchor', \
+                    horizontalalignment='right',verticalalignment='bottom', \
+                    fontsize='x-small')
     # Save plot 
     if savePlt == True:
         try:
@@ -147,6 +161,9 @@ def testPlot():
 
     title = "Test Title"
 
+    vLines = [np.mean(x)]
+    vTexts = ['test description']
+
     legend = ["testdata1","testdata2","testdata3","testdata4"]
 
     # Test dictionary for parameters
@@ -155,6 +172,9 @@ def testPlot():
     dir_fileName = "test"
 
     plot2D([x, x, x, x] , y, xlabel, ylabel, title, legend, dir_fileName=dir_fileName,
+           vLines = vLines, vTexts = vTexts,  
+           xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
-           savePlt=True, savePkl=True, showPlt=True)
+           savePlt=False, savePkl=False, showPlt=True)
 
+testPlot()
