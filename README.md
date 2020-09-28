@@ -7,7 +7,7 @@ When adding new functions always respect the following template and the style gu
     # Description:  ** Add here short description **
     # Author:       ** Add here author's e-mail adress **
     # Created:      ** Add here the date of creation **
-    # Execution:    Import functions / collections (from helpers.util import func)
+    # Execution:    Import functions / collections (from pyLek.helpers.util import func)
     # ------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------
     # Sources
@@ -35,7 +35,8 @@ When adding new functions always respect the following template and the style gu
 https://www.python.org/dev/peps/pep-0008/
 
 # III. Import modules / usage
-1. Add the path of this folder to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). Now you don't have to add the full path for import statements.
+1. Add the path of this folder (e.g. C:\Users\ac123456\GitHub) to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). 
+Now you don't have to add the full path for import statements.
 https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages
 
 2. import modules, z.B: from helper import pyExtras
@@ -64,7 +65,7 @@ Structural finite element analysis, the pythonic way, see https://github.com/rob
 In order to use the module:
 
 1. Open "cmd" as Administrator
-2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\ILEK-py-helpers\feastruct) 
+2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\pyLEK\feastruct) 
 3. Install with py setup.py install
 
 For the usage check out feastruct/examples
