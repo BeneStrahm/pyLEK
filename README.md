@@ -3,6 +3,7 @@
 # I. Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
 
+    # -*- coding: utf-8 -*-
     # ------------------------------------------------------------------------------
     # Description:  ** Add here short description **
     # Author:       ** Add here author's e-mail adress **
@@ -30,6 +31,12 @@ When adding new functions always respect the following template and the style gu
         :rtype keys: List of keys in the dictionary	    # Type & description of return
         """
         return dict.keys() 					            # Actual Function statements
+
+    def sample():                                       # Sample of the function
+        pass
+
+    if __name__ == "__main__":
+        sample()
 
 # II. Style guideline:
 https://www.python.org/dev/peps/pep-0008/
