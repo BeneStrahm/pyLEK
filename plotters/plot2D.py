@@ -151,7 +151,7 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
 # Tests
 # ----------------------------------------------------------------------
 
-def testPlot():
+def sample():
     x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
     y = [np.sin(x + phi) for phi in offsets]
@@ -176,3 +176,6 @@ def testPlot():
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=False, savePkl=False, showPlt=True)
+
+if __name__ == "__main__":
+    sample()
