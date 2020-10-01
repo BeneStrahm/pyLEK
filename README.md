@@ -83,35 +83,43 @@ The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO
 
 Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
 
-TODO.md format
+### TODO.md format
 
 - TODO.md can have multiple columns.
-- Each column has tasks that start with a checkbox sign - [ ] or just a hyphen -
-- Completed column name must contain ✓ or [x].
+- Each column has tasks that start with a checkbox sign `- [ ]` or just a hyphen `- `
+- Completed column name must contain `✓` or `[x]`.
 - There are "2 spaces" at the end of every task title to serve as line breaks on Github pages.
 - Tags, mentions, estimate, date time, ticket id, etc. can be entered at the end of the task title.
-- A task with 2 space indentation in the title is a sub-task or description.
+- A task with 2 space indentation in the title is a sub-task or description. 
 
-    # Project Name
-    Project Description
+```
+# Project Name
+Project Description
 
-    ### Column Name
-    - [ ] Task title ~3d #type @name yyyy-mm-dd  
-    - [ ] Sub-task or description  
+### Column Name
+- [ ] Task title ~3d #type @name yyyy-mm-dd  
+  - [ ] Sub-task or description  
 
-    ### Completed Column ✓
-    - [x] Completed task title  
+### Completed Column ✓
+- [x] Completed task title  
+```
 
-- Checkboxes are used as described in GFM - GitHub Flavored Markdown - Task Lists but they are optional.
+- Checkboxes are used as described in [GFM - GitHub Flavored Markdown - Task Lists](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) but they are optional.
 - A task list without checkboxes look like this:
 
-    ### Column Name
-    - Task title ~3d #type @name yyyy-mm-dd  
-    - Sub-task or description  
+```
+### Column Name
+- Task title ~3d #type @name yyyy-mm-dd  
+  - Sub-task or description  
 
-    ### Completed Column ✓
-    - Completed task title  
+### Completed Column ✓
+- Completed task title  
+```
 
+### See also
+
+- [An example of TODO.md](TODO.md)
+- [Vscode Kanban Extension](https://bit.ly/2JcrUWJ)
 
 # VII. Delete from local machine
 
