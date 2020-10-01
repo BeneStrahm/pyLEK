@@ -31,7 +31,6 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
            savePlt=False, savePkl=False, showPlt=False):
 
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
-
     :param x: list w/ data to plot, with shape [n_row, datapoints]
     :param y: list w/ data to plot, with shape [n_row, datapoints]
     :param xlabel: string w/ labels for x axis
@@ -40,6 +39,8 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param legend: list w/ legends [n]
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
+    :param vLines: list w/ floats on where to add vertical line
+    :param vTexts: list w/ strings for the vertical lines 
     :param xlim: list w/ limits  for x axis [xmin, xmax]
     :param ylim: list w/ limits  for y axis [ymin, ymax]
     :param xscale: string w/ scales acc. to matplotlib
@@ -112,7 +113,8 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     if vLines:
         for vLine in vLines:
             # Add vertical line to ax
-            ax.axvline(vLine, linestyle="-", linewidth=1.5, marker="None", color='black')
+            ax.axvline(vLine, linestyle="--", linewidth=1.0, marker="None", color='black', \
+                       zorder=len(labels)+1)
 
     if vTexts:
         for vLine, vText in zip(vLines, vTexts):
