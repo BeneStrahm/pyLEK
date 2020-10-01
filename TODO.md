@@ -1,10 +1,9 @@
-# General developments
-
-Project Description
+# Further Improvements
 
 ### Todo
 
-- [ ] Updating plot2D for horzizontal line plots  
+- [ ] Implementing plot2D.py - horizontal line plots 
+- [ ] Updating description of plot2D.py
 
 ### In Progress
 
