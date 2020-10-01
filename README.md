@@ -77,13 +77,13 @@ In order to use the module:
 
 For the usage check out feastruct/examples
 
-# VI. ToDo
+# VI. TODO.md
 
 The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO.md is a file that contains tasks organized in multiple sections. Keeping a TODO.md file makes it easier for anyone wants to know about the project's plans and work needs to be done.
 
 Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
 
-### TODO.md format
+## TODO.md format
 
 - TODO.md can have multiple columns.
 - Each column has tasks that start with a checkbox sign `- [ ]` or just a hyphen `- `
@@ -98,7 +98,7 @@ Project Description
 
 ### Column Name
 - [ ] Task title ~3d #type @name yyyy-mm-dd  
-  - [ ] Sub-task or description  
+- [ ] Sub-task or description  
 
 ### Completed Column ✓
 - [x] Completed task title  
@@ -110,7 +110,7 @@ Project Description
 ```
 ### Column Name
 - Task title ~3d #type @name yyyy-mm-dd  
-  - Sub-task or description  
+- Sub-task or description  
 
 ### Completed Column ✓
 - Completed task title  
