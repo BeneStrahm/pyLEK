@@ -76,3 +76,45 @@ In order to use the module:
 3. Install with py setup.py install
 
 For the usage check out feastruct/examples
+
+# VI. ToDo
+
+The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO.md is a file that contains tasks organized in multiple sections. Keeping a TODO.md file makes it easier for anyone wants to know about the project's plans and work needs to be done.
+
+Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
+
+TODO.md format
+
+- TODO.md can have multiple columns.
+- Each column has tasks that start with a checkbox sign - [ ] or just a hyphen -
+- Completed column name must contain ✓ or [x].
+- There are "2 spaces" at the end of every task title to serve as line breaks on Github pages.
+- Tags, mentions, estimate, date time, ticket id, etc. can be entered at the end of the task title.
+- A task with 2 space indentation in the title is a sub-task or description.
+
+    # Project Name
+    Project Description
+
+    ### Column Name
+    - [ ] Task title ~3d #type @name yyyy-mm-dd  
+    - [ ] Sub-task or description  
+
+    ### Completed Column ✓
+    - [x] Completed task title  
+
+- Checkboxes are used as described in GFM - GitHub Flavored Markdown - Task Lists but they are optional.
+- A task list without checkboxes look like this:
+
+    ### Column Name
+    - Task title ~3d #type @name yyyy-mm-dd  
+    - Sub-task or description  
+
+    ### Completed Column ✓
+    - Completed task title  
+
+
+# VII. Delete from local machine
+
+In order to delete the repository from your local machine, simply delete the folder. Make sure you uploaded all your changes before deleting. 
+
+You can delete the folder in the windows explorer, or better, using git-bash (https://gitforwindows.org/), navigate to your folder, and use the command rm-rf Name_of_your_repo
