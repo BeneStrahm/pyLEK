@@ -1,5 +1,4 @@
 # Python
-
 In order to use Python you need at least an installation of Python and an Editor which allows you to comfortably edit your scripts.
 
 ## Installation
@@ -8,7 +7,6 @@ Go to https://www.python.org/downloads/ and download the latest release of pytho
 ## Editors 
 
 ### Visual Studio Code (VS)
-
 Visual Studio Code is a lightweight but powerful source code editor to setup your Python Environment. It has a rich ecosystem of useful extensions. 
 
 If you use Visual Studio code, you might also want to install the following extensions with it:
@@ -25,8 +23,10 @@ Further you might want to use linting, therefore in VS, open the command bar (Ct
 
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
-# pyLEK Repo
+## Example
+See "./sampleRepo" for an exemplary code structure as we recommend it.
 
+# pyLEK Repo
 ## Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
 
@@ -76,7 +76,6 @@ https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-wind
 2. import modules, z.B: from pyLEK.helpers import pyExtras
 
 ## .gitignore / Custom scripts
-
 Ignored files are usually build artifacts and machine generated files that can be derived from your repository source or should otherwise not be committed. Some common examples are:
 
 - dependency caches, such as the contents of /node_modules or /packages
@@ -105,13 +104,11 @@ In order to use the module:
 For the usage check out feastruct/examples
 
 ## TODO.md
-
 The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO.md is a file that contains tasks organized in multiple sections. Keeping a TODO.md file makes it easier for anyone wants to know about the project's plans and work needs to be done.
 
 Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
 
 ### TODO.md format
-
 - TODO.md can have multiple columns.
 - Each column has tasks that start with a checkbox sign `- [ ]` or just a hyphen `- `
 - Completed column name must contain `✓` or `[x]`.
@@ -144,7 +141,6 @@ Project Description
 ```
 
 ### See also
-
 - [An example of TODO.md](TODO.md)
 - [Vscode Kanban Extension](https://bit.ly/2JcrUWJ)
 
