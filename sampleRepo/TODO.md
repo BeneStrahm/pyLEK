@@ -2,12 +2,8 @@
 
 ### Todo
 
-- [ ] Implementing plot2D.py - horizontal line plots 
-- [ ] Updating description of plot2D.py
+- [ ] Write my thesis
 
 ### In Progress
 
-
 ### Done ✓
-
-
