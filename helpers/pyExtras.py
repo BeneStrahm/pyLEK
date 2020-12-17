@@ -2,7 +2,7 @@
 # Description:  Helper functions in python
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2020-08-26
-# Execution:    Import functions / collections (from helpers.util import func)
+# Execution:    Import functions / collections (from helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries

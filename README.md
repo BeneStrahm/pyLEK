@@ -35,7 +35,7 @@ When adding new functions always respect the following template and the style gu
     # Description:  ** Add here short description **
     # Author:       ** Add here author's e-mail adress **
     # Created:      ** Add here the date of creation **
-    # Execution:    Import functions / collections (from pyLek.helpers.util import func)
+    # Execution:    Import functions / collections (from pyLek.helpers import util)
     # ------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------
     # Sources

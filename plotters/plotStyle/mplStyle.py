@@ -2,7 +2,7 @@
 # Description:  Retrieving, modifying and cleaning default.mplStyle
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2018-12-06
-# Execution:    Import functions / collections (from helpers.util import func)
+# Execution:    Import functions / collections (from helpers import util)
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # Libraries

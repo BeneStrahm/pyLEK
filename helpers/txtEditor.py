@@ -2,7 +2,7 @@
 # Description:  Helper functions for csv file handling
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2020-09-16
-# Execution:    Import functions / collections (from helpers.util import func)
+# Execution:    Import functions / collections (from helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries
