@@ -3,8 +3,13 @@
 In order to use Python you need at least an installation of Python and an Editor which allows you to comfortably edit your scripts.
 
 ## Installation
+<details>
+  <summary>Click to expand!</summary>
+  
+  ## Heading
+  Go to https://www.python.org/downloads/ and download the latest release of python. Important: During the installation, check the box "Add Python to PATH", press -> Customize Installation and make sure that "pip" will be installed. Further it's recommended to use the "Install for all users" option.
+</details>
 
-Go to https://www.python.org/downloads/ and download the latest release of python. Important: During the installation, check the box "Add Python to PATH", press -> Customize Installation and make sure that "pip" will be installed. Further it's recommended to use the "Install for all users" option.
 
 ## Editors 
 
