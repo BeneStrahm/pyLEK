@@ -24,7 +24,7 @@ Further you might want to use linting, therefore in VS, open the command bar (Ct
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
 ## Example
-See "./sampleRepo" for an exemplary code structure as we recommend it.
+See "./sampleCode" for an exemplary code structure as we recommend it.
 
 # pyLEK Repo
 ## Template
