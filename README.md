@@ -1,6 +1,34 @@
-# pyLEK
+# Python
 
-# I. Template
+In order to use Python you need at least an installation of Python and an Editor which allows you to comfortably edit your scripts.
+
+## Installation
+
+Go to https://www.python.org/downloads/ and download the latest release of python. Important: During the installation, check the box "Add Python to PATH", press -> Customize Installation and make sure that "pip" will be installed. Further it's recommended to use the "Install for all users" option.
+
+## Editors 
+
+### Visual Studio Code (VS)
+
+Visual Studio Code is a lightweight but powerful source code editor to setup your Python Environment. It has a rich ecosystem of useful extensions. 
+
+If you use Visual Studio code, you might also want to install the following extensions with it:
+
+- Python -> In order to use Python in VS
+- TODO.md Kanban Board -> To edit To-Do Lists in VS
+- GitHub Pull Requests and Issues -> GitHub integration in VS
+- Pylance -> Additional Python language support
+- Visual Studio IntelliCode -> Offers autocomplete of syntax
+
+In order to use GitHub within Visual Studio Code, you need to install "git" as well (https://git-scm.com/downloads). Here you can leave all settings in the installation as they are proposed.
+
+Further you might want to use linting, therefore in VS, open the command bar (Ctrl+Shift+P), type "Python: Select Linter", confirm with enter and select "pylint"
+
+See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
+
+# pyLEK Repo
+
+## Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
 
     # -*- coding: utf-8 -*-
@@ -38,17 +66,17 @@ When adding new functions always respect the following template and the style gu
     if __name__ == "__main__":
         sample()
 
-# II. Style guideline:
+## Style guideline:
 https://www.python.org/dev/peps/pep-0008/
 
-# III. Import modules / usage
+## Import modules / usage
 1. Add the path of this folder (e.g. C:\Users\ac123456\GitHub) to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). 
 Now you don't have to add the full path for import statements.
 https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages
 
 2. import modules, z.B: from pyLEK.helpers import pyExtras
 
-# IV. .gitignore / Custom scripts
+## .gitignore / Custom scripts
 
 Ignored files are usually build artifacts and machine generated files that can be derived from your repository source or should otherwise not be committed. Some common examples are:
 
@@ -63,10 +91,10 @@ Ignored files are tracked in a special file named .gitignore that is checked in 
 
 .gitignore also offers support for custom files. All files named with the prefix *custom*, eg "custom_plot2D.py" will be ignored for upload but will remain on your local machine. Saying you want to create your own plot2D.py, just copy the file and rename it as "custom_plot2D.py", and it will not be uploaded to the repository.
 
-# V. Linked Repositories (Submodules)
+## Linked Repositories (Submodules)
 The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
-## a) robbievanleeuwen/feastruct
+### robbievanleeuwen/feastruct
 Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
 
 In order to use the module:
@@ -77,13 +105,13 @@ In order to use the module:
 
 For the usage check out feastruct/examples
 
-# VI. TODO.md
+## TODO.md
 
 The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO.md is a file that contains tasks organized in multiple sections. Keeping a TODO.md file makes it easier for anyone wants to know about the project's plans and work needs to be done.
 
 Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
 
-## TODO.md format
+### TODO.md format
 
 - TODO.md can have multiple columns.
 - Each column has tasks that start with a checkbox sign `- [ ]` or just a hyphen `- `
@@ -121,7 +149,7 @@ Project Description
 - [An example of TODO.md](TODO.md)
 - [Vscode Kanban Extension](https://bit.ly/2JcrUWJ)
 
-# VII. Delete from local machine
+## Delete Repo from local machine
 
 In order to delete the repository from your local machine, simply delete the folder. Make sure you uploaded all your changes before deleting. 
 
