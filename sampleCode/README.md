@@ -1,4 +1,4 @@
-# sampleRepo
+# sampleCode
 This simple project is an example repo for Python projects @ILEK. 
 
 Use this README to briefly describe your code.
