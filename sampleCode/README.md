@@ -23,8 +23,6 @@ Below you can further structure your code:
 
 This are all sublevel directories
 
-## .gitignore
-
 
 
 
