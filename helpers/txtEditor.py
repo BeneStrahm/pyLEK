@@ -6,12 +6,13 @@
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries
-# ------------------------------------------------------------------------------                                                       
+# ------------------------------------------------------------------------------
 import csv
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-      
+
+
 def writeToTxt(fname, txtline, writeMode='a'):
     """Writing lines to .txt files
     :param fname: str w/ name of .txt file to write to
@@ -19,9 +20,6 @@ def writeToTxt(fname, txtline, writeMode='a'):
     :param writeMode: str w/ how to open file ('a', 'w')
     """
     with open(fname, writeMode, newline='\n') as txt:
-        txt_writer = csv.writer(txt, delimiter='\t', quotechar='"', quoting=csv.QUOTE_NONE)
+        txt_writer = csv.writer(txt, delimiter='\t',
+                                quotechar='"', quoting=csv.QUOTE_NONE)
         txt_writer.writerow([txtline])
-
-                    
-
-

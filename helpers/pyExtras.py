@@ -6,27 +6,29 @@
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries
-# ------------------------------------------------------------------------------                                                          
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
 
-def getKeyList(dict): 
+def getKeyList(dict):
     """Get keys of a dictionary
     :param dict: Dictonary to read from
     :rtype keys: List of keys in the dictionary
     """
     return dict.keys()
 
-def getValueList(dict): 
+
+def getValueList(dict):
     """Get values of a dictionary
     :param dict: Dictonary to read from
     :rtype values: List of values in the dictionary
     """
     return dict.values()
 
-def getKeyValueList(dict): 
+
+def getKeyValueList(dict):
     """Get keys and values of a dictionary
     :param dict: Dictonary to read from
     :rtype keys: List of keys in the dictionary

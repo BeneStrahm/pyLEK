@@ -7,12 +7,12 @@
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Sources
-# ------------------------------------------------------------------------------ 
+# ------------------------------------------------------------------------------
 # Literature / Website ressources
 # e.g: https://www.ilek.uni-stuttgart.de/
 # ------------------------------------------------------------------------------
 # Libraries
-# ------------------------------------------------------------------------------                                                          
+# ------------------------------------------------------------------------------
 # Contains all imported modules / functions
 # e.g: import scipy.io
 from foo.bar import someCode
@@ -21,9 +21,14 @@ from foo.bar import someCode
 # ------------------------------------------------------------------------------
 
 # Example
-def main():                                         # main() should contain code that you want to run when the file is executed
-    someCode.printSomeText("Hello World")           # Calls the function printSomeText()
 
-if __name__ == "__main__":                          # Calling main()-function when script is excecuted     
-    main()                                          # See also https://realpython.com/python-main-function/
 
+# main() should contain code that you want to run when the file is executed
+def main():
+    # Calls the function printSomeText()
+    someCode.printSomeText("Hello World")
+
+
+if __name__ == "__main__":                          # Calling main()-function when script is excecuted
+    # See also https://realpython.com/python-main-function/
+    main()
