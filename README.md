@@ -21,6 +21,8 @@ In order to use GitHub within Visual Studio Code, you need to install "git" as w
 
 Further you might want to use linting, therefore in VS, open the command bar (Ctrl+Shift+P), type "Python: Select Linter", confirm with enter and select "pylint"
 
+Moreover, for simple PEP-Style conform code formatting, you can use a formatter. Therefore install one with "pip install autopep8". In VS, under Settings search for python.formatting.provider and select autopep8. To use the formatter on your code, open the command bar (Ctrl+Shift+P), type "Format:" and select the desired option.
+
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
 ## Example
