@@ -39,6 +39,13 @@ def createCycler(colorScheme, variation):
     linestyleList.append('dotted')
     linestyleList.append('dashdot')
 
+    # Containing o - markers
+    markerList = []
+    markerList.append('1')
+    markerList.append('x')
+    markerList.append('v')
+    markerList.append('+')
+
     # Creating n * m - styles, 1st varying colors, 2nd varying linestyles
     if variation == 'color':
         customCycler = cycler(linestyle=linestyleList) * \
@@ -48,6 +55,11 @@ def createCycler(colorScheme, variation):
     elif variation == 'linestyle':
         customCycler = cycler(color=colorList) * \
             cycler(linestyle=linestyleList)
+
+    # Creating m * o - styles, 1st varying linestyles, 2nd varying colors
+    elif variation == 'marker':
+        customCycler = cycler(color=colorList) * \
+            cycler(marker=markerList) 
 
     else:
         print("Undefined color Scheme!")

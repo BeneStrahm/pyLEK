@@ -107,6 +107,9 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     # Set line thickness / transparency of the legend to standart
     for line in leg.get_lines():
         line.set_linewidth(1.5)
+        # Do not set for only marker plots
+        if style_dict["lines.linewidth"] == 0: 
+            line.set_linewidth(0)
         line.set_alpha(1.0)
 
     # Add vertical line
@@ -168,17 +171,33 @@ def sample():
 
     legend = ["testdata1", "testdata2", "testdata3", "testdata4"]
 
-    # Test dictionary for parameters
-    style_dict = {"lines.linewidth": 5, "savefig.format": "pdf"}
+    # FIRST PLOT
+    # only show plot with custom size and linewidth, add a vertical line
+    # figure size is always in inches (1 in = 2.54 cm)
+    style_dict = {"lines.linewidth": 5, "figure.figsize": "10, 3.28"}
 
-    dir_fileName = "test"
-
-    plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=dir_fileName,
+    plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=None,
            vLines=vLines, vTexts=vTexts,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='color',
+           style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
            savePlt=False, savePkl=False, showPlt=True)
 
+    # SECOND PLOT
+    # save in this folder as pdf and show plot without a line  
+    # but only with different markers
+    offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
+    y = [np.sin(x + phi) for phi in offsets]
+
+    style_dict = {"lines.linewidth": 0, "savefig.format": "pdf", "savefig.format": "pdf"}
+
+    legend = ["testdata1", "testdata2", "testdata3", "testdata4", \
+            "testdata5", "testdata6", "testdata7", "testdata8"]
+
+    plot2D([x, x, x, x, x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName="plotters/pdf_example",
+           vLines=None, vTexts=None,
+           xlim=[], ylim=[], xscale='linear', yscale='linear',
+           style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='marker',
+           savePlt=True, savePkl=False, showPlt=True)
 
 if __name__ == "__main__":
     sample()

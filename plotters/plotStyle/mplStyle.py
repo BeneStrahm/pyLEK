@@ -36,7 +36,9 @@ def modifyPlotStyle(style_dict, mpl):
         for line in file:
             skipline = False
             for key, value in style_dict.items():
-                if key in line:
+                # key + ":" is necessary, otherwise eg. lines.marker and lines.markerfacecolor
+                # are both replaced when only lines.marker should be modified
+                if (key+":") in line:
                     filedata.append(str(key) + ' : ' + str(value) + '\n')
                     skipline = True
             if skipline == False:
