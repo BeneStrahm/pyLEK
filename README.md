@@ -94,6 +94,8 @@ Ignored files are tracked in a special file named .gitignore that is checked in 
 ## Linked Repositories (Submodules)
 The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
+Too pull submodules, from the root of the repo just run: git submodule update --init
+
 ### robbievanleeuwen/feastruct
 Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
 
