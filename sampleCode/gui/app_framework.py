@@ -17,9 +17,15 @@
 from PyQt5 import QtWidgets, uic
 import sys
 
+from matplotlib.axes import Axes
+
 from sampleCode.gui.mainwindow import Ui_MainWindow 
 
 from sampleCode.foo.bar import someCode
+
+import plotters.plot2D as plt
+
+import numpy as np
 
 # ------------------------------------------------------------------------------
 # Functions / Classes
@@ -50,11 +56,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.gui.pushButton_plot.clicked.connect(self.plotData)
 
     def plotData(self):
-        x=range(0, 10)
-        y=range(0, 20, 2)
-        self.gui.MplWidget.canvas.ax.plot(x, y)
+        # Testdata
+        x = np.linspace(0, 2 * np.pi, 50)
+        offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
+        y = [np.sin(x + phi) for phi in offsets]
+
+        xlabel = "Test X Axis"
+        ylabel = "Test Y Axis"
+
+        title = "Test Title"
+
+        vLines = [np.mean(x)]
+        vTexts = ['test description']
+
+        legend = ["testdata1", "testdata2", "testdata3", "testdata4"]
+
+        style_dict = {"lines.linewidth": 5 }
+
+        # Clear 
+        self.gui.MplWidget.canvas.ax.clear()
+        self.gui.MplWidget.canvas.ax.cla()
+
+        # Plot
+        self.gui.MplWidget.canvas.fig, self.gui.MplWidget.canvas.ax = plt.plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=None,
+                vLines=vLines, vTexts=vTexts,
+                xlim=[], ylim=[], xscale='linear', yscale='linear',
+                style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
+                savePlt=False, savePkl=False, showPlt=False,
+                ax=self.gui.MplWidget.canvas.ax, fig=self.gui.MplWidget.canvas.fig)
+    
+        # Update 
         self.gui.MplWidget.canvas.draw()
-        pass
 
     def runTest(self): 
         # Calls the function printSomeText()

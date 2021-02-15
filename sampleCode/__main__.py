@@ -24,13 +24,12 @@ from sampleCode.gui import app_framework
 
 # Example
 
-
 # main() should contain code that you want to run when the file is executed
 def main():
     # Calls the function printSomeText()
     someCode.printSomeText("Hello World")
 
-    # To start gui, uncomment following line
+    # To start sample gui, uncomment following line
     app_framework.start()
 
 

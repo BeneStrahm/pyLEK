@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1021</width>
+    <height>723</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,37 +19,11 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>781</width>
-      <height>541</height>
+      <width>962</width>
+      <height>646</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="1">
-      <widget class="QSpinBox" name="spinBox_edit"/>
-     </item>
-     <item row="6" column="1">
-      <widget class="MplWidget" name="MplWidget" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>480</width>
-         <height>320</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_display">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="1">
       <spacer name="verticalSpacer">
        <property name="orientation">
@@ -63,24 +37,25 @@
        </property>
       </spacer>
      </item>
-     <item row="4" column="1">
-      <widget class="QPushButton" name="pushButton_run">
-       <property name="text">
-        <string>run script</string>
+     <item row="6" column="1">
+      <widget class="MplWidget" name="MplWidget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QPushButton" name="pushButton_plot">
-       <property name="text">
-        <string>plot data</string>
+       <property name="minimumSize">
+        <size>
+         <width>640</width>
+         <height>480</height>
+        </size>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_edit">
-       <property name="text">
-        <string>Enter here some text</string>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -97,6 +72,43 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_display">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="pushButton_plot">
+       <property name="text">
+        <string>plot data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushButton_run">
+       <property name="text">
+        <string>run script</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="spinBox_edit"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEdit_edit">
+       <property name="text">
+        <string>Enter here some text</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -105,7 +117,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1021</width>
      <height>22</height>
     </rect>
    </property>

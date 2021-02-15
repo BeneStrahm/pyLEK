@@ -29,7 +29,8 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
            vLines=None, vTexts=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
-           savePlt=False, savePkl=False, showPlt=False):
+           savePlt=False, savePkl=False, showPlt=False,
+           fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [n_row, datapoints]
     :param y: list w/ data to plot, with shape [n_row, datapoints]
@@ -52,6 +53,8 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param savePkl: bool true to save plot 
     :param savePkl: bool true to save as .pickle
     :param showPlt: bool true show plot in interactive mode
+    :param fig: fig object to be overwritten & returned 
+    :param ax: ax object to be overwritten & returned 
     """
 
     # Modify plot styles
@@ -68,7 +71,8 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     y = np.transpose(y)
 
     # An empty figure with one axe
-    fig, ax = plt.subplots()
+    if fig == None: 
+        fig, ax = plt.subplots()
 
     # Setting the title of the axe-object
     ax.set_title(title)
@@ -149,8 +153,11 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     mplStyle.cleanPlotStyle(mpl)
 
     # Clean up everything
-    plt.clf()
-    plt.close()
+    if fig == None: 
+        plt.clf()
+        plt.close()
+    
+    return fig, ax
 
 
 # ----------------------------------------------------------------------
