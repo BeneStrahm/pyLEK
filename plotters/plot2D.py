@@ -159,9 +159,29 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     
     return fig, ax
 
+def calcFigSize (numberOfFigures=1, aspectRatio=3/2, pageWidth=21, 
+    leftmargin=2.5, rightmargin=2.5, spacing=0.0):
+    """Fitting on ore multiple figures to a page
+    :param numberOfFigures: int w/ number of figures [cm]
+    :param aspectRatio: int w/ aspect ratio of the figure
+    :param pageWidth: int w/ total page margin [cm]
+    :param leftmargin: int w/ left margin [cm]
+    :param rightmargin: int w/ right margin [cm]
+    :param spacing: int w/ spacing between the figures [cm]
+    """
+    figWidth = (pageWidth-leftmargin-rightmargin) / numberOfFigures - spacing
+    figHeight = figWidth * aspectRatio ** -1
+
+    # Convert to inches
+    figWidth, figHeight = figWidth / 2.54, figHeight / 2.54
+
+    # Format as str to insert in style_dict
+    figSize = str(figWidth) + ", " + str(figHeight)
+
+    return figSize
 
 # ----------------------------------------------------------------------
-# Tests
+# Tests / Example
 # ----------------------------------------------------------------------
 
 def sample():
@@ -182,7 +202,10 @@ def sample():
     # FIRST PLOT
     # only show plot with custom size and linewidth, add a vertical line
     # figure size is always in inches (1 in = 2.54 cm)
-    style_dict = {"lines.linewidth": 5, "figure.figsize": "10, 3.28"}
+    # Example for DIN A4 Page with left and right margin of 2.5cm
+    figSize = calcFigSize()
+
+    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
 
     plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=None,
            vLines=vLines, vTexts=vTexts,
