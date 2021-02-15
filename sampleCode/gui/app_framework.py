@@ -1,0 +1,78 @@
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------------------------
+# Description:  ** Add here short description **
+# Author:       ** Add here author's e-mail adress **
+# Created:      ** Add here the date of creation **
+# Execution:    Import functions / collections (from helpers import util)
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Sources
+# ------------------------------------------------------------------------------ 
+# Literature / Website ressources
+# e.g: https://www.ilek.uni-stuttgart.de/
+# ------------------------------------------------------------------------------
+# Libraries
+# ------------------------------------------------------------------------------                                                          
+# Contains all imported modules / functions
+from PyQt5 import QtWidgets, uic
+import sys
+
+from sampleCode.gui.mainwindow import Ui_MainWindow 
+
+from sampleCode.foo.bar import someCode
+
+# ------------------------------------------------------------------------------
+# Functions / Classes
+# ------------------------------------------------------------------------------
+
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, **kwargs):
+        # Here we declare that the MainWindow class inherits from 
+        # QtWidgets.QMainWindow, Ui_MainWindow
+        super().__init__(*args, **kwargs)
+
+        # Initialize gui
+        self.gui = Ui_MainWindow()
+
+        # Setup gui
+        self.gui.setupUi(self)
+
+        # 1. Example: Connect input widgets
+        self.gui.lineEdit_edit.textChanged.connect(self.lineEditDisplayText)
+
+        # 2. Example: Connect input widgets
+        self.gui.spinBox_edit.valueChanged.connect(self.spinBoxDisplayText)
+
+        # Example: Pressing run button and execute script
+        self.gui.pushButton_run.clicked.connect(self.runTest)
+
+        # Example: Create a plot
+        self.gui.pushButton_plot.clicked.connect(self.plotData)
+
+    def plotData(self):
+        x=range(0, 10)
+        y=range(0, 20, 2)
+        self.gui.MplWidget.canvas.ax.plot(x, y)
+        self.gui.MplWidget.canvas.draw()
+        pass
+
+    def runTest(self): 
+        # Calls the function printSomeText()
+        someCode.printSomeText("You could run you own script by modifying \"def runTest(self):\"")
+
+    def lineEditDisplayText(self):
+        lineEditText = self.gui.lineEdit_edit.text()
+        self.gui.lineEdit_display.setText("You wrote: " + lineEditText)
+
+    def spinBoxDisplayText(self):
+        spinBoxValue = self.gui.spinBox_edit.value()
+        spinBoxValue = spinBoxValue * 2
+        self.gui.spinBox_display.setValue(spinBoxValue)
+    
+def start(): 
+    """Starting the application
+    """
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()

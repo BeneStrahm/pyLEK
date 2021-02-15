@@ -15,7 +15,9 @@
 # ------------------------------------------------------------------------------
 # Contains all imported modules / functions
 # e.g: import scipy.io
-from foo.bar import someCode
+from sampleCode.foo.bar import someCode
+
+from sampleCode.gui import app_framework
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
@@ -27,6 +29,9 @@ from foo.bar import someCode
 def main():
     # Calls the function printSomeText()
     someCode.printSomeText("Hello World")
+
+    # To start gui, uncomment following line
+    app_framework.start()
 
 
 if __name__ == "__main__":                          # Calling main()-function when script is excecuted
