@@ -108,8 +108,9 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     for line in leg.get_lines():
         line.set_linewidth(1.5)
         # Do not set for only marker plots
-        if style_dict["lines.linewidth"] == 0: 
-            line.set_linewidth(0)
+        if "lines.linewidth" in style_dict:
+            if style_dict["lines.linewidth"] == 0: 
+                line.set_linewidth(0)
         line.set_alpha(1.0)
 
     # Add vertical line
