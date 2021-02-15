@@ -161,7 +161,7 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
 
 def calcFigSize (numberOfFigures=1, aspectRatio=3/2, pageWidth=21, 
     leftmargin=2.5, rightmargin=2.5, spacing=0.0):
-    """Fitting on ore multiple figures to a page
+    """Fitting on ore multiple figures to a defined page width
     :param numberOfFigures: int w/ number of figures [cm]
     :param aspectRatio: int w/ aspect ratio of the figure
     :param pageWidth: int w/ total page margin [cm]
