@@ -11,3 +11,5 @@ All settings for the default plot style are saved in default.mplstyle. Custom pl
 2) By creating an own mplstyle-sheet and specifying it in the plot function. Own sheets are not uploaded to github.
 
 See also plot2D.py testPlot() for an example of the functionality
+
+To fit one or multiple figures to a specified page with see plotSize.py
