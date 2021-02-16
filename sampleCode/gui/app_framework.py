@@ -1,39 +1,39 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
-# Description:  ** Add here short description **
+# Description:  Framework for custom application
 # Author:       ** Add here author's e-mail adress **
 # Created:      ** Add here the date of creation **
 # Execution:    Import functions / collections (from helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Sources
-# ------------------------------------------------------------------------------ 
+# ------------------------------------------------------------------------------
 # Literature / Website ressources
 # e.g: https://www.ilek.uni-stuttgart.de/
 # ------------------------------------------------------------------------------
 # Libraries
-# ------------------------------------------------------------------------------                                                          
+# ------------------------------------------------------------------------------
 # Contains all imported modules / functions
+# PyQt5 gui
 from PyQt5 import QtWidgets, uic
+from sampleCode.gui.mainwindow import Ui_MainWindow
+
+# python modules
 import sys
-
-from matplotlib.axes import Axes
-
-from sampleCode.gui.mainwindow import Ui_MainWindow 
-
-from sampleCode.foo.bar import someCode
-
-import plotters.plot2D as plt
-
 import numpy as np
+
+# pyLEK/helpers
+from sampleCode.foo.bar import someCode
+import plotters.plot2D as plt
 
 # ------------------------------------------------------------------------------
 # Functions / Classes
 # ------------------------------------------------------------------------------
 
+
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
-        # Here we declare that the MainWindow class inherits from 
+        # Here we declare that the MainWindow class inherits from
         # QtWidgets.QMainWindow, Ui_MainWindow
         super().__init__(*args, **kwargs)
 
@@ -56,41 +56,55 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.gui.pushButton_plot.clicked.connect(self.plotData)
 
     def plotData(self):
-        # Testdata
-        x = np.linspace(0, 2 * np.pi, 50)
-        offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-        y = [np.sin(x + phi) for phi in offsets]
+        # Left canvas
+        # -----------
+        # Clear
+        self.gui.MplWidget_left.canvas.ax.clear()
+        self.gui.MplWidget_left.canvas.ax.cla()
 
-        xlabel = "Test X Axis"
-        ylabel = "Test Y Axis"
+        # Plotting: Pass the MplWidget.canvas.fig / ..ax object to the sample plot defined
+        # in plot2D.py. The sample plot then calls the plot2D-function, which modifies and returns the
+        # MplWidget.canvas.fig / ..ax object
 
-        title = "Test Title"
+        self.gui.MplWidget_left.canvas.fig, self.gui.MplWidget_left.canvas.ax = plt.sample_1(
+            showPlt=False, fig=self.gui.MplWidget_left.canvas.fig, ax=self.gui.MplWidget_left.canvas.ax)
 
-        vLines = [np.mean(x)]
-        vTexts = ['test description']
+        # In order to set up your own plot, use the following scheme
+        # self.gui.MplWidget_left.canvas.fig, self.gui.MplWidget_left.canvas.ax = plt.plot2D(
+        #     x, y, *keyargs, fig=self.gui.MplWidget_left.canvas.fig, ax=self.gui.MplWidget_left.canvas.ax)
 
-        legend = ["testdata1", "testdata2", "testdata3", "testdata4"]
+        # In order to save the plot, recall the plot function but without passing fig, ax
+        # Like this, the plot style will be according to the desired .mplstyle
+        # plt.plot2D(x, y, *keyargs, savefig=True, fig=None, ax=None)
 
-        style_dict = {"lines.linewidth": 5 }
+        # Update
+        self.gui.MplWidget_left.canvas.draw()
 
-        # Clear 
-        self.gui.MplWidget.canvas.ax.clear()
-        self.gui.MplWidget.canvas.ax.cla()
+        # Right canvas
+        # ------------
+        # Clear
+        self.gui.MplWidget_right.canvas.ax.clear()
+        self.gui.MplWidget_right.canvas.ax.cla()
 
-        # Plot
-        self.gui.MplWidget.canvas.fig, self.gui.MplWidget.canvas.ax = plt.plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=None,
-                vLines=vLines, vTexts=vTexts,
-                xlim=[], ylim=[], xscale='linear', yscale='linear',
-                style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
-                savePlt=False, savePkl=False, showPlt=False,
-                ax=self.gui.MplWidget.canvas.ax, fig=self.gui.MplWidget.canvas.fig)
-    
-        # Update 
-        self.gui.MplWidget.canvas.draw()
+        # Plotting
+        self.gui.MplWidget_right.canvas.fig, self.gui.MplWidget_right.canvas.ax = plt.sample_2(
+            showPlt=False, fig=self.gui.MplWidget_right.canvas.fig, ax=self.gui.MplWidget_right.canvas.ax)
+        
+        # In order to save the plot, recall the plot function but without passing fig, ax
+        # Like this, the plot style will be according to the desired .mplstyle
+        # In case of the example: 
+        plt.sample_2(showPlt=False, fig=None, ax=None)
 
-    def runTest(self): 
+        # For your own plot:
+        # plt.plot2D(x, y, *keyargs, savefig=True, fig=None, ax=None)
+
+        # Update
+        self.gui.MplWidget_right.canvas.draw()
+
+    def runTest(self):
         # Calls the function printSomeText()
-        someCode.printSomeText("You could run you own script by modifying \"def runTest(self):\"")
+        someCode.printSomeText(
+            "You could run you own script by modifying \"def runTest(self):\"")
 
     def lineEditDisplayText(self):
         lineEditText = self.gui.lineEdit_edit.text()
@@ -100,8 +114,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         spinBoxValue = self.gui.spinBox_edit.value()
         spinBoxValue = spinBoxValue * 2
         self.gui.spinBox_display.setValue(spinBoxValue)
-    
-def start(): 
+
+
+def start():
     """Starting the application
     """
     app = QtWidgets.QApplication(sys.argv)

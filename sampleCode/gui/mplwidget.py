@@ -1,8 +1,28 @@
-# Imports
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------------------------
+# Description:  Framework for custom application
+# Author:       ** Add here author's e-mail adress **
+# Created:      ** Add here the date of creation **
+# Execution:    Import functions / collections (from helpers import util)
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Sources
+# ------------------------------------------------------------------------------
+# Literature / Website ressources
+# https://stackoverflow.com/questions/43947318/plotting-matplotlib-figure-inside-qwidget-using-qt-designer-form-and-pyqt5/44029435#44029435
+# ------------------------------------------------------------------------------
+# Libraries
+# ------------------------------------------------------------------------------
+# Contains all imported modules / functions
+
 from PyQt5 import QtWidgets
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
 import matplotlib
+
+# ------------------------------------------------------------------------------
+# Functions / Classes
+# ------------------------------------------------------------------------------
 
 # Ensure using PyQt5 backend
 matplotlib.use('QT5Agg')
@@ -15,7 +35,7 @@ class MplCanvas(Canvas):
         Canvas.setSizePolicy(self, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         Canvas.updateGeometry(self)
 
-# Matplotlib widget
+# Matplotlib widget left
 class MplWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)   # Inherit from QWidget
