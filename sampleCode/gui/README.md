@@ -26,3 +26,8 @@ In order to use a widget created in the PyQt5 designer in matplotlib one needs t
 4) Under "Include" select the path and name to the include, hereinafter "sampleCode.gui.mplwidget"
 5) Press "Promote" / "Anwenden"
 6) Rename the widget-object, hereinafter "MplWidget"
+
+## Layouts
+The PyQt5 designer works with layouts. This will ensure that all your widgets will be displayed and resized properly when the form is previewed or used in an application.
+
+For more information see: https://www.learnpyqt.com/tutorials/qt-designer-gui-layout/
