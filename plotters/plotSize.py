@@ -16,16 +16,18 @@
 # Functions
 # ----------------------------------------------------------------------
 
-def calcFigSize (numberOfFigures=1, aspectRatio=3/2, pageWidth=21, 
-    leftmargin=2.5, rightmargin=2.5, spacing=0.0):
-    """Fitting on ore multiple figures to a defined page width
+def calcFigSize(numberOfFigures=1, aspectRatio=3/2, pageWidth=21,
+                leftmargin=2.5, rightmargin=2.5, spacing=0.0):
+    """Size of one/multiple figures on a defined page width
     :param numberOfFigures: int w/ number of figures [cm]
     :param aspectRatio: int w/ aspect ratio of the figure
     :param pageWidth: int w/ total page margin [cm]
     :param leftmargin: int w/ left margin [cm]
     :param rightmargin: int w/ right margin [cm]
     :param spacing: int w/ spacing between the figures [cm]
+    :rtype figSize: str to be inserted into style_dict
     """
+
     figWidth = (pageWidth-leftmargin-rightmargin) / numberOfFigures - spacing
     figHeight = figWidth * aspectRatio ** -1
 
@@ -41,9 +43,11 @@ def calcFigSize (numberOfFigures=1, aspectRatio=3/2, pageWidth=21,
 # Tests / Example
 # ----------------------------------------------------------------------
 
+
 def sample():
     figSize = calcFigSize()
     print("Calculated figure size: " + figSize)
+
 
 if __name__ == "__main__":
     sample()
