@@ -9,9 +9,9 @@
 # ------------------------------------------------------------------------------
 
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import pickle as pkl
 import numpy as np
+import os, sys
 
 # ----------------------------------------------------------------------
 # Imported functions
@@ -171,7 +171,11 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 # ----------------------------------------------------------------------
 
 
-def sample():
+def sample_1(*, showPlt=True, fig=None, ax=None):
+    # FIRST PLOT
+    # only show plot with custom size and linewidth, add a vertical line
+    # Example for DIN A4 Page with left and right margin of 2.5cm
+    # figure size is always in inches (1 in = 2.54 cm)
     x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
     y = [np.sin(x + phi) for phi in offsets]
@@ -184,24 +188,26 @@ def sample():
     vLines = [np.mean(x)]
     vTexts = ['test description']
 
-    # FIRST PLOT
-    # only show plot with custom size and linewidth, add a vertical line
-    # Example for DIN A4 Page with left and right margin of 2.5cm
-    # figure size is always in inches (1 in = 2.54 cm)
     figSize = plotSize.calcFigSize()
 
     style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
 
     # plot2D w/ all available options
-    plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
+    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
            dir_fileName=None, vLines=vLines, vTexts=vTexts,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
-           savePlt=False, savePkl=False, showPlt=True)
+           savePlt=False, savePkl=False, showPlt=showPlt,
+           fig=fig, ax=ax)
 
+    return fig, ax
+
+
+def sample_2(*, showPlt=True, fig=None, ax=None):
     # SECOND PLOT
     # save in this folder as pdf and show plot without a line
     # but only with different markers
+    x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
     y = [np.sin(x + phi) for phi in offsets]
 
@@ -211,12 +217,19 @@ def sample():
     legend = ["testdata1", "testdata2", "testdata3", "testdata4",
               "testdata5", "testdata6", "testdata7", "testdata8"]
 
-    # plot2D w/ only specified options
-    plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
-           dir_fileName="plotters/pdf_example",
-           style_dict=style_dict, variation='marker',
-           savePlt=True, showPlt=True)
+    # Change to current file location
+    os.chdir(os.path.dirname(sys.argv[0]))
+    dir_fileName="plot_as_pdf_example"
 
+    # plot2D w/ only specified options
+    fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
+           dir_fileName=dir_fileName,
+           style_dict=style_dict, variation='marker',
+           savePlt=True, showPlt=showPlt,
+           fig=fig, ax=ax)
+
+    return fig, ax
 
 if __name__ == "__main__":
-    sample()
+    sample_1()
+    sample_2()
