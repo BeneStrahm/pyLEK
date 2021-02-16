@@ -160,7 +160,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     mplStyle.cleanPlotStyle(mpl)
 
     # Clean up everything
-    if fig == None:
+    if fig is None:
         plt.clf()
         plt.close()
 
