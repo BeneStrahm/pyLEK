@@ -27,6 +27,8 @@ In order to use a widget created in the PyQt5 designer in matplotlib one needs t
 5) Press "Promote" / "Anwenden"
 6) Rename the widget-object, hereinafter "MplWidget"
 
+You can easily create multiple widgets showing matplotlib-plots. They all (can) use the same class, since they are simply different objects of the same class. Just make sure that they have a unique object-name (E.g. here "MplWiget_left" and ".._right"), which you then use in your code (see also app_framework.py)
+
 ## Layouts
 The PyQt5 designer works with layouts. This will ensure that all your widgets will be displayed and resized properly when the form is previewed or used in an application.
 
