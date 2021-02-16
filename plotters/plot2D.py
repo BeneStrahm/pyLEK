@@ -26,10 +26,10 @@ import plotters.plotSize as plotSize
 # ----------------------------------------------------------------------
 
 
-def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
-           vLines=None, vTexts=None,
-           xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
+def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
+           dir_fileName=None, vLines=None, vTexts=None, xlim=[], ylim=[],
+           xscale='linear', yscale='linear', style_dict={}, mpl='default',
+           colorScheme='Monochrome', variation='color',
            savePlt=False, savePkl=False, showPlt=False,
            fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
@@ -54,8 +54,10 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     :param savePkl: bool true to save plot 
     :param savePkl: bool true to save as .pickle
     :param showPlt: bool true show plot in interactive mode
-    :param fig: fig object to be overwritten & returned 
-    :param ax: ax object to be overwritten & returned 
+    :param fig: fig object to be overwritten 
+    :param ax: ax object to be overwritten 
+    :rtype fig: modified fig object
+    :rtype ax: modified ax object
     """
 
     # Modify plot styles
@@ -72,15 +74,18 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     y = np.transpose(y)
 
     # An empty figure with one axe
-    if fig == None: 
+    if fig is None:
         fig, ax = plt.subplots()
 
     # Setting the title of the axe-object
-    ax.set_title(title)
+    if not (title is None):
+        ax.set_title(title)
 
     # Setting the x-axis / y-axis label of the axe-object
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    if not (xlabel is None):
+        ax.set_xlabel(xlabel)
+    if not (ylabel is None):
+        ax.set_ylabel(ylabel)
 
     # Setting the x-axis / y-axis limits of the axe-object
     if xlim:
@@ -101,29 +106,30 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     # Correctly ordering legend entries by replacing labels with entries
     # from the legend list. If this is not done there is not order in
     # the legend see: https://matplotlib.org/users/legend_guide.html
-    handles, labels = ax.get_legend_handles_labels()
+    if not (legend is None):
+        handles, labels = ax.get_legend_handles_labels()
 
-    for j, element in enumerate(legend, start=0):
-        labels[j] = element
+        for j, element in enumerate(legend, start=0):
+            labels[j] = element
 
-    # Setting the legend
-    leg = ax.legend(labels)
+        # Setting the legend
+        leg = ax.legend(labels)
 
-    # Set line thickness / transparency of the legend to standart
-    for line in leg.get_lines():
-        line.set_linewidth(1.5)
-        # Do not set for only marker plots
-        if "lines.linewidth" in style_dict:
-            if style_dict["lines.linewidth"] == 0: 
-                line.set_linewidth(0)
-        line.set_alpha(1.0)
+        # Set line thickness / transparency of the legend to standart
+        for line in leg.get_lines():
+            line.set_linewidth(1.5)
+            # Do not set for only marker plots
+            if "lines.linewidth" in style_dict:
+                if style_dict["lines.linewidth"] == 0:
+                    line.set_linewidth(0)
+            line.set_alpha(1.0)
 
     # Add vertical line
     if vLines:
         for vLine in vLines:
             # Add vertical line to ax
             ax.axvline(vLine, linestyle="--", linewidth=1.0, marker="None", color='black',
-                       zorder=len(labels)+1)
+                       zorder=max(len(x), len(y))+1)
 
     if vTexts:
         for vLine, vText in zip(vLines, vTexts):
@@ -154,15 +160,16 @@ def plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName=None,
     mplStyle.cleanPlotStyle(mpl)
 
     # Clean up everything
-    if fig == None: 
+    if fig == None:
         plt.clf()
         plt.close()
-    
+
     return fig, ax
 
 # ----------------------------------------------------------------------
 # Tests / Example
 # ----------------------------------------------------------------------
+
 
 def sample():
     x = np.linspace(0, 2 * np.pi, 50)
@@ -177,8 +184,6 @@ def sample():
     vLines = [np.mean(x)]
     vTexts = ['test description']
 
-    legend = ["testdata1", "testdata2", "testdata3", "testdata4"]
-
     # FIRST PLOT
     # only show plot with custom size and linewidth, add a vertical line
     # Example for DIN A4 Page with left and right margin of 2.5cm
@@ -187,28 +192,31 @@ def sample():
 
     style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
 
-    plot2D([x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName=None,
-           vLines=vLines, vTexts=vTexts,
+    # plot2D w/ all available options
+    plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
+           dir_fileName=None, vLines=vLines, vTexts=vTexts,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
            savePlt=False, savePkl=False, showPlt=True)
 
     # SECOND PLOT
-    # save in this folder as pdf and show plot without a line  
+    # save in this folder as pdf and show plot without a line
     # but only with different markers
     offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
     y = [np.sin(x + phi) for phi in offsets]
 
-    style_dict = {"lines.linewidth": 0, "savefig.format": "pdf", "savefig.format": "pdf"}
+    style_dict = {"lines.linewidth": 0,
+                  "savefig.format": "pdf", "savefig.format": "pdf"}
 
-    legend = ["testdata1", "testdata2", "testdata3", "testdata4", \
-            "testdata5", "testdata6", "testdata7", "testdata8"]
+    legend = ["testdata1", "testdata2", "testdata3", "testdata4",
+              "testdata5", "testdata6", "testdata7", "testdata8"]
 
-    plot2D([x, x, x, x, x, x, x, x], y, xlabel, ylabel, title, legend, dir_fileName="plotters/pdf_example",
-           vLines=None, vTexts=None,
-           xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict=style_dict, mpl='default', colorScheme='Monochrome', variation='marker',
-           savePlt=True, savePkl=False, showPlt=True)
+    # plot2D w/ only specified options
+    plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
+           dir_fileName="plotters/pdf_example",
+           style_dict=style_dict, variation='marker',
+           savePlt=True, showPlt=True)
+
 
 if __name__ == "__main__":
     sample()
