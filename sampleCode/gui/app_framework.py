@@ -73,10 +73,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.gui.MplWidget_left.canvas.fig, self.gui.MplWidget_left.canvas.ax = plt.plot2D(
         #     x, y, *keyargs, fig=self.gui.MplWidget_left.canvas.fig, ax=self.gui.MplWidget_left.canvas.ax)
 
-        # In order to save the plot, recall the plot function but without passing fig, ax
-        # Like this, the plot style will be according to the desired .mplstyle
-        # plt.plot2D(x, y, *keyargs, savefig=True, fig=None, ax=None)
-
         # Update
         self.gui.MplWidget_left.canvas.draw()
 
@@ -97,6 +93,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # For your own plot:
         # plt.plot2D(x, y, *keyargs, savefig=True, fig=None, ax=None)
+
+        # Internal note: An alternative would be to "copy" and "recreate" the ax object in the 
+        # plot function.
+        # See https://stackoverflow.com/questions/6309472/matplotlib-can-i-create-axessubplot-objects-then-add-them-to-a-figure-instance
 
         # Update
         self.gui.MplWidget_right.canvas.draw()
