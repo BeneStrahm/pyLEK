@@ -9,7 +9,7 @@ Use this README to briefly describe your code.
 For all your examples on which to run the code
 
 ## gui
-For everything connected wit the GUI (= Grafik User Interface) if you have one.
+For everything connected wit the GUI (= Grafik User Interface) if you have one. See also README.md in the gui folder.
 
 ## foo
 If you're writing an application named foo, the directory that contains all this stuff is named /foo.
