@@ -25,6 +25,8 @@ Further you might want to use linting, therefore in VS, open the command bar (Ct
 
 Moreover, for simple PEP-Style conform code formatting, you can use a formatter. Therefore install one with "pip install autopep8". In VS, under Settings search for python.formatting.provider and select autopep8. To use the formatter on your code, open the command bar (Ctrl+Shift+P), type "Format:" and select the desired option.
 
+In order to use the same settings for Visual Studio Code on all of your computers, activate "Settings Sync": Open the command bar (Ctrl+Shift+P), type "Settings Sync: Turn On, confirm with enter and select e.g. your GitHub account. See also https://code.visualstudio.com/docs/editor/settings-sync.
+
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
 ## Example
