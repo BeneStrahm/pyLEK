@@ -11,7 +11,8 @@
 import matplotlib.pyplot as plt
 import pickle as pkl
 import numpy as np
-import os, sys
+import os
+import sys
 
 # ----------------------------------------------------------------------
 # Imported functions
@@ -27,9 +28,9 @@ import pyLEK.plotters.plotSize as plotSize
 
 
 def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
-           dir_fileName=None, vLines=None, vTexts=None, xlim=[], ylim=[],
-           xscale='linear', yscale='linear', style_dict={}, mpl='default',
-           colorScheme='Monochrome', variation='color',
+           dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
+           xlim=[], ylim=[], xscale='linear', yscale='linear',
+           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
            savePlt=False, savePkl=False, showPlt=False,
            fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
@@ -43,6 +44,8 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
     :param vTexts: list w/ strings for the vertical lines 
+    :param hLines: list w/ floats on where to add horizontal line
+    :param hTexts: list w/ strings for the horizontal lines 
     :param xlim: list w/ limits  for x axis [xmin, xmax]
     :param ylim: list w/ limits  for y axis [ymin, ymax]
     :param xscale: string w/ scales acc. to matplotlib
@@ -138,6 +141,21 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     vText, rotation=90, rotation_mode='anchor',
                     horizontalalignment='right', verticalalignment='bottom',
                     fontsize='x-small')
+
+    # Add horizontal line
+    if hLines:
+        for hLine in hLines:
+            # Add vertical line to ax
+            ax.axhline(hLine, linestyle="--", linewidth=1.0, marker="None", color='black',
+                       zorder=max(len(x), len(y))+1)
+
+    if hTexts:
+        for hLine, hText in zip(hLines, hTexts):
+            # Add Text to lines
+            ax.text(0.02 * (ax.get_xlim()[1] - ax.get_xlim()[0]) + ax.get_xlim()[0], hLine,
+                    hText, rotation=0, rotation_mode='anchor',
+                    horizontalalignment='left', verticalalignment='bottom',
+                    fontsize='x-small')
     # Save plot
     if savePlt == True:
         try:
@@ -188,17 +206,20 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
     vLines = [np.mean(x)]
     vTexts = ['test description']
 
+    hLines = [np.std(y)]
+    hTexts = ['test description']
+
     figSize = plotSize.calcFigSize()
 
     style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
 
     # plot2D w/ all available options
     fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
-           dir_fileName=None, vLines=vLines, vTexts=vTexts,
-           xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
-           savePlt=False, savePkl=False, showPlt=showPlt,
-           fig=fig, ax=ax)
+                     dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
+                     xlim=[], ylim=[], xscale='linear', yscale='linear',
+                     style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
+                     savePlt=False, savePkl=False, showPlt=showPlt,
+                     fig=fig, ax=ax)
 
     return fig, ax
 
@@ -219,16 +240,17 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
 
     # Change to current file location
     os.chdir(os.path.dirname(sys.argv[0]))
-    dir_fileName="plot_as_pdf_example"
+    dir_fileName = "plot_as_pdf_example"
 
     # plot2D w/ only specified options
     fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
-           dir_fileName=dir_fileName,
-           style_dict=style_dict, variation='marker',
-           savePlt=True, showPlt=showPlt,
-           fig=fig, ax=ax)
+                     dir_fileName=dir_fileName,
+                     style_dict=style_dict, variation='marker',
+                     savePlt=True, showPlt=showPlt,
+                     fig=fig, ax=ax)
 
     return fig, ax
+
 
 if __name__ == "__main__":
     sample_1()
