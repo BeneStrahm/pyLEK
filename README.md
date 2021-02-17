@@ -14,6 +14,7 @@ If you use Visual Studio code, you might also want to install the following exte
 - Python -> In order to use Python in VS
 - TODO.md Kanban Board -> To edit To-Do Lists in VS
 - GitHub Pull Requests and Issues -> GitHub integration in VS
+- GitLens - Git Superchareged -> Tracking GitHub changes
 - Pylance -> Additional Python language support
 - Visual Studio IntelliCode -> Offers autocomplete of syntax
 
