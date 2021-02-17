@@ -75,4 +75,4 @@ class Ui_MainWindow(object):
         self.lineEdit_edit.setText(_translate("MainWindow", "Enter here some text"))
         self.pushButton_run.setText(_translate("MainWindow", "run script (See terminal output)"))
         self.pushButton_plot.setText(_translate("MainWindow", "plot data"))
-from sampleCode.gui.mplwidget import MplWidget
+from pyLEK.sampleCode.gui.mplwidget import MplWidget

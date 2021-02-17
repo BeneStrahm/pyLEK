@@ -15,9 +15,9 @@
 # ------------------------------------------------------------------------------
 # Contains all imported modules / functions
 # e.g: import scipy.io
-from sampleCode.foo.bar import someCode
+from pyLEK.sampleCode.foo.bar import someCode
 
-from sampleCode.gui import app_framework
+from pyLEK.sampleCode.gui import app_framework
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------

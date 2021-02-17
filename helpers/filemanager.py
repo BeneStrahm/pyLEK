@@ -2,7 +2,7 @@
 # Description:  Helper functions for file/folder management
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2020-09-25
-# Execution:    Import functions / collections (from helpers import util)
+# Execution:    Import functions / collections (from pylek.helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries

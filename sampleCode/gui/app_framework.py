@@ -3,7 +3,7 @@
 # Description:  Framework for custom application
 # Author:       ** Add here author's e-mail adress **
 # Created:      ** Add here the date of creation **
-# Execution:    Import functions / collections (from helpers import util)
+# Execution:    Import functions / collections (from pyLEK.helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Sources
@@ -16,15 +16,15 @@
 # Contains all imported modules / functions
 # PyQt5 gui
 from PyQt5 import QtWidgets, uic
-from sampleCode.gui.mainwindow import Ui_MainWindow
+from pyLEK.sampleCode.gui.mainwindow import Ui_MainWindow
 
 # python modules
 import sys
 import numpy as np
 
 # pyLEK/helpers
-from sampleCode.foo.bar import someCode
-import plotters.plot2D as plt
+from pyLEK.sampleCode.foo.bar import someCode
+import pyLEK.plotters.plot2D as plt
 
 # ------------------------------------------------------------------------------
 # Functions / Classes

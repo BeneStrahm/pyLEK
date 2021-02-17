@@ -17,9 +17,9 @@ import os, sys
 # Imported functions
 # ----------------------------------------------------------------------
 
-import plotters.plotStyle.colorCycler as colorCycler
-import plotters.plotStyle.mplStyle as mplStyle
-import plotters.plotSize as plotSize
+import pyLEK.plotters.plotStyle.colorCycler as colorCycler
+import pyLEK.plotters.plotStyle.mplStyle as mplStyle
+import pyLEK.plotters.plotSize as plotSize
 
 # ----------------------------------------------------------------------
 # Functions

@@ -3,7 +3,7 @@
 # Description:  Framework for custom application
 # Author:       ** Add here author's e-mail adress **
 # Created:      ** Add here the date of creation **
-# Execution:    Import functions / collections (from helpers import util)
+# Execution:    Import functions / collections (from pyLEK.helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Sources

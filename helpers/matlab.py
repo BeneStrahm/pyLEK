@@ -2,7 +2,7 @@
 # Description:  Helper functions for matlab
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2020-08-26
-# Execution:    Import functions / collections (from helpers import util)
+# Execution:    Import functions / collections (from pylek.helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries
