@@ -2,7 +2,7 @@
 # Description:  Plotting 2-D Lines on one figure
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2018-12-06
-# Execution:    Import functions / collections (from helpers import util)
+# Execution:    Import functions / collections (from pyLEK.helpers import util)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Libraries
