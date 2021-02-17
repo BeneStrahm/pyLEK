@@ -14,7 +14,7 @@ If you use Visual Studio code, you might also want to install the following exte
 - Python -> In order to use Python in VS
 - TODO.md Kanban Board -> To edit To-Do Lists in VS
 - GitHub Pull Requests and Issues -> GitHub integration in VS
-- GitLens - Git Superchareged -> Tracking GitHub changes
+- GitLens — Git supercharged -> Tracking GitHub changes
 - Pylance -> Additional Python language support
 - Visual Studio IntelliCode -> Offers autocomplete of syntax
 
@@ -72,7 +72,7 @@ When adding new functions always respect the following template and the style gu
 https://www.python.org/dev/peps/pep-0008/
 
 ## Import modules / usage
-1. Add the path of this folder (e.g. C:\Users\ac123456\GitHub) to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). 
+1. Add the path of this folder (e.g. if the pyLEK folder is located under C:\Users\ac123456\GitHub\pyLEK use the path C:\Users\ac123456\GitHub) to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). 
 Now you don't have to add the full path for import statements.
 https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages
 
