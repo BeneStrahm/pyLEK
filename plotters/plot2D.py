@@ -233,7 +233,7 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
     y = [np.sin(x + phi) for phi in offsets]
 
     style_dict = {"lines.linewidth": 0,
-                  "savefig.format": "pdf", "savefig.format": "pdf"}
+                  "savefig.format": "pdf"}
 
     legend = ["testdata1", "testdata2", "testdata3", "testdata4",
               "testdata5", "testdata6", "testdata7", "testdata8"]
