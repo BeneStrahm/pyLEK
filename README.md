@@ -4,8 +4,8 @@ In order to use Python you need at least an installation of Python and an Editor
 ## Installation
 Go to https://www.python.org/downloads/ and download the latest release of python. Important: During the installation, check the box "Add Python to PATH", press -> Customize Installation and make sure that "pip" will be installed. Further it's recommended to use the "Install for all users" option.
 
-## Alternatively: Virtual Environments
-This lets you easily switch between multiple versions of Python. For more information see https://github.com/pyenv/pyenv. As an installer, https://github.com/pyenv/pyenv-installer is recoommended.
+## Advanced: Virtual Environments
+This lets you easily switch between multiple versions of Python. For more information see https://github.com/pyenv/pyenv. As an installer, https://github.com/pyenv/pyenv-installer is recoommended. A full set of commands can be found under https://github.com/pyenv/pyenv/blob/master/COMMANDS.md.
 
 ## Editors 
 
