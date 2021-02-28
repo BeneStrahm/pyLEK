@@ -7,7 +7,8 @@
 # ------------------------------------------------------------------------------
 # Libraries
 # ------------------------------------------------------------------------------
-
+import subprocess
+import os
 # ----------------------------------------------------------------------
 # Imported functions
 # ----------------------------------------------------------------------
@@ -15,6 +16,7 @@
 # ----------------------------------------------------------------------
 # Functions
 # ----------------------------------------------------------------------
+
 
 def calcFigSize(numberOfFigures=1, aspectRatio=3/2, pageWidth=21,
                 leftmargin=2.5, rightmargin=2.5, spacing=0.0):
@@ -38,6 +40,27 @@ def calcFigSize(numberOfFigures=1, aspectRatio=3/2, pageWidth=21,
     figSize = str(figWidth) + ", " + str(figHeight)
 
     return figSize
+
+
+def savePdf_tex(fig, dir_fileName, **kwargs):
+    """ Exporting a figure to .pdf_tex via command line interface
+    :param fig: fig object to be saved 
+    :param dir_fileName: string w/ Directory / Filename to save to,  
+                         must be specified when savePlt is specified
+    """
+    # Save as.pdf
+    fig.savefig("temp.pdf", format="pdf", **kwargs)
+
+    # Shell command to be called
+    incmd = ["inkscape", "temp.pdf", "--export-type=pdf",
+             "--export-filename={}.pdf".format(dir_fileName),
+             "--export-latex"]
+
+    # Open shell to export
+    subprocess.check_output(incmd)
+
+    # Clean up .pdf
+    os.remove("temp.pdf")
 
 # ----------------------------------------------------------------------
 # Tests / Example
