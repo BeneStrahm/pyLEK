@@ -21,7 +21,7 @@ import sys
 
 import pyLEK.plotters.plotStyle.colorCycler as colorCycler
 import pyLEK.plotters.plotStyle.mplStyle as mplStyle
-import pyLEK.plotters.plotSize as plotSize
+import pyLEK.plotters.plotHelpers as plotHelpers
 
 # ----------------------------------------------------------------------
 # Functions
@@ -35,7 +35,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict={}, mpl='barchart', colorScheme='Monochrome', variation='color',
-                 savePlt=False, savePkl=False, showPlt=False,
+                 savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param y: np.array w/ data to plot, with shape [n_datasets, datapoints]
@@ -66,8 +66,9 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
-    :param savePkl: bool true to save plot 
+    :param savePlt: bool true to save plot, file format acc. to mpl-style
     :param savePkl: bool true to save as .pickle
+    :param saveTex: bool true to save as .pdf_tex
     :param showPlt: bool true show plot in interactive mode
     :param fig: fig object to be overwritten 
     :param ax: ax object to be overwritten 
@@ -290,6 +291,13 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         except TypeError:
             print("Error dumping pickle: To dump pickle specify a file name")
 
+    # Save plot as pdf_tex
+    if saveTex == True:
+        try:
+            plotHelpers.savePdf_tex(fig, dir_fileName)
+        except TypeError:
+            print("Error saving .pdf_tex: To save pdf_tex specify a file name")
+
     # Show plot in interactive mode
     if showPlt == True:
         plt.show()
@@ -345,7 +353,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
 
     # Example for DIN A4 Page with left and right margin of 2.5cm
     # figure size is always in inches (1 in = 2.54 cm)
-    figSize = plotSize.calcFigSize()
+    figSize = plotHelpers.calcFigSize()
 
     style_dict = {"figure.figsize": figSize, "axes.titlepad": 12,
                   "legend.loc": "lower center", "figure.subplot.top": 0.85, "figure.subplot.bottom": 0.2}
@@ -362,7 +370,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                 savePlt=False, savePkl=False, showPlt=showPlt,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=fig, ax=ax)
 
     # 2. Plot
@@ -377,7 +385,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                 savePlt=False, savePkl=False, showPlt=showPlt,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=fig, ax=ax)
 
     # 3. Plot
@@ -395,7 +403,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                 savePlt=False, savePkl=False, showPlt=showPlt,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=fig, ax=ax)
 
     # 4. Plot
@@ -413,7 +421,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=ylim, xscale='linear', yscale='linear',
                  style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                 savePlt=False, savePkl=False, showPlt=showPlt,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=fig, ax=ax)
 
     # 5. Plot
@@ -428,7 +436,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=[], ylim=ylim, xscale='linear', yscale='linear',
                            style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                           savePlt=False, savePkl=False, showPlt=showPlt,
+                           savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 
     return fig, ax
@@ -470,7 +478,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
 
     # Example for DIN A4 Page with left and right margin of 2.5cm
     # figure size is always in inches (1 in = 2.54 cm)
-    figSize = plotSize.calcFigSize()
+    figSize = plotHelpers.calcFigSize()
 
     style_dict = {"figure.figsize": figSize, "axes.titlepad": 12,
                   "legend.loc": "lower center", "figure.subplot.top": 0.85, "figure.subplot.bottom": 0.2}
@@ -487,7 +495,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                 savePlt=False, savePkl=False, showPlt=showPlt,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=fig, ax=ax)
 
     # 2. Plot
@@ -505,7 +513,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=[], ylim=[], xscale='linear', yscale='linear',
                            style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
-                           savePlt=False, savePkl=False, showPlt=showPlt,
+                           savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 
     return fig, ax

@@ -20,7 +20,7 @@ import sys
 
 import pyLEK.plotters.plotStyle.colorCycler as colorCycler
 import pyLEK.plotters.plotStyle.mplStyle as mplStyle
-import pyLEK.plotters.plotSize as plotSize
+import pyLEK.plotters.plotHelpers as plotHelpers
 
 # ----------------------------------------------------------------------
 # Functions
@@ -31,7 +31,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
            dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
-           savePlt=False, savePkl=False, showPlt=False,
+           savePlt=False, savePkl=False, showPlt=False, saveTex=False,
            fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [n_row, datapoints]
@@ -56,6 +56,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param variation: string ('color', 'linestyle')
     :param savePkl: bool true to save plot 
     :param savePkl: bool true to save as .pickle
+    :param saveTex: bool true to save as .pdf_tex
     :param showPlt: bool true show plot in interactive mode
     :param fig: fig object to be overwritten 
     :param ax: ax object to be overwritten 
@@ -170,6 +171,13 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
         except TypeError:
             print("Error dumping pickle: To dump pickle specify a file name")
 
+    # Save plot as pdf_tex
+    if saveTex == True:
+        try:
+            plotHelpers.savePdf_tex(fig, dir_fileName)
+        except TypeError:
+            print("Error saving .pdf_tex: To save pdf_tex specify a file name")
+
     # Show plot in interactive mode
     if showPlt == True:
         plt.show()
@@ -209,7 +217,7 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
     hLines = [np.std(y)]
     hTexts = ['test description']
 
-    figSize = plotSize.calcFigSize()
+    figSize = plotHelpers.calcFigSize()
 
     style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
 
@@ -218,7 +226,7 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
                      dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
                      xlim=[], ylim=[], xscale='linear', yscale='linear',
                      style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
-                     savePlt=False, savePkl=False, showPlt=showPlt,
+                     savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                      fig=fig, ax=ax)
 
     return fig, ax
@@ -226,8 +234,8 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
 
 def sample_2(*, showPlt=True, fig=None, ax=None):
     # SECOND PLOT
-    # save in this folder as pdf and show plot without a line
-    # but only with different markers
+    # save in this folder as .pdf, .pdf_tex for latex and show plot
+    # plot without a line but only with different markers
     x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
     y = [np.sin(x + phi) for phi in offsets]
@@ -240,13 +248,21 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
 
     # Change to current file location
     os.chdir(os.path.dirname(sys.argv[0]))
+    
     dir_fileName = "plot_as_pdf_example"
+    # plot2D w/ only specified options, save as .pdf
+    plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
+           dir_fileName=dir_fileName,
+           style_dict=style_dict, variation='marker',
+           savePlt=True,
+           fig=fig, ax=ax)
 
-    # plot2D w/ only specified options
+    dir_fileName = "plot_as_pdftex_example"
+    # plot2D w/ only specified options, save as .pdf_tex
     fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
                      dir_fileName=dir_fileName,
                      style_dict=style_dict, variation='marker',
-                     savePlt=True, showPlt=showPlt,
+                     showPlt=showPlt, saveTex=True,
                      fig=fig, ax=ax)
 
     return fig, ax

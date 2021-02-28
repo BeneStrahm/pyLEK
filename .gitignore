@@ -500,6 +500,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-
-# Plot example
-plot_as_pdf_example.pdf
