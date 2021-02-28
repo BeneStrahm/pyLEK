@@ -1,6 +1,7 @@
 # Plot Styles, except default one
 *.mplstyle
 !default.mplstyle
+!barchart.mplstyle
 
 # Support for custom scripts
 *custom*
