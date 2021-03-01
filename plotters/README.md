@@ -25,3 +25,9 @@ The .pdf_tex file can the be imported to LaTeX.
 Requirements:
 - Inkscape installation (https://inkscape.org/de/)
 - Configuration of the PATH variable for Inkscape (https://www.danielherber.com/guides.php?option=latex-inkscape)
+
+## Fonts
+
+In order to use the official Univers for UniS font, download the font (https://ilias3.uni-stuttgart.de/goto_Uni_Stuttgart_crs_970352.html) and install it.
+
+Windows: Choose the option "Install for all users" to install the font in "C:\Windows\Fonts", otherwise matplotlib might have troubles finding it.
