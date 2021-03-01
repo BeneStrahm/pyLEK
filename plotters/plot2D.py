@@ -54,7 +54,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
-    :param savePkl: bool true to save plot 
+    :param savePĺt: bool true to save plot 
     :param savePkl: bool true to save as .pickle
     :param saveTex: bool true to save as .pdf_tex
     :param showPlt: bool true show plot in interactive mode
