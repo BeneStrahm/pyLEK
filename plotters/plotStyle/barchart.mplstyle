@@ -246,18 +246,18 @@ boxplot.meanprops.linewidth:       1.0
 ## relative to font.size, using the following values: xx-small, x-small,
 ## small, medium, large, x-large, xx-large, larger, or smaller
 
-font.family         : sans-serif
-font.style          : normal
-font.variant        : normal
-font.weight         : medium
-font.stretch        : normal
-font.size           : 10.0
+font.family:        sans-serif
+font.style:         normal
+font.variant:       normal
+font.weight:        medium
+font.stretch:       normal
+font.size:          10.0
 
-font.serif          : DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
-font.sans-serif     : Univers for UniS 55 Roman, DejaVu Sans, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
-font.cursive        : Univers for UniS 45 Light Oblique, Apple Chancery, Textile, Zapf Chapyncery, Sand, Script MT, Felipa, cursive
-font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, Humor Sans, xkcd, fantasy
-font.monospace      : DejaVu Sans Mono, Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+font.serif:         DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
+font.sans-serif:    Univers for UniS 55 Roman, DejaVu Sans, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+font.cursive:       Univers for UniS 45 Light Oblique, Apple Chancery, Textile, Zapf Chapyncery, Sand, Script MT, Felipa, cursive
+font.fantasy:       Comic Sans MS, Chicago, Charcoal, Impact, Western, Humor Sans, xkcd, fantasy
+font.monospace:     DejaVu Sans Mono, Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
 
 
 ## ***************************************************************************

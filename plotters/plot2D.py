@@ -73,6 +73,9 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     # Create color / linestyles
     customCycler = colorCycler.createCycler(colorScheme, variation)
 
+    # Check font
+    plotHelpers.fontChecker()
+
     # Prepare Plots
     x = np.transpose(x)
     y = np.transpose(y)

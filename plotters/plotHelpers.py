@@ -48,6 +48,7 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     """
+    import matplotlib.pyplot as plt
     # Save as.pdf
     fig.savefig("temp.pdf", format="pdf", **kwargs)
 
@@ -59,8 +60,36 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
     # Open shell to export
     subprocess.check_output(incmd)
 
+   # Clean up fig, ax
+    plt.clf()
+    plt.close()
+
     # Clean up .pdf
     os.remove("temp.pdf")
+
+def fontChecker():
+    import matplotlib.pyplot as plt
+
+    # Retrieve active font
+    font_family = plt.rcParams['font.family'][0]
+    font_active = plt.rcParams["font." + font_family][0]
+
+    # Rebuild font
+    import matplotlib.font_manager as font_manager 
+
+    # Get all available fonts on the computer
+    avail_Fonts= [font.name for font in font_manager.fontManager.ttflist]
+
+    # Check if Univers for UniS has been installed
+    if not (font_active in avail_Fonts):
+
+        # Try rebuilding fonts
+        font_manager._rebuild()
+
+        # Check again
+        if not (font_active in avail_Fonts):
+            print("In order to use \"" + font_active + "\" first install it. Default \"" + font_family + "\" font will be used.")
+
 
 # ----------------------------------------------------------------------
 # Tests / Example
@@ -70,6 +99,8 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
 def sample():
     figSize = calcFigSize()
     print("Calculated figure size: " + figSize)
+
+    fontChecker()
 
 
 if __name__ == "__main__":
