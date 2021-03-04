@@ -237,7 +237,7 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
 
 def sample_2(*, showPlt=True, fig=None, ax=None):
     # SECOND PLOT
-    # save in this folder as .pdf, .pdf_tex for latex and show plot
+    # save in this folder as .pdf  and show plot
     # plot without a line but only with different markers
     x = np.linspace(0, 2 * np.pi, 50)
     offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
@@ -251,20 +251,44 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
 
     # Change to current file location
     os.chdir(os.path.dirname(sys.argv[0]))
-    
+
     dir_fileName = "plot_as_pdf_example"
     # plot2D w/ only specified options, save as .pdf
-    plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
-           dir_fileName=dir_fileName,
-           style_dict=style_dict, variation='marker',
-           savePlt=True,
-           fig=fig, ax=ax)
-
-    dir_fileName = "plot_as_pdftex_example"
-    # plot2D w/ only specified options, save as .pdf_tex
     fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
                      dir_fileName=dir_fileName,
                      style_dict=style_dict, variation='marker',
+                     savePlt=True,
+                     fig=fig, ax=ax)
+
+    return fig, ax
+
+
+def sample_3(*, showPlt=True, fig=None, ax=None):
+    # THIRD PLOT
+    # save in this folder as .pdf_tex for latex and show plot
+    x = np.linspace(0, 2 * np.pi, 50)
+    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
+    y = [np.sin(x + phi) for phi in offsets]
+
+    xlabel = "Test X Axis"
+    ylabel = "Test Y Axis"
+
+    title = "LaTeX (.pdf\_tex) example \n legend w/ LaTeX Code to be compiled"
+
+    legend = [r"\$\sin x\$", r"\$\sin x + \frac{\pi}{2}\$", r"\footnotesize{testdata3}", r"\bfseries{testdata4}"]
+
+    figSize = plotHelpers.calcFigSize()
+
+    style_dict = {"lines.linewidth": 2, "figure.figsize": figSize}
+
+    # Change to current file location
+    os.chdir(os.path.dirname(sys.argv[0]))
+
+    dir_fileName = "plot_as_pdftex_example"
+    # plot2D w/ only specified options, save as .pdf_tex
+    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
+                     legend=legend, dir_fileName=dir_fileName,
+                     style_dict=style_dict, variation='color',
                      showPlt=showPlt, saveTex=True,
                      fig=fig, ax=ax)
 
@@ -274,3 +298,4 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
 if __name__ == "__main__":
     sample_1()
     sample_2()
+    sample_3()

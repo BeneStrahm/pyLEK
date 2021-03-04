@@ -60,10 +60,6 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
     # Open shell to export
     subprocess.check_output(incmd)
 
-   # Clean up fig, ax
-    plt.clf()
-    plt.close()
-
     # Clean up .pdf
     os.remove("temp.pdf")
 
