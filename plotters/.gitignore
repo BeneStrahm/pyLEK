@@ -11,6 +11,7 @@
 !plot2D.py
 !plotBarChart.py
 !plotHelpers.py
+!mergePicklePlots.py
 
 # keep plotStyle 
 !colorCycler.py

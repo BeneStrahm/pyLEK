@@ -49,3 +49,16 @@ Windows: Choose the option "Install for all users" to install the font in "C:\Wi
 ## Figure Size
 
 To fit one or multiple figures to a specified page width see plotSize.py
+
+## Pickle
+
+In order to combine multiple plots after plotting, you can use pickle. This can be particularly useful when having set up an automatized routine that generates multiple plots which you want to combine later on. 
+
+mergePicklePlots.py is an example on how to use pickle to load existing plots and replot them.
+
+The work flow looks as the following:
+
+1) Create plots with the plotters using the option savePkl = True
+2) Copy all plots you want to combine into a folder
+3) Copy mergePicklePlots.py into the folder and customize it to your needs
+4) Use again the plotters to plot the figures loaded with mergePicklePlots.py
