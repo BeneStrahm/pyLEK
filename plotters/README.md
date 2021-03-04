@@ -4,17 +4,19 @@ For each plot (lineplots, histograms, bar charts...) a different function shall 
 
 Currently implemented are:
 
-[X] 2D Plots - plot2D.py
-    [X] Line Plots
-    [X] Marker Plots
+    [X] 2D Plots - plot2D.py
 
-[X] Bar Chart - plotBarChart.py
-    [X] Stacked: Horizontal & Vertical
-    [X] Grouped: Horizontal & Vertical 
+        [X] w/ lines and/or markers
 
-In each corresponding .py script at the very end there are examples (sample()) of the functionality which can be displayed when executing the respective .py script.
+    [X] Bar Chart - plotBarChart.py
 
-All plotters can be customized if desired. In this case, copy the script, e.g. plot2D.py and give it your own name. Your custom script will not be uploaded to github since they are excluded via the plotters\.gitignore
+        [X] Stacked: Horizontal & Vertical
+    
+        [X] Grouped: Horizontal & Vertical 
+
+In each corresponding .py script at the very end there are examples (def sample():) of the functionality which can be displayed when executing the respective .py script.
+
+All plotters can be customized if desired. In this case, copy the script, e.g. plot2D.py and give it your own name. Your custom script will not be uploaded to github since they are excluded via the plotters/.gitignore
 
 ## mpl-styles
 
@@ -24,13 +26,15 @@ All settings for the default plot style are saved in default.mplstyle. Custom pl
 
 1) By modifying default.mplstyle with the style_dict passed by the plot function 
 
-2) By creating an own mplstyle-sheet and specifying it in the plot function. In this case, copy or create a style sheet, e.g. default.mpystyle and give it your own name. Your own sheets are not uploaded to github since they are excluded via the plotters\.gitignore
+2) By creating an own mplstyle-sheet and specifying it in the plot function. In this case, copy or create a style sheet, e.g. default.mpystyle and give it your own name. Your own sheets are not uploaded to github since they are excluded via the plotters/.gitignore
 
 ## LaTeX support
 
-All plots support the option to export a .pdf from matplotlib and then use inkscape through the command line interface to let it create a .pdf_tex.
+All plots support the option to export a .pdf from matplotlib and then use Inkscape through the command line interface to let Inkscape create a .pdf_tex.
 
-The .pdf_tex file can the be imported to LaTeX. 
+The .pdf_tex file can then be imported to LaTeX. 
+
+The advantage here is that your LaTeX-Document will take care about the styling of the figure. E.g. the font in the figure will be the same as you set in your LaTeX-Document. Also you can save LaTeX-Code with matplotlib in your figure which LaTeX will then compile, which can be helpful e.g when using mathematical expressions.
 
 Requirements:
 - Inkscape installation (https://inkscape.org/de/)
