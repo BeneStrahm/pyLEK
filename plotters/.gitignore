@@ -22,4 +22,5 @@
 *.svf
 *.jpg
 *.tig
+*.pickle
 *.pdf_tex
