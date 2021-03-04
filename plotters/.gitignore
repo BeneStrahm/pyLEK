@@ -1,11 +1,25 @@
-# Plot Styles, except default one
+# mpl plot Styles
 *.mplstyle
 !default.mplstyle
-!barchart.mplstyle
+!barchart_vertical.mplstyle
+!barchart_horizontal.mplstyle
 
-# Support for custom scripts
-*custom*
+# Exclude all .py
+*.py
 
-# Plot example
-plot_as_pdf_example.*
-plot_as_pdftex_example.*
+# keep plotters
+!plot2D.py
+!plotBarChart.py
+!plotHelpers.py
+
+# keep plotStyle 
+!colorCycler.py
+!mplStyle.py
+
+# exclude samples
+*.png
+*.pdf
+*.svf
+*.jpg
+*.tig
+*.pdf_tex
