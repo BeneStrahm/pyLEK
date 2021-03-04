@@ -12,8 +12,6 @@ import matplotlib.pyplot as plt
 import pickle as pkl
 import numpy as np
 import matplotlib.ticker as mtick
-import os
-import sys
 
 # ----------------------------------------------------------------------
 # Imported functions
@@ -32,12 +30,13 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  xticks=None, xticklabels=None, xticksrotation=None,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations=None, annotations_position='above',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict={}, mpl='barchart', colorScheme='Monochrome', variation='color',
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
-    """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
+    """Plotting bar charts on one figure in a uniform style
     :param y: np.array w/ data to plot, with shape [n_datasets, datapoints]
     :param xlabel: string w/ labels for x axis
     :param xlabel: string w/ labels for y axis
@@ -51,7 +50,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param yticksrotation: int w/ rotation of ticks
     :param barChart: string ('stacked', 'grouped')
     :param annotations: string ('%', 'individual','sum') or None
-    :param annotations_position: string ('above', 'center')
+    :param annotations_position: string ('above', 'center', 'right')
+    :param orientation: string ('horizontal', 'vertical')
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
@@ -124,8 +124,13 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         bars_set = []
         bottom = np.zeros(len(y[0]))
         for yi in y:
-            bars_set.append(ax.bar(x, yi, bottom=bottom, width=bar_width,
-                                   label='label', edgecolor='white', linewidth=0.5))
+            if orientation == 'vertical':
+                bars_set.append(ax.bar(x, yi, bottom=bottom, width=bar_width,
+                                       label='label', edgecolor='white', linewidth=0.5))
+            elif orientation == 'horizontal':
+                bars_set.append(ax.barh(x, yi, left=bottom, height=bar_width,
+                                        label='label', edgecolor='white', linewidth=0.5))
+
             bottom = bottom + yi
 
     elif barChart == 'stacked100%':
@@ -134,27 +139,42 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         bottom = np.zeros(len(y[0]))
         for yi in y:
             yi_rel = yi / np.sum(y, axis=0)
-            bars_set.append(ax.bar(x, yi_rel, bottom=bottom, width=bar_width,
-                                   label='label', edgecolor='white', linewidth=0.5))
+            if orientation == 'vertical':
+                bars_set.append(ax.bar(x, yi_rel, bottom=bottom, width=bar_width,
+                                       label='label', edgecolor='white', linewidth=0.5))
+            elif orientation == 'horizontal':
+                bars_set.append(ax.barh(x, yi_rel, left=bottom, height=bar_width,
+                                        label='label', edgecolor='white', linewidth=0.5))
             bottom = bottom + yi_rel
 
         # Set labels to %
-        if yticklabels is None:
-            ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
+        if orientation == 'vertical':
+            if yticklabels is None:
+                ax.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
+        elif orientation == 'horizontal':
+            if xticklabels is None:
+                ax.xaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 
     elif barChart == 'grouped':
         bars_set = []
         bottom = np.zeros(len(y[0]))
         for i, yi in enumerate(y):
             x_pos = x-bar_width/2 + bar_width/len(y) * i
-            bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y),
-                                   label='label', edgecolor='white', linewidth=0.5))
+            if orientation == 'vertical':
+                y_pos = x-bar_width/2 + bar_width/len(y) * i
+                bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y),
+                                       label='label', edgecolor='white', linewidth=0.5))
+            elif orientation == 'horizontal':
+                x_pos = x-bar_width/2 + bar_width/len(y) * i
+                bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y),
+                                        label='label', edgecolor='white', linewidth=0.5))
 
     # Add text annotations to the top of the bars.
     if not (annotations is None):
 
         # Get maximal size of y-axis for text alignment
         ymax = ax.get_ylim()[1]
+        xmax = ax.get_xlim()[1]
 
         # Loop overs datasets
         for i, bars in enumerate(bars_set):
@@ -163,13 +183,27 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
             for j, bar in enumerate(bars):
 
                 # Position of text and grab the color of bars so the text gets the same color
-                x_pos = bar.get_x() + bar.get_width() / 2
                 if annotations_position == 'above':
+                    x_pos = bar.get_x() + bar.get_width() / 2
                     y_pos = bar.get_y() + bar.get_height() + 0.0175 * ymax
                     bar_color = bars[0].get_facecolor()
-                else:
+                    va = 'center'
+                    ha = 'center'
+                elif annotations_position == 'right':
+                    x_pos = bar.get_x() + bar.get_width() + 0.005 * xmax
+                    y_pos = bar.get_y() + bar.get_height() / 2
+                    bar_color = bars[0].get_facecolor()
+                    va = 'center_baseline'
+                    ha = 'left'
+                elif annotations_position == 'center':
+                    x_pos = bar.get_x() + bar.get_width() / 2
                     y_pos = bar.get_y() + bar.get_height() / 2
                     bar_color = 'white'
+                    va = 'center'
+                    ha = 'center'
+                else:
+                    print('Unknown option for annotation position')
+
 
                 # Get the text
                 if annotations == 'individual':
@@ -177,8 +211,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     bar_text = "{:.0f}".format(y[i][j])
 
                     # Add the text
-                    ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va='center',
-                            ha='center', color=bar_color)
+                    ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va=va,
+                            ha=ha, color=bar_color)
 
                 elif annotations == 'sum':
                     # Only sum for last bar_set
@@ -188,8 +222,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                             "{:.0f}".format(np.sum(y, 0)[j])
 
                         # Add the text
-                        ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va='center',
-                                ha='center', color=bar_color)
+                        ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va=va,
+                                ha=ha, color=bar_color)
 
                 elif annotations == '%':
                     # Get max for xtick
@@ -198,8 +232,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     bar_text = "{:.0%}".format(y[i][j] / np.sum(y, 0)[j])
 
                     # Add the text
-                    ax.text(x_pos, y_pos, bar_text, fontsize='x-small', verticalalignment='center',
-                            horizontalalignment='center', color=bar_color)
+                    ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va=va,
+                            ha=ha, color=bar_color)
 
                 else:
                     print('Unknown option for annotation type')
@@ -367,11 +401,12 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations='sum', annotations_position='above',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=fig, ax=ax)
+                 fig=None, ax=None)
 
     # 2. Plot
     legend = ['% of 400+ m completions',
@@ -382,11 +417,12 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations='%', annotations_position='above',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=fig, ax=ax)
+                 fig=None, ax=None)
 
     # 3. Plot
     legend = ['# of 400+ m completions',
@@ -400,11 +436,12 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  xticks=xticks_mod, xticklabels=xticklabels_mod, xticksrotation=xticksrotation_mod,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations='individual', annotations_position='above',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=fig, ax=ax)
+                 fig=None, ax=None)
 
     # 4. Plot
     legend = ['% of 400+ m completions',
@@ -418,24 +455,45 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked100%', annotations='%', annotations_position='center',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=ylim, xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=fig, ax=ax)
+                 fig=None, ax=None)
 
     # 5. Plot
-    legend = ['% of 400+ m completions',
+    legend = ['# of 400+ m completions',
               '# of 300-400 m completions', '# of 200-300 m completions']
     title = "Completions Timeline (stacked bar chart [100%] w/ respective number)"
     # plot w/ all available options
-    fig, ax = plotBarChart(y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
-                           xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
-                           yticks=None, yticklabels=None, yticksrotation=None,
-                           barChart='stacked100%', annotations='individual', annotations_position='center',
+    plotBarChart(y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
+                 xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
+                 yticks=None, yticklabels=None, yticksrotation=None,
+                 barChart='stacked100%', annotations='individual', annotations_position='center',
+                 orientation='vertical',
+                 dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
+                 xlim=[], ylim=ylim, xscale='linear', yscale='linear',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                 fig=None, ax=None)
+
+    # 5. Plot / Switch to horizontal
+    legend = ['# of 400+ m completions',
+              '# of 300-400 m completions', '# of 200-300 m completions']
+    title = "Completions Timeline (horizontal stacked bar chart [100%] w/ respective number)"
+    style_dict = {"figure.figsize": figSize, "axes.titlepad": 12, "axes.spines.right": "True",
+                  "legend.loc": "lower center", "figure.subplot.top": 0.85, "figure.subplot.bottom": 0.2}
+
+    # plot w/ all available options
+    fig, ax = plotBarChart(y, xlabel=ylabel, ylabel=xlabel, title=title, legend=legend,
+                           xticks=None, xticklabels=None, xticksrotation=None,
+                           yticks=xticks, yticklabels=xticklabels, yticksrotation=None,
+                           barChart='stacked100%', annotations='individual', annotations_position='right',
+                           orientation='horizontal',
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
-                           xlim=[], ylim=ylim, xscale='linear', yscale='linear',
-                           style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                           xlim=ylim, ylim=[], xscale='linear', yscale='linear',
+                           style_dict=style_dict, mpl='barchart_horizontal', colorScheme='UniS', variation='color',
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 
@@ -492,27 +550,42 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='grouped', annotations='%', annotations_position='above',
+                 orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=fig, ax=ax)
+                 fig=None, ax=None)
 
     # 2. Plot
     legend = ['# of 400+ m completions',
               '# of 300-400 m completions', '# of 200-300 m completions']
-    xticks_mod = xticks[::2]
-    xticklabels_mod = xticklabels[::2]
-    xticksrotation_mod = 0
     title = "Completions Timeline (grouped bar chart w/ respective number) \n [modified ticks] "
     # plot w/ all available options
-    fig, ax = plotBarChart(y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
-                           xticks=xticks_mod, xticklabels=xticklabels_mod, xticksrotation=xticksrotation_mod,
-                           yticks=None, yticklabels=None, yticksrotation=None,
-                           barChart='grouped', annotations='individual', annotations_position='above',
+    plotBarChart(y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
+                 xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
+                 yticks=None, yticklabels=None, yticksrotation=None,
+                 barChart='grouped', annotations='individual', annotations_position='above',
+                 orientation='vertical',
+                 dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
+                 xlim=[], ylim=[], xscale='linear', yscale='linear',
+                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                 fig=None, ax=None)
+
+    # 3. Plot / Switch to horizontal
+    legend = ['# of 400+ m completions',
+              '# of 300-400 m completions', '# of 200-300 m completions']
+    title = "Completions Timeline (horizontal grouped bar chart w/ respective number) \n [modified ticks] "
+    # plot w/ all available options
+    fix, ax = plotBarChart(y, xlabel=ylabel, ylabel=xlabel, title=title, legend=legend,
+                           xticks=None, xticklabels=None, xticksrotation=None,
+                           yticks=xticks, yticklabels=xticklabels, yticksrotation=None,
+                           barChart='grouped', annotations='individual', annotations_position='right',
+                           orientation='horizontal',
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=[], ylim=[], xscale='linear', yscale='linear',
-                           style_dict=style_dict, mpl='barchart', colorScheme='UniS', variation='color',
+                           style_dict=style_dict, mpl='barchart_horizontal', colorScheme='UniS', variation='color',
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 
