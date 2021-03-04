@@ -21,7 +21,7 @@ def createCycler(colorScheme, variation):
     if colorScheme == 'Monochrome':
         colorList.append('#000000')     # black,            RGB 0,0,0
         colorList.append('#d6d6d6')     # light grey,       RGB 214,214,214
-        colorList.append('#333333')     # dark grey,        RGB 91,91,91
+        colorList.append('#838383')     # dark grey,        RGB 131,131,131
         colorList.append('#adadad')     # med. light grey,  RGB 173,173,173
 
     elif colorScheme == 'UniS':
