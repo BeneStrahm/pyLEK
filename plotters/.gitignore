@@ -3,6 +3,7 @@
 !default.mplstyle
 !barchart_vertical.mplstyle
 !barchart_horizontal.mplstyle
+!piechart.mplstyle
 
 # Exclude all .py
 *.py
@@ -10,6 +11,7 @@
 # keep plotters
 !plot2D.py
 !plotBarChart.py
+!plotPieChart.py
 !plotHelpers.py
 !mergePicklePlots.py
 

@@ -10,9 +10,13 @@ Currently implemented are:
 
     [X] Bar Chart - plotBarChart.py
 
-        [X] Stacked: Horizontal & Vertical
+        [X] stacked: horizontal & vertical
     
-        [X] Grouped: Horizontal & Vertical 
+        [X] grouped: horizontal & vertical 
+
+    [X] Pie Chart - plotPieChart.py
+
+        [X] w/ inner and outer pies
 
 In each corresponding .py script at the very end there are examples (def sample():) of the functionality which can be displayed when executing the respective .py script.
 
