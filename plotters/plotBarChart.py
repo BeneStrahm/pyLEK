@@ -33,7 +33,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict={}, mpl='barchart', colorScheme='Monochrome', variation='color',
+                 style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
     """Plotting bar charts on one figure in a uniform style
@@ -66,6 +66,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
+    :param customCycler: cycler, instead of colorScheme & variation cycler can be passed 
     :param savePlt: bool true to save plot, file format acc. to mpl-style
     :param savePkl: bool true to save as .pickle
     :param saveTex: bool true to save as .pdf_tex
@@ -81,9 +82,6 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     # Get the plot styles
     mplStyle.retrievePlotStyle(style_dict, mpl)
-
-    # Create color / linestyles
-    customCycler = colorCycler.createCycler(colorScheme, variation)
 
     # Prepare Plots
     x = np.arange(len(y[0]))
@@ -111,6 +109,10 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     # Setting the x-axis / y-axis scale of the axe-object
     ax.set_xscale(xscale)
     ax.set_yscale(yscale)
+
+    # Create color / linestyles
+    if customCycler is None:
+        customCycler = colorCycler.createCycler(colorScheme, variation)
 
     # Setting the cycler
     ax.set_prop_cycle(customCycler)
@@ -203,7 +205,6 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     ha = 'center'
                 else:
                     print('Unknown option for annotation position')
-
 
                 # Get the text
                 if annotations == 'individual':
@@ -538,6 +539,21 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
     # figure size is always in inches (1 in = 2.54 cm)
     figSize = plotHelpers.calcFigSize()
 
+    # Creating a custom cycler with predefined searborn color scheme
+    # See plot2D sample4() for more info..
+    import seaborn as sns
+    from cycler import cycler
+
+    N_colors = 4            # Number of colors
+    paletteName = "gist_heat"  # Name of seaborn color palette
+
+    # Create the color palette ...
+    customColorPalette = sns.color_palette(
+        palette=paletteName, as_cmap=True)(np.linspace(0, 1, N_colors))
+
+    # ... and create a cycler from it
+    customCycler = cycler(color=customColorPalette)
+
     style_dict = {"figure.figsize": figSize, "axes.titlepad": 12,
                   "legend.loc": "lower center", "figure.subplot.top": 0.85, "figure.subplot.bottom": 0.2}
 
@@ -553,7 +569,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', customCycler=customCycler,
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -569,7 +585,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='barchart_vertical', customCycler=customCycler,
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -578,14 +594,14 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
               '# of 300-400 m completions', '# of 200-300 m completions']
     title = "Completions Timeline (horizontal grouped bar chart w/ respective number) \n [modified ticks] "
     # plot w/ all available options
-    fix, ax = plotBarChart(y, xlabel=ylabel, ylabel=xlabel, title=title, legend=legend,
+    fig, ax = plotBarChart(y, xlabel=ylabel, ylabel=xlabel, title=title, legend=legend,
                            xticks=None, xticklabels=None, xticksrotation=None,
                            yticks=xticks, yticklabels=xticklabels, yticksrotation=None,
                            barChart='grouped', annotations='individual', annotations_position='right',
                            orientation='horizontal',
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=[], ylim=[], xscale='linear', yscale='linear',
-                           style_dict=style_dict, mpl='barchart_horizontal', colorScheme='UniS', variation='color',
+                           style_dict=style_dict, mpl='barchart_horizontal', customCycler=customCycler,
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 

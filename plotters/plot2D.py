@@ -30,7 +30,7 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
            dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color',
+           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
            savePlt=False, savePkl=False, showPlt=False, saveTex=False,
            fig=None, ax=None):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
@@ -54,6 +54,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
+    :param customCycler: cycler, instead of colorScheme & variation cycler can be passed 
     :param savePĺt: bool true to save plot 
     :param savePkl: bool true to save as .pickle
     :param saveTex: bool true to save as .pdf_tex
@@ -69,9 +70,6 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     # Get the plot styles
     mplStyle.retrievePlotStyle(style_dict, mpl)
-
-    # Create color / linestyles
-    customCycler = colorCycler.createCycler(colorScheme, variation)
 
     # Check font
     plotHelpers.fontChecker()
@@ -103,6 +101,10 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     # Setting the x-axis / y-axis scale of the axe-object
     ax.set_xscale(xscale)
     ax.set_yscale(yscale)
+
+    # Create color / linestyles
+    if customCycler is None:
+        customCycler = colorCycler.createCycler(colorScheme, variation)
 
     # Setting the cycler
     ax.set_prop_cycle(customCycler)
@@ -228,7 +230,7 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
     fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
                      dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
                      xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color',
+                     style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color', customCycler=None,
                      savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                      fig=fig, ax=ax)
 
@@ -257,7 +259,7 @@ def sample_2(*, showPlt=True, fig=None, ax=None):
     fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
                      dir_fileName=dir_fileName,
                      style_dict=style_dict, variation='marker',
-                     savePlt=True,
+                     showPlt=showPlt, savePlt=True,
                      fig=fig, ax=ax)
 
     return fig, ax
@@ -275,7 +277,8 @@ def sample_3(*, showPlt=True, fig=None, ax=None):
 
     title = "LaTeX (.pdf\_tex) example \n legend w/ LaTeX Code to be compiled"
 
-    legend = [r"\$\sin x\$", r"\$\sin x + \frac{\pi}{2}\$", r"\footnotesize{testdata3}", r"\bfseries{testdata4}"]
+    legend = [r"\$\sin x\$", r"\$\sin x + \frac{\pi}{2}\$",
+              r"\footnotesize{testdata3}", r"\bfseries{testdata4}"]
 
     figSize = plotHelpers.calcFigSize()
 
@@ -295,7 +298,53 @@ def sample_3(*, showPlt=True, fig=None, ax=None):
     return fig, ax
 
 
+def sample_4(*, showPlt=True, fig=None, ax=None):
+    # FOURTH PLOT
+    # Use seaborn color scheme & show plot
+    # For searborn color schemes see:
+    # https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
+
+    # Any other (custom) color scheme can be used by creating a cycler
+    # See also: https://matplotlib.org/stable/tutorials/intermediate/color_cycle.html
+
+    x = np.linspace(0, 2 * np.pi, 50)
+    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
+    y = [np.sin(x + phi) for phi in offsets]
+
+    xlabel = "Test X Axis"
+    ylabel = "Test Y Axis"
+
+    title = "Seaborn Color Scheme \"OrRd_r\""
+
+    figSize = plotHelpers.calcFigSize()
+
+    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
+
+    # Creating a custom cycler with predefined searborn color scheme
+    import seaborn as sns
+    from cycler import cycler
+
+    N_colors = 5            # Number of colors
+    paletteName = "OrRd_r"  # Name of seaborn color palette
+
+    # Create the color palette ...
+    customColorPalette = sns.color_palette(
+        palette=paletteName, as_cmap=True)(np.linspace(0, 1, N_colors))
+
+    # ... and create a cycler from it
+    customCycler = cycler(color=customColorPalette)
+
+    # plot2D w/ only specified options, save as .pdf_tex
+    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
+                     style_dict=style_dict, customCycler=customCycler,
+                     showPlt=showPlt,
+                     fig=fig, ax=ax)
+
+    return fig, ax
+
+
 if __name__ == "__main__":
     sample_1()
     sample_2()
     sample_3()
+    sample_4()
