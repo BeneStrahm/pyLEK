@@ -128,10 +128,10 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         for yi in y:
             if orientation == 'vertical':
                 bars_set.append(ax.bar(x, yi, bottom=bottom, width=bar_width,
-                                       label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
                 bars_set.append(ax.barh(x, yi, left=bottom, height=bar_width,
-                                        label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
 
             bottom = bottom + yi
 
@@ -143,10 +143,10 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
             yi_rel = yi / np.sum(y, axis=0)
             if orientation == 'vertical':
                 bars_set.append(ax.bar(x, yi_rel, bottom=bottom, width=bar_width,
-                                       label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
                 bars_set.append(ax.barh(x, yi_rel, left=bottom, height=bar_width,
-                                        label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             bottom = bottom + yi_rel
 
         # Set labels to %
@@ -165,11 +165,11 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
             if orientation == 'vertical':
                 y_pos = x-bar_width/2 + bar_width/len(y) * i
                 bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y),
-                                       label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
                 x_pos = x-bar_width/2 + bar_width/len(y) * i
                 bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y),
-                                        label='label', edgecolor='white', linewidth=0.5))
+                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
 
     # Add text annotations to the top of the bars.
     if not (annotations is None):
@@ -280,8 +280,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                            'lower left', 'lower right', 'lower center']
             if style_dict["legend.loc"] in above_below:
                 leg = fig.legend(labels, ncol=len(y))
-            else:
-                leg = fig.legend(labels)
+        else:
+            leg = fig.legend(labels)
 
     # Add vertical line
     if vLines:
