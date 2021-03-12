@@ -263,12 +263,12 @@ def sample1(*, showPlt=True, fig=None, ax=None):
     outerLabels = ['Group A', 'Group B', 'Group C']
 
     # plot w/ all available options
-    plotPieChart(y, title=title, outerLabels=outerLabels, innerLabels=None,
-                 dir_fileName=None, pieWidth=0.8, pieRadius=1.2, innerPalette='light',
-                 outerLabelDistance=1.2, innerLabelDistance=1.2, autopct='%1.0f%%',
-                 style_dict=style_dict, mpl='piechart', colorScheme='UniS', variation='color', customCycler=None,
-                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                 fig=None, ax=None)
+    fig, ax = plotPieChart(y, title=title, outerLabels=outerLabels, innerLabels=None,
+                           dir_fileName=None, pieWidth=0.8, pieRadius=1.2, innerPalette='light',
+                           outerLabelDistance=1.2, innerLabelDistance=1.2, autopct='%1.0f%%',
+                           style_dict=style_dict, mpl='piechart', colorScheme='UniS', variation='color', customCycler=None,
+                           savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                           fig=fig, ax=ax)
 
     return fig, ax
 
@@ -320,12 +320,12 @@ def sample2(*, showPlt=True, fig=None, ax=None):
     innerLabelDistance = (innerRadius - pieWidth / 2) / innerRadius
 
     # plot w/ all available options
-    plotPieChart(y, title=title, outerLabels=outerLabels, innerLabels=innerLabels,
-                 pieWidth=pieWidth, pieRadius=pieRadius,
-                 outerLabelDistance=outerLabelDistance, innerLabelDistance=innerLabelDistance, autopct=None,
-                 style_dict=style_dict, customCycler=customCycler,
-                 showPlt=showPlt, savePlt=False,
-                 fig=None, ax=None)
+    fig, ax = plotPieChart(y, title=title, outerLabels=outerLabels, innerLabels=innerLabels,
+                           pieWidth=pieWidth, pieRadius=pieRadius,
+                           outerLabelDistance=outerLabelDistance, innerLabelDistance=innerLabelDistance, autopct=None,
+                           style_dict=style_dict, customCycler=customCycler,
+                           showPlt=showPlt, savePlt=False,
+                           fig=fig, ax=ax)
 
     return fig, ax
 
@@ -348,16 +348,16 @@ def sample3(*, showPlt=True, fig=None, ax=None):
         return "{:.1f}%\n({:d} kg)".format(pct, absolute)
 
     # Center the title
-    style_dict = {"figure.figsize": figSize, "legend.loc": "lower center", 
+    style_dict = {"figure.figsize": figSize, "legend.loc": "lower center",
                   'axes.titley': 0.39, 'ax.titlesize': 'xxx-small'}
 
     # plot w/ all available options
-    plotPieChart(y, title=title, outerLabels=outerLabels,
-                 pieWidth=0.6, pieRadius=1.2,
-                 outerLabelDistance=None, autopct=lambda pct: func(pct, y),
-                 style_dict=style_dict, colorScheme='UniS',
-                 savePlt=False, showPlt=showPlt,
-                 fig=None, ax=None)
+    fig, ax = plotPieChart(y, title=title, outerLabels=outerLabels,
+                           pieWidth=0.6, pieRadius=1.2,
+                           outerLabelDistance=None, autopct=lambda pct: func(pct, y),
+                           style_dict=style_dict, colorScheme='UniS',
+                           savePlt=False, showPlt=showPlt,
+                           fig=fig, ax=ax)
 
     return fig, ax
 
