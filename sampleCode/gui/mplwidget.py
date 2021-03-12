@@ -76,7 +76,7 @@ class MplWidget(QtWidgets.QWidget):
 
         # In order to set up your own plot, use the following scheme
         # self.canvas.fig, self.canvas.ax = plot2D.plot2D(
-        #     x, y, *keyargs, fig=self.canvas.fig, ax=self.gui.canvas.ax)
+        #     x, y, *keyargs, fig=self.canvas.fig, ax=self.canvas.ax)
 
         # Update the canvas
         self.canvas.draw()
@@ -119,7 +119,7 @@ class MplWidget(QtWidgets.QWidget):
 
         # In order to set up your own plot, use the following scheme
         # self.canvas.fig, self.canvas.ax = plotBarChart.plotBarChart(
-        #     y, *keyargs, fig=self.canvas.fig, ax=self.gui.canvas.ax)
+        #     y, *keyargs, fig=self.canvas.fig, ax=self.canvas.ax)
 
         # Update the canvas
         self.canvas.draw()
@@ -157,7 +157,7 @@ class MplWidget(QtWidgets.QWidget):
 
         # In order to set up your own plot, use the following scheme
         # self.canvas.fig, self.canvas.ax = plotPieChart.plotPieChart(
-        #     y, *keyargs, fig=self.canvas.fig, ax=self.gui.canvas.ax)
+        #     y, *keyargs, fig=self.canvas.fig, ax=self.canvas.ax)
 
         # Update the canvas
         self.canvas.draw()
