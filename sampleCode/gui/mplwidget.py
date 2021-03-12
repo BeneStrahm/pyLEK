@@ -18,6 +18,7 @@
 from PyQt5 import QtWidgets
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib
 
 # pyLEK/helpers
@@ -37,7 +38,7 @@ matplotlib.use('QT5Agg')
 
 class MplCanvas(Canvas):
     def __init__(self):
-        self.fig, self.ax = plt.subplots()
+        self.fig, self.ax = plt.subplots(tight_layout=True)
         Canvas.__init__(self, self.fig)
         Canvas.setSizePolicy(
             self, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -50,8 +51,10 @@ class MplWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)   # Inherit from QWidget
         self.canvas = MplCanvas()                  # Create canvas object
+        self.toolbar = NavigationToolbar(self.canvas, self) # Create corresponding mpl toolbar
         self.vbl = QtWidgets.QVBoxLayout()         # Set box for plotting
         self.vbl.addWidget(self.canvas)
+        self.vbl.addWidget(self.toolbar)
         self.setLayout(self.vbl)
 
     # Using the pyLEK-plotter functions
