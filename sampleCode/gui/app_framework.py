@@ -56,50 +56,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.gui.pushButton_plot.clicked.connect(self.plotData)
 
     def plotData(self):
+        # In the class MplWidget pyLEK-plotters are imported. Therefore all objects
+        # of the class MplWidget can use the pyLEK-plotters methods
+        # Class MplWidget
+        # -> Object MplWidget_left
+        # -> Object MplWidget_right
+
+        # See also mplwidget.py for more information
+
+        # Using the pyLEK-plotter functions
+
         # Left canvas
         # -----------
-        # Clear
-        self.gui.MplWidget_left.canvas.ax.clear()
-        self.gui.MplWidget_left.canvas.ax.cla()
-
-        # Plotting: Pass the MplWidget.canvas.fig / ..ax object to the sample plot defined
-        # in plot2D.py. The sample plot then calls the plot2D-function, which modifies and returns the
-        # MplWidget.canvas.fig / ..ax object
-
-        self.gui.MplWidget_left.canvas.fig, self.gui.MplWidget_left.canvas.ax = plt.sample_1(
-            showPlt=False, fig=self.gui.MplWidget_left.canvas.fig, ax=self.gui.MplWidget_left.canvas.ax)
-
-        # In order to set up your own plot, use the following scheme
-        # self.gui.MplWidget_left.canvas.fig, self.gui.MplWidget_left.canvas.ax = plt.plot2D(
-        #     x, y, *keyargs, fig=self.gui.MplWidget_left.canvas.fig, ax=self.gui.MplWidget_left.canvas.ax)
-
-        # Update
-        self.gui.MplWidget_left.canvas.draw()
+        # Calling plotPieCharts w/ all available options, execute sample plot
+        self.gui.MplWidget_left.plot2D(None, None, xlabel=None, ylabel=None, title=None, legend=None,
+               dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
+               xlim=[], ylim=[], xscale='linear', yscale='linear',
+               style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+               savePlt=False, savePkl=False, showPlt=False, saveTex=False)
 
         # Right canvas
         # ------------
-        # Clear
-        self.gui.MplWidget_right.canvas.ax.clear()
-        self.gui.MplWidget_right.canvas.ax.cla()
+        # Calling plotPieChart w\ options, execute sample plot
+        self.gui.MplWidget_right.plotPieChart(None)
 
-        # Plotting
-        self.gui.MplWidget_right.canvas.fig, self.gui.MplWidget_right.canvas.ax = plt.sample_2(
-            showPlt=False, fig=self.gui.MplWidget_right.canvas.fig, ax=self.gui.MplWidget_right.canvas.ax)
-        
-        # In order to save the plot, recall the plot function but without passing fig, ax
-        # Like this, the plot style will be according to the desired .mplstyle
-        # In case of the example: 
-        plt.sample_2(showPlt=False, fig=None, ax=None)
-
-        # For your own plot:
-        # plt.plot2D(x, y, *keyargs, savefig=True, fig=None, ax=None)
-
-        # Internal note: An alternative would be to "copy" and "recreate" the ax object in the 
-        # plot function.
-        # See https://stackoverflow.com/questions/6309472/matplotlib-can-i-create-axessubplot-objects-then-add-them-to-a-figure-instance
-
-        # Update
-        self.gui.MplWidget_right.canvas.draw()
+        # Calling plotBarChart w\ options, execute sample plot
+        # self.gui.MplWidget_right.plotBarChart(None)
 
     def runTest(self):
         # Calls the function printSomeText()
