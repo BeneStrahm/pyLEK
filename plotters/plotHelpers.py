@@ -53,9 +53,9 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
     fig.savefig("temp.pdf", format="pdf", **kwargs)
 
     # Shell command to be called
-    incmd = ["inkscape", "temp.pdf", "--export-type=pdf",
-             "--export-filename={}.pdf".format(dir_fileName),
-             "--export-latex"]
+    incmd = ["inkscape", "temp.pdf", "-export-type=pdf",
+             "-export-filename={}.pdf".format(dir_fileName),
+             "-export-latex"]
 
     # Open shell to export
     subprocess.check_output(incmd)
