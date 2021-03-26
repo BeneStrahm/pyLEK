@@ -48,14 +48,21 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     """
-    import matplotlib.pyplot as plt
     # Save as.pdf
     fig.savefig("temp.pdf", format="pdf", **kwargs)
 
+    # Windows
+    if os.name == 'nt':
+        incmd = ["inkscape", "temp.pdf", "--export-type=pdf", 
+                "--export-filename={}.pdf".format(dir_fileName), 
+                "--export-latex"]
+
+    # Linux
     # Shell command to be called
-    incmd = ["inkscape", "temp.pdf", "-export-type=pdf",
-             "-export-filename={}.pdf".format(dir_fileName),
-             "-export-latex"]
+    elif os.name == 'posix':
+        incmd = ["inkscape", "temp.pdf", "-export-type=pdf",
+                "-export-filename={}.pdf".format(dir_fileName),
+                "-export-latex"]
 
     # Open shell to export
     subprocess.check_output(incmd)
