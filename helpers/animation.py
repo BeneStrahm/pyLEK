@@ -49,7 +49,7 @@ def pngToMp4(*, inFolder=None):
                 image = imageio.imread(filename)
                 writer.append_data(image)
 
-    print('.. were converted to ' + outFile + '.mp4')
+    print('.. were converted to \"' + outFile + '.mp4\" in path \"' + inFolder + '\"')
 
 
 def pngToGif(*, inFolder=None):
@@ -60,11 +60,10 @@ def pngToGif(*, inFolder=None):
     outFile = os.path.split(inFolder)[-1]
 
     # Time step between frames
-    dT = int(input("Enter time between Frames in seconds [dT]: "))
-
+    dT = float(input("Enter time between Frames in seconds [dT]: "))
     # Create animation and save as *.mp4
     import imageio
-    with imageio.get_writer(outFile + '.gif', mode='I', dT=dT) as writer:
+    with imageio.get_writer(outFile + '.gif', mode='I', duration=dT) as writer:
         for filename in filenames:
 
             # Select only *.png files
@@ -73,16 +72,17 @@ def pngToGif(*, inFolder=None):
                 image = imageio.imread(filename)
                 writer.append_data(image)
 
-    print('.. were converted to ' + outFile + '.gif')
+    print('.. were converted to \"' + outFile + '.gif\" in path \"' + inFolder + '\"')
 
 
 if __name__ == "__main__":
     # Opens user dialog to select functions from predefined list
     title = 'Please choose conversion option'
     options = ['pngToMp4', 'pngToGif']
+    options = ['pngToGif']
     option, index = pick(options, title)
 
     {
-        'pngToMp4':  pngToMp4,
+        # 'pngToMp4':  pngToMp4,
         'pngToGif':  pngToGif,
     }.get(option)()
