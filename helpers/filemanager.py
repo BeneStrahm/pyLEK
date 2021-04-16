@@ -11,6 +11,8 @@ import os
 import sys
 import shutil
 from typing import NamedTuple
+import tkinter as tk
+from tkinter import filedialog
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
@@ -54,6 +56,38 @@ def getPathOfFile():
 
     return cwd, filePath, folderPath
 
+
+def scanFolderForFiles(fname):
+    """Scans for all files in a specified folder
+    :param fname: string with name of folder
+    :rtype dirpath: directory that was scanned
+    :rtype dirnames: list w/ all folders in dirpath
+    :rtype filenames: list w/ all files in dirpath
+    """
+    folder = fname
+    # Walk through selected folder and scan for all files
+    f = []
+    for (dirpath, dirnames, filenames) in os.walk(folder):
+        f.extend(filenames)
+        break
+    return dirpath, dirnames, filenames
+
+
+def folderDialog():
+    """Opens dialog to choose a folder
+    :rtype dirpath: str w/ path to folder
+    """
+    root = tk.Tk()
+    root.withdraw()
+    dirpath = filedialog.askdirectory()
+
+    return dirpath
+
+# ------------------------------------------------------------------------------
+# Samples
+# ------------------------------------------------------------------------------
+
+
 def sample_getPathOfFile():
     # In your script, import first
     from pyLEK.helpers import filemanager
@@ -65,5 +99,37 @@ def sample_getPathOfFile():
     print('folderPath:  ' + str(folderPath))
     input()
 
+
+def sample_scanFolderForFiles():
+    # In your script, import first
+    from pyLEK.helpers import filemanager
+
+    # As an example, get current working dir
+    cwd = os.getcwd()
+
+    # Execute the function
+    dirpath, dirnames, filenames = filemanager.scanFolderForFiles(cwd)
+    print('scanpath:   ' + dirpath)
+
+    print('\nFound the following folders')
+    for dirname in dirnames:
+        print('dirnames:   ' + str(dirname))
+
+    print('\nFound the following files')
+    for filename in filenames:
+        print('filename:   ' + str(filename))
+
+
+def sample_folderDialog():
+    # In your script, import first
+    from pyLEK.helpers import filemanager
+
+    # Execute the function
+    dirpath = filemanager.folderDialog()
+    print('Dirpath:   ' + dirpath)
+
+
 if __name__ == "__main__":
-    sample_getPathOfFile()
+    # sample_getPathOfFile()
+    # sample_scanFolderForFiles()
+    sample_folderDialog()
