@@ -65,7 +65,11 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
                 "-export-latex"]
 
     # Open shell to export
-    subprocess.check_output(incmd)
+    try:
+        subprocess.check_output(incmd)
+    except FileNotFoundError as e:
+        print('FileNotFoundError: '+ e.strerror)
+        print("Failed to save as .pdf_tex.\nIs a recent version of Inkscape installed? \nInkscape is required to use the plot2D saveTex functionality.") 
 
     # Clean up .pdf
     os.remove("temp.pdf")
