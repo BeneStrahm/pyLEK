@@ -83,6 +83,16 @@ def folderDialog():
 
     return dirpath
 
+def fileDialog():
+    """Opens dialog to choose a file
+    :rtype filepath: str w/ path to file
+    """
+    root = tk.Tk()
+    root.withdraw()
+    filepath = filedialog.askopenfilename()
+
+    return filepath
+
 # ------------------------------------------------------------------------------
 # Samples
 # ------------------------------------------------------------------------------
