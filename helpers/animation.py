@@ -79,10 +79,9 @@ if __name__ == "__main__":
     # Opens user dialog to select functions from predefined list
     title = 'Please choose conversion option'
     options = ['pngToMp4', 'pngToGif']
-    options = ['pngToGif']
     option, index = pick(options, title)
 
     {
-        # 'pngToMp4':  pngToMp4,
+        'pngToMp4':  pngToMp4,
         'pngToGif':  pngToGif,
     }.get(option)()
