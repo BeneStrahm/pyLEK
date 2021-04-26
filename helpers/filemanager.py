@@ -13,10 +13,11 @@ import shutil
 from typing import NamedTuple
 import tkinter as tk
 from tkinter import filedialog
-from pyLEK.helpers.deprecated import * 
+from pyLEK.helpers.deprecated import *
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
+
 
 def delFilesInFolder(fname):
     """Delete all files in a specified folder
@@ -56,9 +57,11 @@ def getPathOfFile():
 
     return cwd, filePath, folderPath
 
+
 @deprecated("use pyLEK.helper.filemanager.py scanFolder() instead")
 def scanFolderForFiles(fname):
     pass
+
 
 def scanFolder(fname):
     """Scans for all files and folders in a specified folder
@@ -85,6 +88,7 @@ def folderDialog():
     dirpath = filedialog.askdirectory()
 
     return dirpath
+
 
 def fileDialog():
     """Opens dialog to choose a file
