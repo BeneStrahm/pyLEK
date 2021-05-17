@@ -1,9 +1,7 @@
 ##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
-...snip...    
+[Python](#Python)  
+[Emphasis](#emphasis)      
 <a name="headers"/>
-## Headers
 # Python
 In order to use Python you need at least an installation of Python and an Editor which allows you to comfortably edit your scripts.
 
