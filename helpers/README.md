@@ -1,2 +1,20 @@
 # helpers
 A helper function is a function that performs part of the computation of another function. Helper functions are used to make your programs easier to read by giving descriptive names to computations. They also let you reuse computations, just as with functions in general.
+
+## animation
+Create animations from files or with matplotlib
+
+## deprecated
+Used to mark deprecated (old) functions and give hints for newer implementations
+
+## filemanager
+Add, change, read, close and delete files
+
+## matlab
+Using Matlab files / syntax in python
+
+## pyExtras
+Simple Python-Functions, e.g. how to handle list comprehension
+
+## txtEditor
+Creatring or modifying simple *.txt files
