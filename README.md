@@ -1,12 +1,22 @@
 ##### Table of Contents  
-[1.  Python](#Python)  
-[1.1 Installation](#Installation)  
-[1.2 Advanced: Virtual Environments](#Python)  
-[1.3 Editors](#Python)  
-[1.4 Example](#Python)  
 
-[2.  pyLEK Repo](#Python)  
-[2.1 Template](#Python)    
+- [Python](#python)
+  * [Installation](#installation)
+  * [Advanced: Virtual Environments](#advanced--virtual-environments)
+  * [Editors](#editors)
+    + [Visual Studio Code (VS)](#visual-studio-code--vs-)
+  * [Example](#example)
+- [pyLEK Repo](#pylek-repo)
+  * [Template](#template)
+  * [Style guideline:](#style-guideline-)
+  * [Import modules / usage](#import-modules---usage)
+  * [.gitignore / Custom scripts](#gitignore---custom-scripts)
+  * [Linked Repositories (Submodules)](#linked-repositories--submodules-)
+    + [robbievanleeuwen/feastruct](#robbievanleeuwen-feastruct)
+  * [TODO.md](#todomd)
+    + [TODO.md format](#todomd-format)
+    + [See also](#see-also)
+  * [Delete Repo from local machine](#delete-repo-from-local-machine)
 
 <a name="headers"/>
 
