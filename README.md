@@ -10,7 +10,7 @@
    1. [Structure & Content](#structure--content)
    1. [Style guideline](#style-guideline)
    1. [Import modules / usage](#import-modules--usage)
-   1. [.gitignore / Custom scripts](#gitignore-custom-scripts)
+   1. [.gitignore / Custom scripts](#gitignore--custom-scripts)
    1. [Linked Repositories (Submodules)](#linked-repositories-submodules)
    1. [TODO.md](#todomd)
    1. [Delete Repo from local machine](#delete-repo-from-local-machine)
