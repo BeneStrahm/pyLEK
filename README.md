@@ -1,22 +1,18 @@
-##### Table of Contents  
+# Table of Contents  
 
-- [Python](#python)
-  * [Installation](#installation)
-  * [Advanced: Virtual Environments](#advanced--virtual-environments)
-  * [Editors](#editors)
-    + [Visual Studio Code (VS)](#visual-studio-code--vs-)
-  * [Example](#example)
-- [pyLEK Repo](#pylek-repo)
-  * [Template](#template)
-  * [Style guideline:](#style-guideline-)
-  * [Import modules / usage](#import-modules---usage)
-  * [.gitignore / Custom scripts](#gitignore---custom-scripts)
-  * [Linked Repositories (Submodules)](#linked-repositories--submodules-)
-    + [robbievanleeuwen/feastruct](#robbievanleeuwen-feastruct)
-  * [TODO.md](#todomd)
-    + [TODO.md format](#todomd-format)
-    + [See also](#see-also)
-  * [Delete Repo from local machine](#delete-repo-from-local-machine)
+1. [Python](#python)
+  1. [Installation](#installation)
+  1. [Advanced: Virtual Environments](#advanced--virtual-environments)
+  1. [Editors](#editors)
+  1. [Example](#example)
+1. [pyLEK Repo](#pylek-repo)
+  1. [Template](#template)
+  1. [Style guideline:](#style-guideline-)
+  1. [Import modules / usage](#import-modules---usage)
+  1. [.gitignore / Custom scripts](#gitignore---custom-scripts)
+  1. [Linked Repositories (Submodules)](#linked-repositories--submodules-)
+  1. [TODO.md](#todomd)
+  1. [Delete Repo from local machine](#delete-repo-from-local-machine)
 
 <a name="headers"/>
 
