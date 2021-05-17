@@ -1,7 +1,15 @@
 ##### Table of Contents  
-[](#Python)  
-[Emphasis](#emphasis)      
+[1.  Python](#Python)  
+[1.1 Installation](##Installation)  
+[1.2 Advanced: Virtual Environments](#Python)  
+[1.3 Editors](#Python)  
+[1.4 Example](#Python)  
+
+[2.  pyLEK Repo](#Python)  
+[2.1 Template](#Python)    
+
 <a name="headers"/>
+
 # Python
 In order to use Python you need at least an installation of Python and an Editor which allows you to comfortably edit your scripts.
 
