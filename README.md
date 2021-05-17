@@ -1,6 +1,6 @@
 ##### Table of Contents  
 [1.  Python](#Python)  
-[1.1 Installation](##Installation)  
+[1.1 Installation](#Installation)  
 [1.2 Advanced: Virtual Environments](#Python)  
 [1.3 Editors](#Python)  
 [1.4 Example](#Python)  
