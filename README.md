@@ -2,16 +2,16 @@
 
 1. [Python](#python)
    1. [Installation](#installation)
-   1. [Advanced: Virtual Environments](#Advanced: Virtual Environments)
+   1. [Advanced: Virtual Environments](#advanced-virtual-environments)
    1. [Editors](#editors)
    1. [Example](#example)
 1. [pyLEK Repo](#pylek-repo)
    1. [Template](#template)
-   1. [Structure & Content](#structure---content)
-   1. [Style guideline:](#style-guideline-)
-   1. [Import modules / usage](#import-modules---usage)
-   1. [.gitignore / Custom scripts](#gitignore---custom-scripts)
-   1. [Linked Repositories (Submodules)](#linked-repositories--submodules-)
+   1. [Structure & Content](#structure--content)
+   1. [Style guideline](#style-guideline)
+   1. [Import modules / usage](#import-modules--usage)
+   1. [.gitignore / Custom scripts](#gitignore-custom-scripts)
+   1. [Linked Repositories (Submodules)](#linked-repositories-submodules)
    1. [TODO.md](#todomd)
    1. [Delete Repo from local machine](#delete-repo-from-local-machine)
 
@@ -63,6 +63,8 @@ A helper function is a function which is used frequently in different scripts th
 [See also README.md for further information](helpers/README.md)
 
 ### inkscape
+Inkscape is an open-source vector graphics editing program. It can be eg. used to make sketches and static drawings. Find here templates and additional scripts.
+
 [See also README.md for further information](inkscape/README.md)
 
 ### plotters
@@ -115,7 +117,7 @@ When adding new functions always respect the following template and the style gu
     if __name__ == "__main__":
         sample()
 
-## Style guideline:
+## Style guideline
 https://www.python.org/dev/peps/pep-0008/
 
 ## Import modules / usage
