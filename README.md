@@ -2,7 +2,7 @@
 
 1. [Python](#python)
    1. [Installation](#installation)
-   1. [Advanced: Virtual Environments](#advanced: virtual environments)
+   1. [Advanced: Virtual Environments](#Advanced: Virtual Environments)
    1. [Editors](#editors)
    1. [Example](#example)
 1. [pyLEK Repo](#pylek-repo)
