@@ -7,6 +7,7 @@
    1. [Example](#example)
 1. [pyLEK Repo](#pylek-repo)
    1. [Template](#template)
+   1. [Structure & Content](#structure---content)
    1. [Style guideline:](#style-guideline-)
    1. [Import modules / usage](#import-modules---usage)
    1. [.gitignore / Custom scripts](#gitignore---custom-scripts)
@@ -54,6 +55,23 @@ See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 See "./sampleCode" for an exemplary code structure as we recommend it.
 
 # pyLEK Repo
+
+## Structure & Content
+### helpers
+A helper function is a function which is used frequently in different scripts that performs part of the computation of another function. Helper functions are used to make your programs easier to read by giving descriptive names to computations. They also let you reuse computations, just as with functions in general.
+
+[See also README.md for further information](helpers/README.md)
+
+### inkscape
+
+### plotters
+For each plot (lineplots, histograms, bar charts...) a different function simplyfing the process of plotting is used.
+### sampleCode
+This simple project is an example for the structure of Python code @ILEK. Simply copy it and customize according to your needs.
+#### gui
+
+
+
 ## Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
 
