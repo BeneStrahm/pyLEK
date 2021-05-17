@@ -2,7 +2,7 @@
 
 1. [Python](#python)
    1. [Installation](#installation)
-   1. [Advanced: Virtual Environments](#advanced--virtual-environments)
+   1. [Advanced: Virtual Environments](#advanced: virtual environments)
    1. [Editors](#editors)
    1. [Example](#example)
 1. [pyLEK Repo](#pylek-repo)
@@ -63,14 +63,19 @@ A helper function is a function which is used frequently in different scripts th
 [See also README.md for further information](helpers/README.md)
 
 ### inkscape
+[See also README.md for further information](inkscape/README.md)
 
 ### plotters
 For each plot (lineplots, histograms, bar charts...) a different function simplyfing the process of plotting is used.
+[See also README.md for further information](plotters/README.md)
 ### sampleCode
 This simple project is an example for the structure of Python code @ILEK. Simply copy it and customize according to your needs.
-#### gui
 
+[See also README.md for further information](sampleCode/README.md)
 
+The sample also contains an example for a simple gui (graphical user interface) using PyQt5 which can be copied and customized according to your needs.
+
+[See also README.md for further information](sampleCode/gui/README.md)
 
 ## Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
