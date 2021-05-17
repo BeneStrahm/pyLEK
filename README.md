@@ -1,5 +1,5 @@
 ##### Table of Contents  
-[Python](#Python)  
+[](#Python)  
 [Emphasis](#emphasis)      
 <a name="headers"/>
 # Python
