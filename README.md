@@ -142,9 +142,16 @@ Ignored files are tracked in a special file named .gitignore that is checked in 
 .gitignore also offers support for custom files. All files named with the prefix *custom*, eg "custom_plot2D.py" will be ignored for upload but will remain on your local machine. Saying you want to create your own plot2D.py, just copy the file and rename it as "custom_plot2D.py", and it will not be uploaded to the repository.
 
 ## Linked Repositories (Submodules)
-The repository is using linked repositories created by third-party authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
+The repository is using linked repositories created by other authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
-Too pull submodules, from the root of the repo just run: git submodule update --init
+When cloning the pyLEK-Repo, by default you get the directories that contain submodules, but none of the files within them yet.
+
+Too pull submodules, from the root of the repo just run `<git submodule init>` to initialize your local configuration file, and `<git submodule update>` to fetch all the data from that project
+
+### silaxer/LaTeX
+The ILEK-LaTeX template for theses, see https://github.com/Silaxer/Vorlage_Abschlussarbeiten
+
+In order to use just copy the folder.
 
 ### robbievanleeuwen/feastruct
 Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
