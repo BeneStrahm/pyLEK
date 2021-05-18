@@ -79,24 +79,26 @@ def scanFolder(fname):
     return dirpath, dirnames, filenames
 
 
-def folderDialog():
+def folderDialog(title=None):
     """Opens dialog to choose a folder
+    :param title: string with title of dialog
     :rtype dirpath: str w/ path to folder
     """
     root = tk.Tk()
     root.withdraw()
-    dirpath = filedialog.askdirectory()
+    dirpath = filedialog.askdirectory(title=title)
 
     return dirpath
 
 
-def fileDialog():
+def fileDialog(title=None):
     """Opens dialog to choose a file
+    :param title: string with title of dialog
     :rtype filepath: str w/ path to file
     """
     root = tk.Tk()
     root.withdraw()
-    filepath = filedialog.askopenfilename()
+    filepath = filedialog.askopenfilename(title=title)
 
     return filepath
 

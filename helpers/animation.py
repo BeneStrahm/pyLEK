@@ -17,7 +17,7 @@ from pyLEK.helpers import filemanager
 
 def getFiles(*, inFolder=None):
     if inFolder == None:
-        inFolder = filemanager.folderDialog()
+        inFolder = filemanager.folderDialog(title="Choose the folder containing the files to be converted")
 
     # Select as current wkdir
     os.chdir(inFolder)
@@ -74,7 +74,6 @@ def pngToGif(*, inFolder=None):
 
     print('.. were converted to \"' + outFile + '.gif\" in path \"' + inFolder + '\"')
 
-
 if __name__ == "__main__":
     # Opens user dialog to select functions from predefined list
     title = 'Please choose conversion option'
@@ -85,3 +84,4 @@ if __name__ == "__main__":
         'pngToMp4':  pngToMp4,
         'pngToGif':  pngToGif,
     }.get(option)()
+
