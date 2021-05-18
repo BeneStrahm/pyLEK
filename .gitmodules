@@ -1,3 +1,6 @@
 [submodule "feastruct"]
 	path = feastruct
 	url = https://github.com/robbievanleeuwen/feastruct
+[submodule "LaTeX"]
+	path = LaTeX
+	url = https://github.com/Silaxer/Vorlage_Abschlussarbeiten
