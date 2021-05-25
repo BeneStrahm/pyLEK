@@ -146,7 +146,9 @@ The repository is using linked repositories created by other authors. In order t
 
 When cloning the pyLEK-Repo, by default you get the directories that contain submodules, but none of the files within them yet.
 
-Too pull submodules, from the root of the repo just run `<git submodule init>` to initialize your local configuration file, and `<git submodule update>` to fetch all the data from that project
+Too pull submodules, from the root of the repo just run `<git submodule init>` to initialize your local configuration file, and `<git submodule update>` to fetch all the data from that project. 
+
+Submodules are linked to a certain commit of the submodule. In case the submodule has been updated, the link in the project has to be updated manually. In order to do so, execute `<git submodule update --remote --merge>` from the project folder.
 
 ### silaxer/LaTeX
 The ILEK-LaTeX template for theses, see https://github.com/Silaxer/Vorlage_Abschlussarbeiten
