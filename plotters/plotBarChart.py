@@ -33,7 +33,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+                 style_dict={}, mpl='barchart_vertical', colorScheme='Monochrome', variation='color', customCycler=None,
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
     """Plotting bar charts on one figure in a uniform style
@@ -86,6 +86,10 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     # Prepare Plots
     x = np.arange(len(y[0]))
 
+    # Convert to array if necessary
+    if not isinstance(y, np.ndarray):
+        y = np.asarray(y)
+
     # An empty figure with one axe
     if fig is None:
         fig, ax = plt.subplots()
@@ -122,18 +126,36 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     # Stacked Bar Chart - Plot of the axe-object
     if barChart == 'stacked':
-        #
         bars_set = []
-        bottom = np.zeros(len(y[0]))
+
+        # Create stacked bar chart w/ positive and negative values
+        # https://stackoverflow.com/questions/35979852/stacked-bar-charts-using-python-matplotlib-for-positive-and-negative-values
+
+        # Take negative and positive data apart and cumulate
+        def get_cumulated_array(data, **kwargs):
+            cum = np.clip(data, **kwargs)
+            cum = np.cumsum(cum, axis=0)
+            d = np.zeros(np.shape(data))
+            d[1:] = cum[:-1]
+            return d  
+
+        cumulated_data = get_cumulated_array(y, a_min=0, a_max=None)
+        cumulated_data_neg = get_cumulated_array(y, a_min=None, a_max=0)
+
+        # Re-merge negative and positive data.
+        row_mask = (y<0)
+        cumulated_data[row_mask] = cumulated_data_neg[row_mask]
+        bottom = cumulated_data
+
+        i = 0
         for yi in y:
             if orientation == 'vertical':
-                bars_set.append(ax.bar(x, yi, bottom=bottom, width=bar_width,
+                bars_set.append(ax.bar(x, yi, bottom=bottom[i], width=bar_width,
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
-                bars_set.append(ax.barh(x, yi, left=bottom, height=bar_width,
+                bars_set.append(ax.barh(x, yi, left=bottom[i], height=bar_width,
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
-
-            bottom = bottom + yi
+            i = i +1
 
     elif barChart == 'stacked100%':
         #
@@ -238,8 +260,6 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
                 else:
                     print('Unknown option for annotation type')
-    else:
-        print('Unknown option for bar chart type')
 
     # Setting the x-ticks / y-ticks label of the axe-object
     if not (xticks is None):                # Position
