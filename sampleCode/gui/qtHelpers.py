@@ -16,7 +16,7 @@
 
 from helpers.filemanager import openFileDialog, saveFileDialog
 from PyQt5.QtWidgets import QComboBox, QCheckBox, QLineEdit,\
-    QRadioButton, QSpinBox, QSlider, QListWidget
+    QRadioButton, QSpinBox, QDoubleSpinBox, QSlider, QListWidget
 from distutils.util import strtobool
 from PyQt5.QtCore import QSettings
 
@@ -62,6 +62,11 @@ def guiSaveState(QMainWindow):
             settings.setValue(name, value)
 
         if isinstance(obj, QSpinBox):
+            name = obj.objectName()
+            value = obj.value()
+            settings.setValue(name, value)
+
+        if isinstance(obj, QDoubleSpinBox):
             name = obj.objectName()
             value = obj.value()
             settings.setValue(name, value)
@@ -134,6 +139,12 @@ def guiRestoreState(QMainWindow):
                 obj. setValue(int(value))
 
         if isinstance(obj, QSpinBox):
+            name = obj.objectName()
+            value = settings.value(name)
+            if value != None:
+                obj. setValue(int(value))
+
+        if isinstance(obj, QDoubleSpinBox):
             name = obj.objectName()
             value = settings.value(name)
             if value != None:
