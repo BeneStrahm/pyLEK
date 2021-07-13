@@ -91,14 +91,33 @@ def folderDialog(title=None):
     return dirpath
 
 
-def fileDialog(title=None):
+@deprecated("use pyLEK.helper.filemanager.py openFileDialog() or saveFileDialog() instead")
+def fileDialog(title=None, filetypes=[]):
+    pass
+
+
+def openFileDialog(title=None, filetypes=[]):
     """Opens dialog to choose a file
-    :param title: string with title of dialog
+    :param title: string w/ title of dialog
+    :param filetypes: list w/ filetypes. The general syntax is eg. filetypes=[("Excel files", "*.xlsx"), (label2, ext2), ...]
     :rtype filepath: str w/ path to file
     """
     root = tk.Tk()
     root.withdraw()
-    filepath = filedialog.askopenfilename(title=title)
+    filepath = filedialog.askopenfilename(title=title, filetypes=filetypes)
+
+    return filepath
+
+
+def saveFileDialog(title=None, filetypes=[]):
+    """Opens dialog to choose a file
+    :param title: string w/ title of dialog
+    :param filetypes: list w/ filetypes. The general syntax is eg. filetypes=[("Excel files", "*.xlsx"), (label2, ext2), ...]
+    :rtype filepath: str w/ path to file
+    """
+    root = tk.Tk()
+    root.withdraw()
+    filepath = filedialog.asksaveasfilename(defaultextension="*.*", title=title, filetypes=filetypes)
 
     return filepath
 
