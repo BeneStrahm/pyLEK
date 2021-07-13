@@ -51,27 +51,12 @@ def guiSaveState(QMainWindow):
             value = obj.text()
             settings.setValue(name, value)
 
-        if isinstance(obj, QCheckBox):
+        if isinstance(obj, (QCheckBox, QRadioButton)):
             name = obj.objectName()
             state = obj.isChecked()
             settings.setValue(name, state)
 
-        if isinstance(obj, QRadioButton):
-            name = obj.objectName()
-            value = obj.isChecked()
-            settings.setValue(name, value)
-
-        if isinstance(obj, QSpinBox):
-            name = obj.objectName()
-            value = obj.value()
-            settings.setValue(name, value)
-
-        if isinstance(obj, QDoubleSpinBox):
-            name = obj.objectName()
-            value = obj.value()
-            settings.setValue(name, value)
-
-        if isinstance(obj, QSlider):
+        if isinstance(obj, (QSpinBox, QDoubleSpinBox, QSlider)):
             name = obj.objectName()
             value = obj.value()
             settings.setValue(name, value)
@@ -120,35 +105,23 @@ def guiRestoreState(QMainWindow):
             value = settings.value(name)   # get stored value
             obj.setText(value)              # restore lineEditFile
 
-        if isinstance(obj, QCheckBox):
+        if isinstance(obj, (QCheckBox, QRadioButton)):
             name = obj.objectName()
             value = settings.value(name)
             if value != None:
                 obj.setChecked(strtobool(value))
 
-        if isinstance(obj, QRadioButton):
+        if isinstance(obj, (QSpinBox, QSlider)):
             name = obj.objectName()
             value = settings.value(name)
             if value != None:
-                obj.setChecked(strtobool(value))
-
-        if isinstance(obj, QSlider):
-            name = obj.objectName()
-            value = settings.value(name)
-            if value != None:
-                obj. setValue(int(value))
-
-        if isinstance(obj, QSpinBox):
-            name = obj.objectName()
-            value = settings.value(name)
-            if value != None:
-                obj. setValue(int(value))
+                obj.setValue(int(value))
 
         if isinstance(obj, QDoubleSpinBox):
             name = obj.objectName()
             value = settings.value(name)
             if value != None:
-                obj. setValue(int(value))
+                obj.setValue(float(value))
 
         if isinstance(obj, QListWidget):
             name = obj.objectName()
