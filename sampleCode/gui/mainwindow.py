@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\mainwindow.ui'
+# Form implementation generated from reading ui file 'mainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -61,10 +61,19 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 988, 22))
         self.menubar.setObjectName("menubar")
+        self.menuDatei = QtWidgets.QMenu(self.menubar)
+        self.menuDatei.setObjectName("menuDatei")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionOpen = QtWidgets.QAction(MainWindow)
+        self.actionOpen.setObjectName("actionOpen")
+        self.actionSave = QtWidgets.QAction(MainWindow)
+        self.actionSave.setObjectName("actionSave")
+        self.menuDatei.addAction(self.actionOpen)
+        self.menuDatei.addAction(self.actionSave)
+        self.menubar.addAction(self.menuDatei.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -75,4 +84,17 @@ class Ui_MainWindow(object):
         self.lineEdit_edit.setText(_translate("MainWindow", "Enter here some text"))
         self.pushButton_run.setText(_translate("MainWindow", "run script (See terminal output)"))
         self.pushButton_plot.setText(_translate("MainWindow", "plot data"))
-from pyLEK.sampleCode.gui.mplwidget import MplWidget
+        self.menuDatei.setTitle(_translate("MainWindow", "File"))
+        self.actionOpen.setText(_translate("MainWindow", "Open"))
+        self.actionSave.setText(_translate("MainWindow", "Save"))
+from gui.mplwidget import MplWidget
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

@@ -104,14 +104,32 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+   </widget>
+   <addaction name="menuDatei"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>MplWidget</class>
    <extends>QWidget</extends>
-   <header>sampleCode.gui.mplwidget.h</header>
+   <header>gui.mplwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

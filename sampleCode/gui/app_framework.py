@@ -32,6 +32,7 @@ import pyLEK.plotters.plot2D as plt
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+
     def __init__(self, *args, **kwargs):
         # Here we declare that the MainWindow class inherits from
         # QtWidgets.QMainWindow, Ui_MainWindow
@@ -55,6 +56,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Example: Create a plot
         self.gui.pushButton_plot.clicked.connect(self.plotData)
 
+        # Example: Save values from selected PyQt5.QtWidgets
+        # See qtHelpers for further details
+        self.gui.actionSave.triggered.connect(self.guiSaveState)
+
+        # Example: Restore values from selected PyQt5.QtWidgets
+        # See qtHelpers for further details
+        self.gui.actionOpen.triggered.connect(self.guiRestoreState)
+
+    def guiSaveState(self):
+        # Import from qtHelpers
+        from gui import qtHelpers
+
+        # Execute imported method to save state
+        qtHelpers.guiSaveState(self.gui)
+
+    def guiRestoreState(self):
+        # Import from qtHelpers
+        from gui import qtHelpers
+
+        # Execute imported method to restore state
+        qtHelpers.guiRestoreState(self.gui)
+
     def plotData(self):
         # In the class MplWidget pyLEK-plotters are imported. Therefore all objects
         # of the class MplWidget can use the pyLEK-plotters methods
@@ -70,10 +93,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # -----------
         # Calling plotPieCharts w/ all available options, execute sample plot
         self.gui.MplWidget_left.plot2D(None, None, xlabel=None, ylabel=None, title=None, legend=None,
-               dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
-               xlim=[], ylim=[], xscale='linear', yscale='linear',
-               style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
-               savePlt=False, savePkl=False, showPlt=False, saveTex=False)
+                                       dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
+                                       xlim=[], ylim=[], xscale='linear', yscale='linear',
+                                       style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+                                       savePlt=False, savePkl=False, showPlt=False, saveTex=False)
 
         # Right canvas
         # ------------
