@@ -20,6 +20,7 @@ from pyLEK.sampleCode.gui.mainwindow import Ui_MainWindow
 
 # python modules
 import sys
+import os
 import numpy as np
 
 # pyLEK/helpers
@@ -63,6 +64,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Example: Restore values from selected PyQt5.QtWidgets
         # See qtHelpers for further details
         self.gui.actionOpen.triggered.connect(self.guiRestoreState)
+
+        # Example: Linking with pandas-dataframe (Using .csv as a database)
+        # 1) Load dataframe
+        # Import from pdHelpers
+        from gui.pdHelpers import readDataframe
+
+        # Change to current file location, avoiding abs-path for link to database
+        os.chdir(os.path.dirname(sys.argv[0]))
+
+        # Reading from database
+        self.df = readDataframe('gui/materials.csv')
+
+        # 2) Initialize at startup
+        self.addMaterials()
+        self.modifyStrengthClasses()
+        self.modifyMaterialProperties()
+
+        # 3) Link signals
+        self.gui.comboBoxMaterial.textActivated.connect(
+            self.modifyStrengthClasses)
+        self.gui.comboBoxStrengthClass.textActivated.connect(
+            self.modifyMaterialProperties)
 
     def guiSaveState(self):
         # Import from qtHelpers
@@ -119,6 +142,47 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         spinBoxValue = self.gui.spinBox_edit.value()
         spinBoxValue = spinBoxValue * 2
         self.gui.spinBox_display.setValue(spinBoxValue)
+
+    def addMaterials(self):
+        # Import from pdHelpers
+        from gui.pdHelpers import getAvailMaterials
+
+        # Filtering available materials
+        materials = getAvailMaterials(self.df)
+
+        # Set up ComboBox
+        self.gui.comboBoxMaterial.clear()
+        self.gui.comboBoxMaterial.addItems(materials)
+
+    def modifyStrengthClasses(self):
+        # Import from pdHelpers
+        from gui.pdHelpers import getAvailStrengthClasses
+
+        # Get selected material
+        material = self.gui.comboBoxMaterial.currentText()
+
+        # Get strengthClasses from selected materials
+        strengthClasses = getAvailStrengthClasses(self.df, material)
+
+        # Set up ComboBox
+        self.gui.comboBoxStrengthClass.clear()
+        self.gui.comboBoxStrengthClass.addItems(strengthClasses)
+
+        # Change material properties as well
+        self.modifyMaterialProperties()
+
+    def modifyMaterialProperties(self):
+        # Import from pdHelpers
+        from gui.pdHelpers import getMaterialProperties
+
+        # Get selected strengthClass
+        strengthClass = self.gui.comboBoxStrengthClass.currentText()
+
+        # Get material properties from selected strengthClass
+        matProperties = getMaterialProperties(self.df, strengthClass)
+
+        # Set up doubleSpinBox
+        self.gui.doubleSpinBoxCompressiveStrength.setValue(matProperties["fk"])
 
 
 def start():

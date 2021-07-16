@@ -54,6 +54,32 @@
        </widget>
       </item>
       <item>
+       <widget class="QComboBox" name="comboBoxMaterial"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBoxStrengthClass"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Compressive strength:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxCompressiveStrength">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <double>10000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_run">
         <property name="text">
          <string>run script (See terminal output)</string>
