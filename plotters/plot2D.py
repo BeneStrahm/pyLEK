@@ -30,7 +30,7 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
            dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
-           style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+           style_dict={}, mpl='_2D', colorScheme='Monochrome', variation='color', customCycler=None,
            savePlt=False, savePkl=False, showPlt=False, saveTex=False,
            fig=None, ax=None,annotate=[]):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
@@ -65,11 +65,14 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :rtype ax: modified ax object
     """
 
+    # Find plot styles
+    mplPath = mplStyle.findPlotStyle(mpl)
+
     # Modify plot styles
-    mplStyle.modifyPlotStyle(style_dict, mpl)
+    mplStyle.modifyPlotStyle(style_dict, mplPath)
 
     # Get the plot styles
-    mplStyle.retrievePlotStyle(style_dict, mpl)
+    mplStyle.retrievePlotStyle(style_dict, mplPath)
 
     # Check font
     plotHelpers.fontChecker()
@@ -193,7 +196,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
         plt.show()
 
     # Clean up mplstyles
-    mplStyle.cleanPlotStyle(mpl)
+    mplStyle.cleanPlotStyle(mplPath)
 
     # Clean up everything
     if fig is None:
@@ -235,7 +238,7 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
     fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
                      dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
                      xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict=style_dict, mpl='default', colorScheme='UniS', variation='color', customCycler=None,
+                     style_dict=style_dict, mpl='_2D', colorScheme='UniS', variation='color', customCycler=None,
                      savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                      fig=fig, ax=ax)
 

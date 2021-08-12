@@ -1,9 +1,9 @@
 # mpl plot Styles
 *.mplstyle
-!default.mplstyle
-!barchart_vertical.mplstyle
-!barchart_horizontal.mplstyle
-!piechart.mplstyle
+!_2D.mplstyle
+!_barchart_v.mplstyle
+!_barchart_h.mplstyle
+!_piechart.mplstyle
 
 # Exclude all .py
 *.py

@@ -31,7 +31,7 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 def plotPieChart(y, *, title=None, outerLabels=None, innerLabels=None,
                  dir_fileName=None, pieWidth=0.4, pieRadius=1.2, innerPalette='light',
                  outerLabelDistance=1.2, innerLabelDistance=1.2, autopct='%1.0f%%',
-                 style_dict={}, mpl='piechart', colorScheme='Monochrome', variation='color', customCycler=None,
+                 style_dict={}, mpl='_piechart', colorScheme='Monochrome', variation='color', customCycler=None,
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
     """Plotting bar charts on one figure in a uniform style
@@ -65,12 +65,14 @@ def plotPieChart(y, *, title=None, outerLabels=None, innerLabels=None,
     :rtype fig: modified fig object
     :rtype ax: modified ax object
     """
+    # Find plot styles
+    mplPath = mplStyle.findPlotStyle(mpl)
 
     # Modify plot styles
-    mplStyle.modifyPlotStyle(style_dict, mpl)
+    mplStyle.modifyPlotStyle(style_dict, mplPath)
 
     # Get the plot styles
-    mplStyle.retrievePlotStyle(style_dict, mpl)
+    mplStyle.retrievePlotStyle(style_dict, mplPath)
 
     # Prepare Plots
     if isinstance(y[0], list):
@@ -234,7 +236,7 @@ def plotPieChart(y, *, title=None, outerLabels=None, innerLabels=None,
         plt.show()
 
     # Clean up mplstyles
-    mplStyle.cleanPlotStyle(mpl)
+    mplStyle.cleanPlotStyle(mplPath)
 
     # Clean up everything
     if fig is None:
@@ -266,7 +268,7 @@ def sample1(*, showPlt=True, fig=None, ax=None):
     fig, ax = plotPieChart(y, title=title, outerLabels=outerLabels, innerLabels=None,
                            dir_fileName=None, pieWidth=0.8, pieRadius=1.2, innerPalette='light',
                            outerLabelDistance=1.2, innerLabelDistance=1.2, autopct='%1.0f%%',
-                           style_dict=style_dict, mpl='piechart', colorScheme='UniS', variation='color', customCycler=None,
+                           style_dict=style_dict, mpl='_piechart', colorScheme='UniS', variation='color', customCycler=None,
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 

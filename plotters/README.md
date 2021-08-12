@@ -26,11 +26,20 @@ All plotters can be customized if desired. In this case, copy the script, e.g. p
 
 All the plots use the same plot styles from ./plotStyle. As style template so called mpl-style sheets are used (https://matplotlib.org/3.1.1/tutorials/introductory/customizing.html)
 
-All settings for the default plot style are saved in default.mplstyle. Custom plots can be configured:
+All settings for the default plots style are saved in the *.mplstyle-files. 
 
-1) By modifying default.mplstyle with the style_dict passed by the plot function 
+Custom plots can be configured:
 
-2) By creating an own mplstyle-sheet and specifying it in the plot function. In this case, copy or create a style sheet, e.g. default.mpystyle and give it your own name. Your own sheets are not uploaded to github since they are excluded via the plotters/.gitignore
+1) Using style_dict (Prefered)
+By modifying default.mplstyle with the style_dict passed by the plot function. See plot2D.py - sample_1(), where the style-dict is used to change the linewidth.
+
+2) Using .mplstyle in pyLEK
+By creating an own mplstyle-sheet and specifying it in the plot function. In this case, copy or create a style sheet, e.g. _myStyle.mpystyle and give it your own name. Your own sheets are not uploaded to github since they are excluded via the plotters/.gitignore. In the params of the plot function, change *mpl=...* to *mpl=_myStyle*, then your style template will be used.
+
+3) Using .mplstyle in project folder (Prefered)
+Same as 2), but this time save the .mplstyle-file in an arbitrary folder, e.g. "plotStyle". The folder needs to be placed in the same folder, where your __main__.py is located. Also here, in the params of the plot function, change *mpl=...* to *mpl=_myStyle*, then your style template will be used. 
+
+The advantage of this approach is that your style will be included within your project, so everybody working with your project will be able to use it. An example can be found in sampleCode/plotStyle and foo/bar/somePlot.py.
 
 ## LaTeX support
 

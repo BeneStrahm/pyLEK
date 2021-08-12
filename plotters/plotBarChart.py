@@ -33,7 +33,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict={}, mpl='barchart_vertical', colorScheme='Monochrome', variation='color', customCycler=None,
+                 style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
     """Plotting bar charts on one figure in a uniform style
@@ -77,11 +77,14 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :rtype ax: modified ax object
     """
 
+    # Find plot styles
+    mplPath = mplStyle.findPlotStyle(mpl)
+
     # Modify plot styles
-    mplStyle.modifyPlotStyle(style_dict, mpl)
+    mplStyle.modifyPlotStyle(style_dict, mplPath)
 
     # Get the plot styles
-    mplStyle.retrievePlotStyle(style_dict, mpl)
+    mplStyle.retrievePlotStyle(style_dict, mplPath)
 
     # Prepare Plots
     x = np.arange(len(y[0]))
@@ -358,7 +361,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         plt.show()
 
     # Clean up mplstyles
-    mplStyle.cleanPlotStyle(mpl)
+    mplStyle.cleanPlotStyle(mplPath)
 
     # Clean up everything
     if fig is None:
@@ -425,7 +428,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='_barchart_v', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -441,7 +444,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='_barchart_v', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -460,7 +463,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='_barchart_v', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -479,7 +482,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=ylim, xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='_barchart_v', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -495,7 +498,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=ylim, xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', colorScheme='UniS', variation='color',
+                 style_dict=style_dict, mpl='_barchart_v', colorScheme='UniS', variation='color',
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -514,7 +517,7 @@ def sample_stacked(*, showPlt=True, fig=None, ax=None):
                            orientation='horizontal',
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=ylim, ylim=[], xscale='linear', yscale='linear',
-                           style_dict=style_dict, mpl='barchart_horizontal', colorScheme='UniS', variation='color',
+                           style_dict=style_dict, mpl='_barchart_h', colorScheme='UniS', variation='color',
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 
@@ -589,7 +592,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', customCycler=customCycler,
+                 style_dict=style_dict, mpl='_barchart_v', customCycler=customCycler,
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -605,7 +608,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                  orientation='vertical',
                  dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
-                 style_dict=style_dict, mpl='barchart_vertical', customCycler=customCycler,
+                 style_dict=style_dict, mpl='_barchart_v', customCycler=customCycler,
                  savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                  fig=None, ax=None)
 
@@ -621,7 +624,7 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
                            orientation='horizontal',
                            dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
                            xlim=[], ylim=[], xscale='linear', yscale='linear',
-                           style_dict=style_dict, mpl='barchart_horizontal', customCycler=customCycler,
+                           style_dict=style_dict, mpl='_barchart_h', customCycler=customCycler,
                            savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
                            fig=fig, ax=ax)
 

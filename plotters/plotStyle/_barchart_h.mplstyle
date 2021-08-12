@@ -353,8 +353,8 @@ mathtext.default: it  # The default font to use for math.
 axes.facecolor:     white   # axes background color
 axes.edgecolor:     black   # axes edge color
 axes.linewidth:     0.8     # edge linewidth
-axes.grid:          True    # display grid or not
-axes.grid.axis:     both    # which axis the grid should apply to
+axes.grid:          True   # display grid or not
+axes.grid.axis:     x       # which axis the grid should apply to
 axes.grid.which:    major   # gridlines at {major, minor, both} ticks
 axes.titlelocation: center  # alignment of the title: {left, right, center}
 axes.titlesize:     10.0    # fontsize of the axes title
@@ -367,7 +367,7 @@ axes.labelsize:     10.0    # fontsize of the x any y labels
 axes.labelpad:      4.0     # space between label and axis
 axes.labelweight:   normal  # weight of the x and y labels
 axes.labelcolor:    black
-axes.axisbelow:     line    # draw axis gridlines and ticks:
+axes.axisbelow:     True    # draw axis gridlines and ticks:
                             #     - below patches (True)
                             #     - above patches but below lines ('line')
                             #     - above all (False)
@@ -393,9 +393,9 @@ axes.formatter.offset_threshold: 4  # When useoffset is True, the offset
                                     # digits from tick labels.
 
 axes.spines.left:   True  # display axis spines
-axes.spines.bottom: True
-axes.spines.top:    True
-axes.spines.right:  True
+axes.spines.bottom: False
+axes.spines.top:    False
+axes.spines.right:  False
 
 axes.unicode_minus: True  # use Unicode for the minus symbol rather than hyphen.  See
                           # https://en.wikipedia.org/wiki/Plus_and_minus_signs#Character_codes
@@ -411,8 +411,8 @@ axes.prop_cycle: cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467b
 axes.autolimit_mode: data  # How to scale axes limits to the data.  By using:
                            #     - "data" to use data limits, plus some margin
                            #     - "round_numbers" move to the nearest "round" number
-axes.xmargin:   .00  # x margin.  See `axes.Axes.margins`
-axes.ymargin:   .00  # y margin.  See `axes.Axes.margins`
+axes.xmargin:   0.05  # x margin.  See `axes.Axes.margins`
+axes.ymargin:   0.075 # y margin.  See `axes.Axes.margins`
 polaraxes.grid: True  # display grid on polar axes
 axes3d.grid:    True  # display grid on 3d axes
 
@@ -452,8 +452,8 @@ date.autoformatter.microsecond: %M:%S.%f
 ## * TICKS                                                                   *
 ## ***************************************************************************
 ## See https://matplotlib.org/api/axis_api.html#matplotlib.axis.Tick
-xtick.top:           True    # draw ticks on the top side
-xtick.bottom:        True    # draw ticks on the bottom side
+xtick.top:           False   # draw ticks on the top side
+xtick.bottom:        False   # draw ticks on the bottom side
 xtick.labeltop:      False   # draw label on the top
 xtick.labelbottom:   True    # draw label on the bottom
 xtick.major.size:    3.5     # major tick size in points
@@ -465,15 +465,15 @@ xtick.minor.pad:     3.4     # distance to the minor tick label in points
 xtick.color:         black   # color of the tick labels
 xtick.labelsize:     8.0     # fontsize of the tick labels
 xtick.direction:     in      # direction: {in, out, inout}
-xtick.minor.visible: True    # visibility of minor ticks on x-axis
-xtick.major.top:     True    # draw x axis top major ticks
+xtick.minor.visible: False   # visibility of minor ticks on x-axis
+xtick.major.top:     False   # draw x axis top major ticks
 xtick.major.bottom:  True    # draw x axis bottom major ticks
-xtick.minor.top:     True    # draw x axis top minor ticks
-xtick.minor.bottom:  True    # draw x axis bottom minor ticks
+xtick.minor.top:     False   # draw x axis top minor ticks
+xtick.minor.bottom:  False   # draw x axis bottom minor ticks
 xtick.alignment:     center  # alignment of xticks
 
-ytick.left:          True    # draw ticks on the left side
-ytick.right:         True    # draw ticks on the right side
+ytick.left:          False   # draw ticks on the left side
+ytick.right:         False   # draw ticks on the right side
 ytick.labelleft:     True    # draw tick labels on the left side
 ytick.labelright:    False   # draw tick labels on the right side
 ytick.major.size:    3.5     # major tick size in points
@@ -485,11 +485,11 @@ ytick.minor.pad:     3.4     # distance to the minor tick label in points
 ytick.color:         black   # color of the tick labels
 ytick.labelsize:     8.0     # fontsize of the tick labels
 ytick.direction:     in      # direction: {in, out, inout}
-ytick.minor.visible: True    # visibility of minor ticks on y-axis
+ytick.minor.visible: False   # visibility of minor ticks on y-axis
 ytick.major.left:    True    # draw y axis left major ticks
-ytick.major.right:   True    # draw y axis right major ticks
-ytick.minor.left:    True    # draw y axis left minor ticks
-ytick.minor.right:   True    # draw y axis right minor ticks
+ytick.major.right:   False   # draw y axis right major ticks
+ytick.minor.left:    False   # draw y axis left minor ticks
+ytick.minor.right:   False   # draw y axis right minor ticks
 ytick.alignment:     center_baseline  # alignment of yticks
 
 
@@ -497,9 +497,9 @@ ytick.alignment:     center_baseline  # alignment of yticks
 ## * GRIDS                                                                   *
 ## ***************************************************************************
 grid.color:         grey      # grid color
-grid.linestyle:     dotted    # dotted
-grid.linewidth:     0.7       # in points
-grid.alpha:         0.8       # transparency, between 0.0 and 1.0
+grid.linestyle:     solid     # dotted
+grid.linewidth:     0.5       # in points
+grid.alpha:         0.5       # transparency, between 0.0 and 1.0
 
 
 ## ***************************************************************************
@@ -690,13 +690,13 @@ pdf.use14corefonts : False
 pdf.inheritcolor:   False
 
 ### SVG backend params
-svg.image_inline: True  # Write raster image data directly into the SVG file
-svg.fonttype: path      # How to handle SVG fonts:
-                        #     path: Embed characters as paths -- supported
-                        #           by most SVG renderers
-                        #     None: Assume fonts are installed on the
-                        #           machine where the SVG will be viewed.
-svg.hashsalt: None      # If not None, use this string as hash salt instead of uuid4
+svg.image_inline: True      # Write raster image data directly into the SVG file
+svg.fonttype: none          # How to handle SVG fonts:
+                            #     path: Embed characters as paths -- supported
+                            #           by most SVG renderers
+                            #     None: Assume fonts are installed on the
+                            #           machine where the SVG will be viewed.
+svg.hashsalt: None          # If not None, use this string as hash salt instead of uuid4
 
 ### pgf parameter
 ## See https://matplotlib.org/tutorials/text/pgf.html for more information.

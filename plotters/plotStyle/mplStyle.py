@@ -10,29 +10,69 @@
 
 import matplotlib.pyplot as plt
 import os
+from pyLEK.helpers import filemanager
 
 # ----------------------------------------------------------------------
 # Functions
 # ----------------------------------------------------------------------
 
 
-def retrievePlotStyle(style_dict, mpl):
+def findPlotStyle(mpl):
+    import __main__
+    import pathlib
+    import os
+    import sys
+    # 1) Look in pyLEK for choosen mpstyle
+    try:
+        # Get path of this file (..pyLEK/plotStyle)
+        thisDir = os.path.dirname(os.path.realpath(__file__))
+
+        # Search in the folder of this file (..pyLEK/plotStyle)
+        mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+            thisDir, ".mplstyle")
+
+        i = mplStyles.index(mpl + ".mplstyle")
+        mplPath = mplPaths[i]
+        mplPath = os.path.splitext(mplPath)[0]
+        print('Using pyLEK-default .mplstyle: ' + mplPath)
+        return mplPath
+    except:
+
+        # 2) Look in path of __main__ file for choosen mpstyle
+        try:
+            # Get path of __main__ file
+            mainFolder = pathlib.Path(__main__.__file__).parent.resolve()
+
+            # Search in the folder and subfolders of __main__
+            mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+                mainFolder, ".mplstyle")
+
+            i = mplStyles.index(mpl + ".mplstyle")
+            mplPath = mplPaths[i]
+            mplPath = os.path.splitext(mplPath)[0]
+            print('Using custom .mplstyle: ' + mplPath)
+            return mplPath
+        except:
+            print('Error Plotting: .mplstyle not found! Please specify a valid .mplstyle.')
+            print('Exiting Python-Code')
+            sys.exit(1)
+
+
+def retrievePlotStyle(style_dict, mplpath):
     # Retrieving the current plot settings
-    scriptDir = os.path.dirname(os.path.realpath(__file__))
     if bool(style_dict):
-        plt.style.use(scriptDir + '/' + mpl + '_temp.mplstyle')
+        plt.style.use(mplpath + '_temp.mplstyle')
     else:
-        plt.style.use(scriptDir + '/' + mpl + '.mplstyle')
+        plt.style.use(mplpath + '.mplstyle')
 
 
-def modifyPlotStyle(style_dict, mpl):
-    scriptDir = os.path.dirname(os.path.realpath(__file__))
+def modifyPlotStyle(style_dict, mplpath):
     # Modify the plot settings
     # mplstyle-format:  key : val # optional comment
 
     # Read in the file and replace lines by key - values pair
     filedata = []
-    with open(scriptDir + '/' + mpl + '.mplstyle', 'r') as file:
+    with open(mplpath + '.mplstyle', 'r') as file:
         for line in file:
             skipline = False
             for key, value in style_dict.items():
@@ -45,12 +85,11 @@ def modifyPlotStyle(style_dict, mpl):
                 filedata.append(line)
 
     # Write the file out again
-    with open(scriptDir + '/' + mpl + '_temp.mplstyle', 'w') as file:
+    with open(mplpath + '_temp.mplstyle', 'w') as file:
         for line in filedata:
             file.write(line)
 
 
-def cleanPlotStyle(mpl):
-    scriptDir = os.path.dirname(os.path.realpath(__file__))
+def cleanPlotStyle(mplpath):
     # delete temporary mplstyles
-    os.remove(scriptDir + '/' + mpl + '_temp.mplstyle')
+    os.remove(mplpath + '_temp.mplstyle')

@@ -690,13 +690,13 @@ pdf.use14corefonts : False
 pdf.inheritcolor:   False
 
 ### SVG backend params
-svg.image_inline: True  # Write raster image data directly into the SVG file
-svg.fonttype: path      # How to handle SVG fonts:
-                        #     path: Embed characters as paths -- supported
-                        #           by most SVG renderers
-                        #     None: Assume fonts are installed on the
-                        #           machine where the SVG will be viewed.
-svg.hashsalt: None      # If not None, use this string as hash salt instead of uuid4
+svg.image_inline: True      # Write raster image data directly into the SVG file
+svg.fonttype: none          # How to handle SVG fonts:
+                            #     path: Embed characters as paths -- supported
+                            #           by most SVG renderers
+                            #     None: Assume fonts are installed on the
+                            #           machine where the SVG will be viewed.
+svg.hashsalt: None          # If not None, use this string as hash salt instead of uuid4
 
 ### pgf parameter
 ## See https://matplotlib.org/tutorials/text/pgf.html for more information.
