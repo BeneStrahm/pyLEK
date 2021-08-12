@@ -61,7 +61,7 @@ class MplWidget(QtWidgets.QWidget):
     def plot2D(self, x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
                dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                xlim=[], ylim=[], xscale='linear', yscale='linear',
-               style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+               style_dict={}, mpl='_2D', colorScheme='Monochrome', variation='color', customCycler=None,
                savePlt=False, savePkl=False, showPlt=False, saveTex=False):
         # Clear
         self.canvas.ax.clear()
@@ -104,7 +104,7 @@ class MplWidget(QtWidgets.QWidget):
                      orientation='vertical',
                      dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                      xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+                     style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
                      savePlt=False, savePkl=False, showPlt=False, saveTex=False):
         # Clear
         self.canvas.ax.clear()
@@ -142,7 +142,7 @@ class MplWidget(QtWidgets.QWidget):
                      orientation='vertical',
                      dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                      xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict={}, mpl='default', colorScheme='Monochrome', variation='color', customCycler=None,
+                     style_dict={}, mpl='_piechart', colorScheme='Monochrome', variation='color', customCycler=None,
                      savePlt=False, savePkl=False, showPlt=False, saveTex=False):
         # Clear
         self.canvas.ax.clear()
