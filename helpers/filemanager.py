@@ -79,6 +79,23 @@ def scanFolder(fname):
     return dirpath, dirnames, filenames
 
 
+def scanSubdirsForFilesWithExtension(dirpath, extension):
+    """Scans for all files in directory and subdirectories with extension
+    :param dirpath: string with name of folder to scan
+    :param extension: string w/ extension to match
+    :rtype filenames: list w/ of files
+    :rtype filepaths: list w/ abspaths to files
+    """
+    import os
+    filenames = []
+    filepaths = []
+    for root, directories, file in os.walk(dirpath):
+        for file in file:
+            if(file.endswith(extension)):
+                filenames.append(file)
+                filepaths.append(os.path.join(root, file))
+    return filenames, filepaths
+
 def folderDialog(title=None):
     """Opens dialog to choose a folder
     :param title: string with title of dialog
@@ -117,7 +134,8 @@ def saveFileDialog(title=None, filetypes=[]):
     """
     root = tk.Tk()
     root.withdraw()
-    filepath = filedialog.asksaveasfilename(defaultextension="*.*", title=title, filetypes=filetypes)
+    filepath = filedialog.asksaveasfilename(
+        defaultextension="*.*", title=title, filetypes=filetypes)
 
     return filepath
 
