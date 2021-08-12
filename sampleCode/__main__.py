@@ -16,6 +16,7 @@
 # Contains all imported modules / functions
 # e.g: import scipy.io
 from pyLEK.sampleCode.foo.bar import someCode
+from pyLEK.sampleCode.foo.bar import somePlot
 
 from pyLEK.sampleCode.gui import app_framework
 # ------------------------------------------------------------------------------
@@ -31,6 +32,9 @@ def main():
 
     # To start sample gui, uncomment following line
     app_framework.start()
+
+    # To plot something, uncomment the following line
+    somePlot.plotSomething()
 
 
 if __name__ == "__main__":                          # Calling main()-function when script is excecuted
