@@ -44,7 +44,7 @@ def guiSaveState(QMainWindow):
             name = obj.objectName()         # get combobox name
             index = obj.currentIndex()      # get current index from combobox
             text = obj.itemText(index)      # get the text for current index
-            settings.setValue(name, text)  # save combobox selection
+            settings.setValue(name, text)   # save combobox selection
 
         if isinstance(obj, QLineEdit):
             name = obj.objectName()
@@ -109,7 +109,7 @@ def guiRestoreState(QMainWindow):
             name = obj.objectName()
             value = settings.value(name)
             if value != None:
-                obj.setChecked(strtobool(value))
+                obj.setChecked(bool(value))
 
         if isinstance(obj, (QSpinBox, QSlider)):
             name = obj.objectName()
