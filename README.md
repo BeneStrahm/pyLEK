@@ -51,6 +51,13 @@ In order to use the same settings for Visual Studio Code on all of your computer
 
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
+## Source code explorer
+Sourcetrail van be used for code search and dependency visualization that lets you understand, refactor and maintain unfamiliar source code. It analyzes code and provides a graphical overview of the code.
+
+See https://www.sourcetrail.com/ for more details.
+
+Nota: Sourcetrail requires jedi. Currently jedi seems to depend on Python 3.8. Install Python 3.8 and under "Python Environment" in your Sourcetrail project specify the Python environment (e.g. C:/Program Files/Python38)
+
 ## Example
 See "./sampleCode" for an exemplary code structure as we recommend it.
 
