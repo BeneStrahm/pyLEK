@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Description:  Helper functions for csv file handling
+# Description:  Helper functions for txt file handling
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2020-09-16
 # Execution:    Import functions / collections (from pylek.helpers import util)
