@@ -13,6 +13,9 @@ Used to mark deprecated (old) functions and give hints for newer implementations
 ## filemanager
 Add, change, read, close and delete files
 
+## kwargschecker
+Handling of kwargs (keyworded variable)
+
 ## matlab
 Using Matlab files / syntax in python
 
