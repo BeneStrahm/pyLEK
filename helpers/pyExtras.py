@@ -12,7 +12,7 @@
 # Functions
 # ------------------------------------------------------------------------------
 
-def getKeyList(dict):
+def getKeyList(dict: dict):
     """Get keys of a dictionary
     :param dict: Dictonary to read from
     :rtype keys: List of keys in the dictionary
@@ -20,7 +20,7 @@ def getKeyList(dict):
     return dict.keys()
 
 
-def getValueList(dict):
+def getValueList(dict: dict):
     """Get values of a dictionary
     :param dict: Dictonary to read from
     :rtype values: List of values in the dictionary
@@ -28,7 +28,7 @@ def getValueList(dict):
     return dict.values()
 
 
-def getKeyValueList(dict):
+def getKeyValueList(dict: dict):
     """Get keys and values of a dictionary
     :param dict: Dictonary to read from
     :rtype keys: List of keys in the dictionary
