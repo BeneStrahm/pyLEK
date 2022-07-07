@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
-# Description:  Klasse der Querschnitte
+# Description:  Handling w/ kwargs
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      07.07.2022
 # Execution:    Import functions / collections (from pyLek.helpers import util)
@@ -10,7 +10,6 @@
 # ------------------------------------------------------------------------------
 # Libraries
 # ------------------------------------------------------------------------------
-from distutils.command import check
 import sys
 # ------------------------------------------------------------------------------
 # Classes
