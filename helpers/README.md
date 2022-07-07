@@ -4,6 +4,9 @@ A helper function is a function which is used frequently in different scripts th
 ## animation
 Create animations from files or with matplotlib
 
+## csvEditor
+Creating or modifying simple *.csv files
+
 ## deprecated
 Used to mark deprecated (old) functions and give hints for newer implementations
 
@@ -16,5 +19,8 @@ Using Matlab files / syntax in python
 ## pyExtras
 Simple Python-Functions, e.g. how to handle list comprehension
 
+## sphinx.mustache
+Custom sphinx-docstring template to use with https://github.com/NilsJPWerner/autoDocstring/
+
 ## txtEditor
-Creatring or modifying simple *.txt files
+Creating or modifying simple *.txt files

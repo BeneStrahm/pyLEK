@@ -40,6 +40,7 @@ If you use Visual Studio code, you might also want to install the following exte
 - GitLens — Git supercharged -> Tracking GitHub changes (Sign in with GitHub)
 - Pylance -> Additional Python language support
 - Visual Studio IntelliCode -> Offers autocomplete of syntax
+- autoDocstring - Python Docstring Generator -> Helps you to generate docstrings to document your code
 
 In order to use GitHub within Visual Studio Code, you need to install "git" as well (https://git-scm.com/downloads). Here you can leave all settings in the installation as they are proposed.
 
@@ -52,7 +53,7 @@ In order to use the same settings for Visual Studio Code on all of your computer
 See also https://www.youtube.com/watch?v=TILIcrrVABg for a VS complete guide
 
 ## Source code explorer
-Sourcetrail van be used for code search and dependency visualization that lets you understand, refactor and maintain unfamiliar source code. It analyzes code and provides a graphical overview of the code.
+Sourcetrail can be used for code search and dependency visualization that lets you understand, refactor and maintain unfamiliar source code. It analyzes code and provides a graphical overview of the code.
 
 See https://www.sourcetrail.com/ for more details.
 
@@ -109,12 +110,14 @@ When adding new functions always respect the following template and the style gu
     # Functions
     # ------------------------------------------------------------------------------
 
-    # Example
-    def getList(dict): 
-        """Get keys of a dictionary				        # Description of function
-
-        :param dict: Dictonary to read from			    # Type & description of input
-        :rtype keys: List of keys in the dictionary	    # Type & description of return
+    # Example, see pyExtras.py
+    def getList(dict: _type_):              # Note the type hint with ": _type_"
+        """
+        _summary_   			            # Brief description of function, see
+                                            # https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
+        :param dict: _description_          # Description of input
+        :return: _description_              # Description of return
+        :rtype: _type_                      # Type of return
         """
         return dict.keys() 					            # Actual Function statements
 
