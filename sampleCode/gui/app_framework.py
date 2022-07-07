@@ -33,8 +33,18 @@ import pyLEK.plotters.plot2D as plt
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    """
+    Constructs a main window
+    :param QtWidgets: _description_
+    :type QtWidgets: _type_
+    :param Ui_MainWindow: _description_
+    :type Ui_MainWindow: _type_
+    """
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the UI for the GUI
+        """
         # Here we declare that the MainWindow class inherits from
         # QtWidgets.QMainWindow, Ui_MainWindow
         super().__init__(*args, **kwargs)
@@ -88,6 +98,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.modifyMaterialProperties)
 
     def guiSaveState(self):
+        """
+        Save the current state of the GUI to the GUI
+        """
         # Import from qtHelpers
         from gui import qtHelpers
 

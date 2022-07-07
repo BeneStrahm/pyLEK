@@ -27,6 +27,9 @@ from pyLEK.sampleCode.gui import app_framework
 
 # main() should contain code that you want to run when the file is executed
 def main():
+    """
+    Main function for the application.
+    """        
     # Calls the function printSomeText()
     someCode.printSomeText("Hello World")
 
