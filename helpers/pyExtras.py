@@ -35,3 +35,18 @@ def getKeyValueList(dict: dict):
     :rtype values: List of values in the dictionary
     """
     return dict.keys(), dict.values()
+
+
+def findMiddleIndex(input_list):
+    """
+    Get the index of middle item in list if list has odd number length, or a 
+    tuple containing the middle indices if list has even number length
+    :param input_list: _description_
+    :return: middle index or tuple of middle indices
+    :rtype: int or tuple
+    """
+    middle = float(len(input_list))/2
+    if middle % 2 != 0:
+        return int(middle - .5)
+    else:
+        return (int(middle), int(middle-1))
