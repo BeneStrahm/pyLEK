@@ -88,6 +88,11 @@ The sample also contains an example for a simple gui (graphical user interface) 
 
 [See also README.md for further information](sampleCode/gui/README.md)
 
+## Snippets
+Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements. See also https://code.visualstudio.com/docs/editor/userdefinedsnippets.
+
+The below mentioned templates and some basic snippets can be found within pyLEK/snippets. Place them in C:\Users\"Username"\AppData\Roaming\Code\User\snippets to globally enable them. 
+
 ## Template
 When adding new functions always respect the following template and the style guideline. Otherwise you're file will be removed. Keep the functions simple, short and comment when necessary.
 
@@ -128,12 +133,6 @@ When adding new functions always respect the following template and the style gu
     if __name__ == "__main__":
         sample()
 
-## Snippets
-Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements. See also https://code.visualstudio.com/docs/editor/userdefinedsnippets.
-
-The above mentioned templates and some basic snippets can be found within pyLEK/snippets.
-
-Place them in C:\Users\"Username"\AppData\Roaming\Code\User\snippets to globally enable them. 
 
 ## Style guideline
 https://www.python.org/dev/peps/pep-0008/
