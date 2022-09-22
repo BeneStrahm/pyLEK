@@ -7,6 +7,7 @@
    1. [Example](#example)
 1. [pyLEK Repo](#pylek-repo)
    1. [Template](#template)
+   1. [Snippets](#snippets)
    1. [Structure & Content](#structure--content)
    1. [Style guideline](#style-guideline)
    1. [Import modules / usage](#import-modules--usage)
@@ -126,6 +127,13 @@ When adding new functions always respect the following template and the style gu
 
     if __name__ == "__main__":
         sample()
+
+## Snippets
+Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements. See also https://code.visualstudio.com/docs/editor/userdefinedsnippets.
+
+The above mentioned templates and some basic snippets can be found within pyLEK/snippets.
+
+Place them in C:\Users\"Username"\AppData\Roaming\Code\User\snippets to globally enable them. 
 
 ## Style guideline
 https://www.python.org/dev/peps/pep-0008/
