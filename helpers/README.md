@@ -16,6 +16,9 @@ Add, change, read, close and delete files
 ## kwargschecker
 Handling of kwargs (keyworded variable)
 
+## generalMath
+General mathematical operations
+
 ## matlab
 Using Matlab files / syntax in python
 
