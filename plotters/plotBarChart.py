@@ -140,13 +140,13 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
             cum = np.cumsum(cum, axis=0)
             d = np.zeros(np.shape(data))
             d[1:] = cum[:-1]
-            return d  
+            return d
 
         cumulated_data = get_cumulated_array(y, a_min=0, a_max=None)
         cumulated_data_neg = get_cumulated_array(y, a_min=None, a_max=0)
 
         # Re-merge negative and positive data.
-        row_mask = (y<0)
+        row_mask = (y < 0)
         cumulated_data[row_mask] = cumulated_data_neg[row_mask]
         bottom = cumulated_data
 
@@ -157,8 +157,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
                 bars_set.append(ax.barh(x, yi, left=bottom[i], height=bar_width,
-                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
-            i = i +1
+                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
+            i = i + 1
 
     elif barChart == 'stacked100%':
         #
@@ -171,7 +171,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
                 bars_set.append(ax.barh(x, yi_rel, left=bottom, height=bar_width,
-                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
+                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             bottom = bottom + yi_rel
 
         # Set labels to %
@@ -194,7 +194,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
             elif orientation == 'horizontal':
                 x_pos = x-bar_width/2 + bar_width/len(y) * i
                 bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y),
-                                       label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
+                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
 
     # Add text annotations to the top of the bars.
     if not (annotations is None):
@@ -234,7 +234,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                 # Get the text
                 if annotations == 'individual':
                     # Get each individual value
-                    bar_text = "{:.0f}".format(y[i][j])
+                    bar_text = "{:.1f}".format(y[i][j])
 
                     # Add the text
                     ax.text(x_pos, y_pos, bar_text, fontsize='x-small', va=va,
@@ -632,5 +632,5 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
 
 
 if __name__ == "__main__":
-    sample_stacked()
+    # sample_stacked()
     sample_grouped()

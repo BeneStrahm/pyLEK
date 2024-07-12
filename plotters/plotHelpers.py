@@ -53,49 +53,55 @@ def savePdf_tex(fig, dir_fileName, **kwargs):
 
     # Windows
     if os.name == 'nt':
-        incmd = ["inkscape", "temp.pdf", "--export-type=pdf", 
-                "--export-filename={}.pdf".format(dir_fileName), 
-                "--export-latex"]
+        incmd = ["inkscape", "temp.pdf", "--export-type=pdf",
+                 "--export-filename={}.pdf".format(dir_fileName),
+                 "--export-latex"]
 
     # Linux
     # Shell command to be called
     elif os.name == 'posix':
         incmd = ["inkscape", "temp.pdf", "-export-type=pdf",
-                "-export-filename={}.pdf".format(dir_fileName),
-                "-export-latex"]
+                 "-export-filename={}.pdf".format(dir_fileName),
+                 "-export-latex"]
 
     # Open shell to export
     try:
         subprocess.check_output(incmd)
     except FileNotFoundError as e:
-        print('FileNotFoundError: '+ e.strerror)
-        print("Failed to save as .pdf_tex.\nIs a recent version of Inkscape installed? \nInkscape is required to use the plot2D saveTex functionality.") 
+        print('FileNotFoundError: ' + e.strerror)
+        print("Failed to save as .pdf_tex.\nIs a recent version of Inkscape installed? \nInkscape is required to use the plot2D saveTex functionality.")
 
     # Clean up .pdf
     os.remove("temp.pdf")
 
+
 def fontChecker():
     import matplotlib.pyplot as plt
+
+    # Rebuild font
+    import matplotlib.font_manager as font_manager
 
     # Retrieve active font
     font_family = plt.rcParams['font.family'][0]
     font_active = plt.rcParams["font." + font_family][0]
 
-    # Rebuild font
-    import matplotlib.font_manager as font_manager 
-
     # Get all available fonts on the computer
-    avail_Fonts= [font.name for font in font_manager.fontManager.ttflist]
+    avail_Fonts = [font.name for font in font_manager.fontManager.ttflist]
 
     # Check if Univers for UniS has been installed
     if not (font_active in avail_Fonts):
 
         # Try rebuilding fonts
-        font_manager._rebuild()
+        try:
+            font_manager._rebuild()
+        except:
+            print("Failed to rebuild fonts. Default \"" +
+                  font_family + "\" font will be used.")
 
         # Check again
         if not (font_active in avail_Fonts):
-            print("In order to use \"" + font_active + "\" first install it. Default \"" + font_family + "\" font will be used.")
+            print("In order to use \"" + font_active +
+                  "\" first install it. Default \"" + font_family + "\" font will be used.")
 
 
 # ----------------------------------------------------------------------

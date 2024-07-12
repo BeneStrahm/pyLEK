@@ -32,7 +32,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear',
            style_dict={}, mpl='_2D', colorScheme='Monochrome', variation='color', customCycler=None,
            savePlt=False, savePkl=False, showPlt=False, saveTex=False,
-           fig=None, ax=None,annotate=[]):
+           fig=None, ax=None, annotate=[]):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [n_row, datapoints]
     :param y: list w/ data to plot, with shape [n_row, datapoints]
@@ -102,14 +102,16 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
         ax.set_ylim(ylim)
 
     # Setting the x-axis / y-axis scale of the axe-object
-    ax.set_xscale(xscale)
-    ax.set_yscale(yscale)
+    if xscale:
+        ax.set_xscale(xscale)
+    if yscale:
+        ax.set_yscale(yscale)
 
-    #Anmerkungen für Punkte im Plot
+    # Anmerkungen für Punkte im Plot
     if annotate:
         for a in annotate:
-            ax.annotate(a[0],a[1])
-        
+            ax.annotate(a[0], a[1])
+
     # Create color / linestyles
     if customCycler is None:
         customCycler = colorCycler.createCycler(colorScheme, variation)
