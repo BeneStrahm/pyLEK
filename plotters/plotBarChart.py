@@ -30,7 +30,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  xticks=None, xticklabels=None, xticksrotation=None,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations=None, annotations_position='above',
-                 orientation='vertical',
+                 orientation='vertical', bar_width=0.8,
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
@@ -52,6 +52,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param annotations: string ('%', 'individual','sum') or None
     :param annotations_position: string ('above', 'center', 'right')
     :param orientation: string ('horizontal', 'vertical')
+    :param barWidth: float w/ width of bars
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
@@ -87,7 +88,8 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     mplStyle.retrievePlotStyle(style_dict, mplPath)
 
     # Prepare Plots
-    x = np.arange(len(y[0]))
+    if y is not None:
+        x = np.arange(len(y[0]))
 
     # Convert to array if necessary
     if not isinstance(y, np.ndarray):
@@ -125,7 +127,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     ax.set_prop_cycle(customCycler)
 
     # Bar width (1=no space between bars)
-    bar_width = 0.8
+    bar_width = bar_width
 
     # Stacked Bar Chart - Plot of the axe-object
     if barChart == 'stacked':
@@ -631,6 +633,36 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
     return fig, ax
 
 
+def sample_grouped_empty(*, showPlt=True, fig=None, ax=None):
+    # Data: https://www.skyscrapercenter.com/year-in-review/2019
+
+    # When using stacked charts, the data is offset automatically !
+    # In this example:
+    # All buildings 400+ m are included in the buildings 300+ m
+    # For the stacked bar chart, the data has to be divided in
+    # all buildings 400+ and all buildings 300-400 m !
+    #
+    # See also the following three plots where the annotation
+    # changes for explanation
+    #
+    # See also this code L120ff
+    y = None
+
+    # plot w/ all available options
+    plotBarChart(y, xlabel=None, ylabel=None, title=None, legend=None,
+                 xticks=None, xticklabels=None, xticksrotation=None,
+                 yticks=None, yticklabels=None, yticksrotation=None,
+                 barChart=None, annotations=None, annotations_position=None,
+                 orientation='vertical',
+                 dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
+                 xlim=[], ylim=[], xscale='linear', yscale='linear',
+                 style_dict={}, mpl='_barchart_v', customCycler=None,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                 fig=None, ax=None)
+
+    return fig, ax
+
+
 if __name__ == "__main__":
     # sample_stacked()
-    sample_grouped()
+    sample_grouped_empty()
