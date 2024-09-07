@@ -1,6 +1,7 @@
 # mpl plot Styles
 *.mplstyle
 !_2D.mplstyle
+!_3D.mplstyle
 !_barchart_v.mplstyle
 !_barchart_h.mplstyle
 !_piechart.mplstyle
@@ -10,6 +11,9 @@
 
 # keep plotters
 !plot2D.py
+!plot3D_surf.py
+!plot3D_trisurf.py
+!plot4D_surf
 !plotBarChart.py
 !plotPieChart.py
 !plotHelpers.py
