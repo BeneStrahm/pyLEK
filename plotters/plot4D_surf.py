@@ -30,12 +30,12 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 # ----------------------------------------------------------------------
 
 
-def plot2D(x, y, z, c, *, xlabel=None, ylabel=None, zlabel=None, title=None, legend=None,
-           dir_fileName=None, colorbar=True,
-           xlim=[], ylim=[], zlim=[], xscale='linear', yscale='linear', zscale='linear',
-           style_dict={}, mpl='_3D', colormap='plasma',
-           savePlt=False, savePkl=False, showPlt=False, saveTex=False,
-           fig=None, ax=None):
+def plot4D_surf(x, y, z, c, *, xlabel=None, ylabel=None, zlabel=None, title=None, legend=None,
+                dir_fileName=None, colorbar=True, colorbar_loc='left',
+                xlim=[], ylim=[], zlim=[], xscale='linear', yscale='linear', zscale='linear',
+                style_dict={}, mpl='_3D', colormap='plasma',
+                savePlt=False, savePkl=False, showPlt=False, saveTex=False,
+                fig=None, ax=None):
     """Plotting Surface + color plots (x,y,z,c-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [datapoints] - 1D-Data
     :param y: list w/ data to plot, with shape [datapoints] - 1D-Data
@@ -137,7 +137,7 @@ def plot2D(x, y, z, c, *, xlabel=None, ylabel=None, zlabel=None, title=None, leg
 
     if colorbar:
         m = cm.ScalarMappable(cmap=cmap)
-        fig.colorbar(m, ax=ax, location='left', shrink=0.5, )
+        fig.colorbar(m, ax=ax, location=colorbar_loc, shrink=0.5, )
 
     # Correctly ordering legend entries by replacing labels with entries
     # from the legend list. If this is not done there is not order in
@@ -221,12 +221,12 @@ def sample_1(*, showPlt=True, fig=None, ax=None):
     style_dict = {"figure.figsize": figSize, "lines.linewidth": 5, }
 
     # plot2D w/ all available options
-    fig, ax = plot2D(x, y, z, c, xlabel=xlabel, ylabel=ylabel, zlabel=zlabel, title=title, legend=None,
-                     dir_fileName=None, colorbar=True,
-                     xlim=[], ylim=[], zlim=[], xscale='linear', yscale='linear', zscale='linear',
-                     style_dict=style_dict, mpl='_3D', colormap='crest',
-                     savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                     fig=fig, ax=ax)
+    fig, ax = plot4D_surf(x, y, z, c, xlabel=xlabel, ylabel=ylabel, zlabel=zlabel, title=title, legend=None,
+                          dir_fileName=None, colorbar=True, colorbar_loc='left',
+                          xlim=[], ylim=[], zlim=[], xscale='linear', yscale='linear', zscale='linear',
+                          style_dict=style_dict, mpl='_3D', colormap='crest',
+                          savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                          fig=fig, ax=ax)
 
     return fig, ax
 
