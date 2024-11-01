@@ -21,3 +21,14 @@ def writeToCsv(fname, array, writeMode='a'):
     """
     pd.DataFrame(array).to_csv(fname, mode=writeMode,
                                index=False, sep='\t', decimal=',')
+
+
+def readFromCsv(fname, sep='\t', decimal='.'):
+    """Reading lines from .csv files
+    :param fname: str w/ name of .csv file to read from
+    :param sep: str w/ separator
+    :param decimal: str w/ decimal separator
+    """
+    # Read csv file
+    df = pd.read_csv(fname, sep=sep, decimal=decimal)
+    return df
