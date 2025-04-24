@@ -28,15 +28,17 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 # ----------------------------------------------------------------------
 
 
-def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
+def plotScatter(x, y, s=None, c=None, *, xlabel=None, ylabel=None, title=None, legend=None,
            dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
            xlim=[], ylim=[], xscale='linear', yscale='linear', xlabelformat='%.1f', ylabelformat='%.1f',
-           style_dict={}, mpl='_2D', colorScheme='Monochrome', variation='color', customCycler=None,
+           style_dict={}, mpl='_', colorScheme='Monochrome', variation='color', customCycler=None,
            savePlt=False, savePkl=False, showPlt=False, saveTex=False,
            fig=None, ax=None, annotate=[]):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
-    :param x: list w/ data to plot, with shape [n_row, datapoints]
-    :param y: list w/ data to plot, with shape [n_row, datapoints]
+    :param x: list w/ data to plot, with shape [datapoints]
+    :param y: list w/ data to plot, with shape [datapoints]
+    :param s: list w/ size of markers to plot, with shape [datapoints] 
+    :param c: list w/ color of markers to plot, with shape [datapoints]
     :param xlabel: string w/ labels for x axis
     :param xlabel: string w/ labels for y axis
     :param title: string w/ plot title
@@ -79,10 +81,6 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     # Check font
     plotHelpers.fontChecker()
-
-    # Prepare Plots
-    x = np.transpose(x)
-    y = np.transpose(y)
 
     # An empty figure with one axe
     if fig is None:
@@ -129,7 +127,17 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     ax.set_prop_cycle(customCycler)
 
     # 2D - Plot of the axe-object
-    ax.plot(x, y, label='label')
+    if c and s:
+        ax.scatter(x, y, c=c, s=s)
+
+    elif s:
+        ax.scatter(x, y, s=s)
+
+    elif c:
+        ax.scatter(x, y, c=c)
+
+    else:
+        ax.scatter(x, y)
 
     # Correctly ordering legend entries by replacing labels with entries
     # from the legend list. If this is not done there is not order in
@@ -217,154 +225,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     return fig, ax
 
-# ----------------------------------------------------------------------
-# Tests / Example
-# ----------------------------------------------------------------------
-
-
-def sample_1(*, showPlt=True, fig=None, ax=None):
-    # FIRST PLOT
-    # only show plot with custom size and linewidth, add a vertical line
-    # Example for DIN A4 Page with left and right margin of 2.5cm
-    # figure size is always in inches (1 in = 2.54 cm)
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "Test Title"
-
-    vLines = [np.mean(x)]
-    vTexts = ['test description']
-
-    hLines = [np.std(y)]
-    hTexts = ['test description']
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
-
-    # plot2D w/ all available options
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
-                     dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
-                     xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict=style_dict, mpl='_2D', colorScheme='UniS', variation='color', customCycler=None,
-                     savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
-def sample_2(*, showPlt=True, fig=None, ax=None):
-    # SECOND PLOT
-    # save in this folder as .pdf  and show plot
-    # plot without a line but only with different markers
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    style_dict = {"lines.linewidth": 0,
-                  "savefig.format": "pdf"}
-
-    legend = ["testdata1", "testdata2", "testdata3", "testdata4",
-              "testdata5", "testdata6", "testdata7", "testdata8"]
-
-    # Change to current file location
-    os.chdir(os.path.dirname(sys.argv[0]))
-
-    dir_fileName = "plot_as_pdf_example"
-    # plot2D w/ only specified options, save as .pdf
-    fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
-                     dir_fileName=dir_fileName,
-                     style_dict=style_dict, variation='marker',
-                     showPlt=showPlt, savePlt=True,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
-def sample_3(*, showPlt=True, fig=None, ax=None):
-    # THIRD PLOT
-    # save in this folder as .pdf_tex for latex and show plot
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "LaTeX (.pdf\_tex) example \n legend w/ LaTeX Code to be compiled"
-
-    legend = [r"\$\sin x\$", r"\$\sin x + \frac{\pi}{2}\$",
-              r"\footnotesize{testdata3}", r"\bfseries{testdata4}"]
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 2, "figure.figsize": figSize}
-
-    # Change to current file location
-    os.chdir(os.path.dirname(sys.argv[0]))
-
-    dir_fileName = "plot_as_pdftex_example"
-    # plot2D w/ only specified options, save as .pdf_tex
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
-                     legend=legend, dir_fileName=dir_fileName,
-                     style_dict=style_dict, variation='color',
-                     showPlt=showPlt, saveTex=True,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
-def sample_4(*, showPlt=True, fig=None, ax=None):
-    # FOURTH PLOT
-    # Use seaborn color scheme & show plot
-    # For searborn color schemes see:
-    # https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
-
-    # Any other (custom) color scheme can be used by creating a cycler
-    # See also: https://matplotlib.org/stable/tutorials/intermediate/color_cycle.html
-
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "Seaborn Color Scheme \"OrRd_r\""
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
-
-    # Creating a custom cycler with predefined searborn color scheme
-    import seaborn as sns
-    from cycler import cycler
-
-    N_colors = 5            # Number of colors
-    paletteName = "OrRd_r"  # Name of seaborn color palette
-
-    # Create the color palette ...
-    customColorPalette = sns.color_palette(
-        palette=paletteName, as_cmap=True)(np.linspace(0, 1, N_colors))
-
-    # ... and create a cycler from it
-    customCycler = cycler(color=customColorPalette)
-
-    # plot2D w/ only specified options, save as .pdf_tex
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
-                     style_dict=style_dict, customCycler=customCycler,
-                     showPlt=showPlt,
-                     fig=fig, ax=ax)
-
-    return fig, ax
 
 
 if __name__ == "__main__":
-    sample_1()
-    sample_2()
-    sample_3()
-    sample_4()
+    pass

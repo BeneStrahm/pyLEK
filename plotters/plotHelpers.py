@@ -93,10 +93,17 @@ def fontChecker():
 
         # Try rebuilding fonts
         try:
-            font_manager._rebuild()
+            import matplotlib
+            if matplotlib.__version__ >= '3.4.3':
+                font_manager._load_fontmanager(try_read_cache=False)
+            else:
+                font_manager._rebuild()
         except:
             print("Failed to rebuild fonts. Default \"" +
                   font_family + "\" font will be used.")
+
+        # Get all available fonts on the computer
+        avail_Fonts = [font.name for font in font_manager.fontManager.ttflist]
 
         # Check again
         if not (font_active in avail_Fonts):
