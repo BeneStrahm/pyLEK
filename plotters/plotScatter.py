@@ -29,11 +29,11 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 
 
 def plotScatter(x, y, s=None, c=None, *, xlabel=None, ylabel=None, title=None, legend=None,
-           dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
-           xlim=[], ylim=[], xscale='linear', yscale='linear', xlabelformat='%.1f', ylabelformat='%.1f',
-           style_dict={}, mpl='_', colorScheme='Monochrome', variation='color', customCycler=None,
-           savePlt=False, savePkl=False, showPlt=False, saveTex=False,
-           fig=None, ax=None, annotate=[]):
+                dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
+                xlim=[], ylim=[], xscale='linear', yscale='linear', xlabelformat='%.1f', ylabelformat='%.1f',
+                style_dict={}, mpl='_', colorScheme='Monochrome', variation='color', customCycler=None,
+                savePlt=False, savePkl=False, showPlt=False, saveTex=False,
+                fig=None, ax=None, annotate=[]):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [datapoints]
     :param y: list w/ data to plot, with shape [datapoints]
@@ -224,7 +224,6 @@ def plotScatter(x, y, s=None, c=None, *, xlabel=None, ylabel=None, title=None, l
         plt.close()
 
     return fig, ax
-
 
 
 if __name__ == "__main__":
