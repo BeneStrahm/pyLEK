@@ -53,9 +53,29 @@ def findPlotStyle(mpl):
             print('Using custom .mplstyle: ' + mplPath)
             return mplPath
         except:
-            print('Error Plotting: .mplstyle not found! Please specify a valid .mplstyle.')
-            print('Exiting Python-Code')
-            sys.exit(1)
+
+            # 3) Look in PYTHONPATH for choosen mpstyle
+            try:
+                # Get all paths in PYTHONPATH
+                pythonPath = os.environ['PYTHONPATH'].split(os.pathsep)
+
+                for path in pythonPath:
+                    # Search in the folder and subfolders of PYTHONPATH
+                    mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+                        path, ".mplstyle")
+
+                    if mpl + ".mplstyle" in mplStyles:
+                        i = mplStyles.index(mpl + ".mplstyle")
+                        mplPath = mplPaths[i]
+                        mplPath = os.path.splitext(mplPath)[0]
+                        print('Using PYTHONPATH .mplstyle: ' + mplPath)
+                        return mplPath
+
+            except:
+                print(
+                    'Error Plotting: .mplstyle not found! Please specify a valid .mplstyle.')
+                print('Exiting Python-Code')
+                sys.exit(1)
 
 
 def retrievePlotStyle(style_dict, mplpath):
