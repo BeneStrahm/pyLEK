@@ -30,7 +30,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  xticks=None, xticklabels=None, xticksrotation=None,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations=None, annotations_position='above',
-                 orientation='vertical', bar_width=0.8,
+                 orientation='vertical', bar_width=0.8, bar_spacing=4/3,
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
@@ -53,6 +53,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param annotations_position: string ('above', 'center', 'right')
     :param orientation: string ('horizontal', 'vertical')
     :param barWidth: float w/ width of bars
+    :param bar_spacing: float w/ spacing of bars for grouped bar chart (1=no space between bars)
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
@@ -188,14 +189,15 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
         bars_set = []
         bottom = np.zeros(len(y[0]))
         for i, yi in enumerate(y):
-            x_pos = x-bar_width/2 + bar_width/len(y) * i
+            x_pos = x-bar_width/2 + bar_width/len(y) * i * bar_spacing
             if orientation == 'vertical':
                 y_pos = x-bar_width/2 + bar_width/len(y) * i
-                bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y),
+                bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y)*(1 / bar_spacing),
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
-                x_pos = x-bar_width/2 + bar_width/len(y) * i
-                bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y),
+                x_pos = x-bar_width/2 + bar_width / \
+                    len(y) * i * (1 / bar_spacing)
+                bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y)*(1 / bar_spacing),
                                         label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
 
     # Add text annotations to the top of the bars.
