@@ -30,7 +30,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  xticks=None, xticklabels=None, xticksrotation=None,
                  yticks=None, yticklabels=None, yticksrotation=None,
                  barChart='stacked', annotations=None, annotations_position='above',
-                 orientation='vertical', bar_width=0.8, bar_spacing=4/3,
+                 orientation='vertical', bar_width=0.8, bar_spacing=0.2,
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
                  xlim=[], ylim=[], xscale='linear', yscale='linear',
                  style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
@@ -54,12 +54,12 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param orientation: string ('horizontal', 'vertical')
     :param barWidth: float w/ width of bars
     :param bar_spacing: float w/ spacing of bars for grouped bar chart (1=no space between bars)
-    :param dir_fileName: string w/ Directory / Filename to save to,  
+    :param dir_fileName: string w/ Directory / Filename to save to,
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
-    :param vTexts: list w/ strings for the vertical lines 
+    :param vTexts: list w/ strings for the vertical lines
     :param hLines: list w/ floats on where to add horizontal line
-    :param hTexts: list w/ strings for the horizontal lines 
+    :param hTexts: list w/ strings for the horizontal lines
     :param xlim: list w/ limits  for x axis [xmin, xmax]
     :param ylim: list w/ limits  for y axis [ymin, ymax]
     :param xscale: string w/ scales acc. to matplotlib
@@ -68,13 +68,13 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
     :param variation: string ('color', 'linestyle')
-    :param customCycler: cycler, instead of colorScheme & variation cycler can be passed 
+    :param customCycler: cycler, instead of colorScheme & variation cycler can be passed
     :param savePlt: bool true to save plot, file format acc. to mpl-style
     :param savePkl: bool true to save as .pickle
     :param saveTex: bool true to save as .pdf_tex
     :param showPlt: bool true show plot in interactive mode
-    :param fig: fig object to be overwritten 
-    :param ax: ax object to be overwritten 
+    :param fig: fig object to be overwritten
+    :param ax: ax object to be overwritten
     :rtype fig: modified fig object
     :rtype ax: modified ax object
     """
@@ -187,17 +187,34 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     elif barChart == 'grouped':
         bars_set = []
-        bottom = np.zeros(len(y[0]))
+        i_ = 0
         for i, yi in enumerate(y):
-            x_pos = x-bar_width/2 + bar_width/len(y) * i * bar_spacing
+            w = bar_width/len(y)
+            s = bar_spacing/len(y)
+            x_pos = []
+            for x_i in range(y.shape[1]):
+
+                valid_count = sum(1 for x in y[:, x_i] if x is not None)
+
+                if y[i, x_i] == None:
+                    i_ -= 1
+
+                if None in y[:, x_i]:
+                    x_pos.append(x[x_i] - (w/2 + s/2) *
+                                 (y.shape[0] - (y.shape[0] - valid_count) - 1) + i_ * (w + s))
+                else:
+                    x_pos.append(x[x_i] - (w/2 + s/2) *
+                                 (y.shape[0] - 1) + i * (w + s))
+            i_ += 1
+
+            # Filter out None values from yi and x_pos
+            x_pos, yi = zip(*[(x, y)
+                              for x, y in zip(x_pos, yi) if y is not None])
             if orientation == 'vertical':
-                y_pos = x-bar_width/2 + bar_width/len(y) * i
-                bars_set.append(ax.bar(x_pos, yi, width=bar_width/len(y)*(1 / bar_spacing),
+                bars_set.append(ax.bar(x_pos, yi, width=w,
                                        label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
             elif orientation == 'horizontal':
-                x_pos = x-bar_width/2 + bar_width / \
-                    len(y) * i * (1 / bar_spacing)
-                bars_set.append(ax.barh(x_pos, yi, left=bottom, height=bar_width/len(y)*(1 / bar_spacing),
+                bars_set.append(ax.barh(x_pos, yi, height=w,
                                         label='label', edgecolor='white', linewidth=0.5, alpha=0.7))
 
     # Add text annotations to the top of the bars.
@@ -635,6 +652,72 @@ def sample_grouped(*, showPlt=True, fig=None, ax=None):
     return fig, ax
 
 
+def sample_grouped_none(*, showPlt=True, fig=None, ax=None):
+    # Data: https://www.skyscrapercenter.com/year-in-review/2019
+    completions_300_plus = np.array(
+        [9,  9,  8,  9, 11, ])
+    completions_400_plus = np.array(
+        [4,  2,  2,  None,  1,])
+
+    # Notice the differnce to sample_grouped: None instead of 0
+    # See also the following three plots where the annotation
+    # changes for explanation
+    #
+    # See also this code L120ff
+    y = [completions_400_plus, completions_300_plus,]
+
+    xlabel = "Year"
+    ylabel = "Number of Completions"
+
+    # Custom tick annotations
+    # Position of the labels
+    xticks = np.arange(len(y[0]))
+    # Labels
+    xticklabels = ["2010", "2011", "2012", "2013", "2014",]
+    # Label Orientation
+    xticksrotation = 45
+
+    # Example for DIN A4 Page with left and right margin of 2.5cm
+    # figure size is always in inches (1 in = 2.54 cm)
+    figSize = plotHelpers.calcFigSize()
+
+    # Creating a custom cycler with predefined searborn color scheme
+    # See plot2D sample4() for more info..
+    import seaborn as sns
+    from cycler import cycler
+
+    N_colors = 5            # Number of colors
+    paletteName = "gist_heat"  # Name of seaborn color palette
+
+    # Create the color palette ...
+    customColorPalette = sns.color_palette(
+        palette=paletteName, as_cmap=True)(np.linspace(0, 1, N_colors))
+
+    # ... and create a cycler from it
+    customCycler = cycler(color=customColorPalette)
+
+    style_dict = {"figure.figsize": figSize, "axes.titlepad": 12,
+                  "legend.loc": "lower center", "figure.subplot.top": 0.85, "figure.subplot.bottom": 0.2}
+
+    # 1. Plot
+    legend = ['400+ m completions',
+              '300+ m completions',]
+    title = "Completions Timeline (grouped bar chart w/ ratio)"
+    # plot w/ all available options
+    plotBarChart(y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
+                 xticks=xticks, xticklabels=xticklabels, xticksrotation=xticksrotation,
+                 yticks=None, yticklabels=None, yticksrotation=None,
+                 barChart='grouped', annotations=None, annotations_position=None,
+                 orientation='vertical',
+                 dir_fileName=None, vLines=None, vTexts=None, hLines=None, hTexts=None,
+                 xlim=[], ylim=[], xscale='linear', yscale='linear',
+                 style_dict=style_dict, mpl='_barchart_v', customCycler=customCycler,
+                 savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
+                 fig=None, ax=None)
+
+    return fig, ax
+
+
 def sample_grouped_empty(*, showPlt=True, fig=None, ax=None):
     # Data: https://www.skyscrapercenter.com/year-in-review/2019
 
@@ -667,4 +750,4 @@ def sample_grouped_empty(*, showPlt=True, fig=None, ax=None):
 
 if __name__ == "__main__":
     # sample_stacked()
-    sample_grouped_empty()
+    sample_grouped_none()
