@@ -13,7 +13,6 @@
    1. [Import modules / usage](#import-modules--usage)
    1. [.gitignore / Custom scripts](#gitignore--custom-scripts)
    1. [Linked Repositories (Submodules)](#linked-repositories-submodules)
-   1. [TODO.md](#todomd)
    1. [Delete Repo from local machine](#delete-repo-from-local-machine)
 
 <a name="headers"/>
@@ -34,14 +33,15 @@ Visual Studio Code is a lightweight but powerful source code editor to setup you
 
 If you use Visual Studio code, you might also want to install the following extensions with it:
 
-- Python -> In order to use Python in VS
-- TODO.md Kanban Board -> To edit To-Do Lists in VS
-- GitHub Pull Requests and Issues -> GitHub integration in VS
-- CodeStream -> Collaboration, code discussion and review (Sign in with GitHub)
+- Python - In order to use Python in VS
+- Todo Tree - Create & edit To-Do Lists in VS
+- GitHub Pull Requests and Issues - GitHub integration in VS
+- CodeStream - Collaboration, code discussion and review (Sign in with GitHub)
 - GitLens — Git supercharged -> Tracking GitHub changes (Sign in with GitHub)
-- Pylance -> Additional Python language support
+- Pylance - Additional Python language support
 - Visual Studio IntelliCode -> Offers autocomplete of syntax
 - autoDocstring - Python Docstring Generator -> Helps you to generate docstrings to document your code
+- LaTeX Workshop - Boost LaTeX typesetting efficiency with preview, compile, autocomplete, colorize, and more. In order to use LaTeX Enginge, e.g. TinyTeX is required.
 
 In order to use GitHub within Visual Studio Code, you need to install "git" as well (https://git-scm.com/downloads). Here you can leave all settings in the installation as they are proposed.
 
@@ -182,48 +182,6 @@ In order to use the module:
 3. Install with py setup.py install
 
 For the usage check out feastruct/examples
-
-## TODO.md
-The TODO.md format is based on GFM - GitHub Flavored Markdown - Task Lists. TODO.md is a file that contains tasks organized in multiple sections. Keeping a TODO.md file makes it easier for anyone wants to know about the project's plans and work needs to be done.
-
-Tasks in TODO.md can be visualized using Kanban Board where sections become columns on the board.
-
-### TODO.md format
-- TODO.md can have multiple columns.
-- Each column has tasks that start with a checkbox sign `- [ ]` or just a hyphen `- `
-- Completed column name must contain `✓` or `[x]`.
-- There are "2 spaces" at the end of every task title to serve as line breaks on Github pages.
-- Tags, mentions, estimate, date time, ticket id, etc. can be entered at the end of the task title.
-- A task with 2 space indentation in the title is a sub-task or description. 
-
-```
-# Project Name
-Project Description
-
-### Column Name
-- [ ] Task title ~3d #type @name yyyy-mm-dd  
-- [ ] Sub-task or description  
-
-### Completed Column ✓
-- [x] Completed task title  
-```
-
-- Checkboxes are used as described in [GFM - GitHub Flavored Markdown - Task Lists](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) but they are optional.
-- A task list without checkboxes look like this:
-
-```
-### Column Name
-- Task title ~3d #type @name yyyy-mm-dd  
-- Sub-task or description  
-
-### Completed Column ✓
-- Completed task title  
-```
-
-### See also
-- [An example of TODO.md](TODO.md)
-- [Vscode Kanban Extension](https://bit.ly/2JcrUWJ)
-
 ## Delete Repo from local machine
 
 In order to delete the repository from your local machine, simply delete the folder. Make sure you uploaded all your changes before deleting. 

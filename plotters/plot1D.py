@@ -28,31 +28,29 @@ import pyLEK.plotters.plotHelpers as plotHelpers
 # ----------------------------------------------------------------------
 
 
-def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
-           dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
-           xlim=[], ylim=[], xscale='linear', yscale='linear', xlabelformat='%.1f', ylabelformat='%.1f',
-           style_dict={}, mpl='_2D', colorScheme='Monochrome', variation='color', customCycler=None,
+def plot1D(x, *, s=None, c=None, xlabel=None, ylabel=None, title=None, legend=None,
+           dir_fileName=None, vLines=None, vTexts=None,
+           xlim=[], ylim=[-0.5, 0.5], xticks=True, xscale='linear',  xlabelformat='%.1f',
+           style_dict={}, mpl='_1D', colorScheme='Monochrome', variation='color', customCycler=None,
            savePlt=False, savePkl=False, showPlt=False, saveTex=False,
            fig=None, ax=None, annotate=[]):
     """Plotting 2-D Lines (x,y-plot) on one figure in a uniform style
     :param x: list w/ data to plot, with shape [n_row, datapoints]
-    :param y: list w/ data to plot, with shape [n_row, datapoints]
+    :param s: list w/ size of markers to plot, with shape [datapoints] 
+    :param c: list w/ color of markers to plot, with shape [datapoints]
     :param xlabel: string w/ labels for x axis
-    :param xlabel: string w/ labels for y axis
+    :param ylabel: string w/ labels for y axis
     :param title: string w/ plot title
     :param legend: list w/ legends [n]
     :param dir_fileName: string w/ Directory / Filename to save to,  
                          must be specified when savePlt is specified
     :param vLines: list w/ floats on where to add vertical line
     :param vTexts: list w/ strings for the vertical lines 
-    :param hLines: list w/ floats on where to add horizontal line
-    :param hTexts: list w/ strings for the horizontal lines 
     :param xlim: list w/ limits  for x axis [xmin, xmax]
     :param ylim: list w/ limits  for y axis [ymin, ymax]
+    :param xticks: bool true to annotate ticks based on data and limits
     :param xscale: string w/ scales acc. to matplotlib
-    :param yscale: string w/ scales acc. to matplotlib
     :param xlabelformat: string w/ format for x axis labels
-    :param ylabelformat: string w/ format for y axis labels
     :param style_dict: dict w/ settings to overwrite mplstyle-template
     :param mpl: string w/ name of the mplstyle-sheet
     :param colorScheme: string ('Monochrome', 'UniS')
@@ -81,8 +79,7 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     plotHelpers.fontChecker()
 
     # Prepare Plots
-    x = np.transpose(x)
-    y = np.transpose(y)
+    y = np.zeros(len(x), )
 
     # An empty figure with one axe
     if fig is None:
@@ -94,9 +91,10 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 
     # Setting the x-axis / y-axis label of the axe-object
     if not (xlabel is None):
-        ax.set_xlabel(xlabel)
-    if not (ylabel is None):
-        ax.set_ylabel(ylabel)
+        ax.set_xlabel(xlabel, loc='right', )
+
+    if not (ylabel) is None:
+        ax.set_ylabel(ylabel, rotation=0, va='center', ha='right', labelpad=12)
 
     # Setting the x-axis / y-axis limits of the axe-object
     if xlim:
@@ -104,22 +102,31 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     if ylim:
         ax.set_ylim(ylim)
 
+    # Setting position spines in data coordinate
+    ax.spines['bottom'].set_position(('data', 0))
+    ax.spines['top'].set_position(('data', 0))
+
     # Setting the x-axis / y-axis scale of the axe-object
     if xscale:
         ax.set_xscale(xscale)
-    if yscale:
-        ax.set_yscale(yscale)
 
     # Setting the x-axis / y-axis label format of the axe-object
     if xlabelformat:
         ax.xaxis.set_major_formatter(FormatStrFormatter(xlabelformat))
-    if ylabelformat:
-        ax.yaxis.set_major_formatter(FormatStrFormatter(ylabelformat))
 
     # Anmerkungen für Punkte im Plot
     if annotate:
         for a in annotate:
             ax.annotate(a[0], a[1])
+
+    # Add vertical line / arrow on spine
+    if True and xlim:
+        ax.plot(1.00, 0, ">k", transform=ax.get_yaxis_transform(),
+                clip_on=False, fillstyle='full', markeredgewidth=1, markersize=4)
+        ax.plot(xlim[0], 0, "|k",
+                clip_on=False, fillstyle='full', markeredgewidth=1, markersize=8, )
+        ax.plot(xlim[1], 0, "|k",
+                clip_on=False, fillstyle='full', markeredgewidth=1, markersize=8, )
 
     # Create color / linestyles
     if customCycler is None:
@@ -129,7 +136,17 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     ax.set_prop_cycle(customCycler)
 
     # 2D - Plot of the axe-object
-    ax.plot(x, y, label='label')
+    if c and s:
+        ax.scatter(x, y, c=c, s=s, clip_on=False, zorder=3)
+
+    elif s:
+        ax.scatter(x, y, s=s, clip_on=False, zorder=3)
+
+    elif c:
+        ax.scatter(x, y, c=c, clip_on=False, zorder=3)
+
+    else:
+        ax.scatter(x, y, clip_on=False, zorder=3)
 
     # Correctly ordering legend entries by replacing labels with entries
     # from the legend list. If this is not done there is not order in
@@ -152,6 +169,21 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     line.set_linewidth(0)
             line.set_alpha(1.0)
 
+    if xticks:
+        # Set ticks based on data and limits
+        xmin, xmax = ax.get_xlim()
+
+        # Major ticks - Bottom spine
+        ax.set_xticks([xmin, xmax], [xmin, xmax], minor=False)
+        # Minor ticks - Top spine
+        ax.set_xticks(x, x, minor=True)
+
+        ax.xaxis.set_major_formatter(FormatStrFormatter(xlabelformat))
+        ax.xaxis.set_minor_formatter(FormatStrFormatter(xlabelformat))
+
+        # Reset limits
+        ax.set_xlim([xmin, .075 * (xmax-xmin) + xmax], )
+
     # Add vertical line
     if vLines:
         for vLine in vLines:
@@ -167,20 +199,6 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
                     horizontalalignment='right', verticalalignment='bottom',
                     fontsize='x-small')
 
-    # Add horizontal line
-    if hLines:
-        for hLine in hLines:
-            # Add vertical line to ax
-            ax.axhline(hLine, linestyle="--", linewidth=1.0, marker="None", color='black',
-                       zorder=max(len(x), len(y))+1)
-
-    if hTexts:
-        for hLine, hText in zip(hLines, hTexts):
-            # Add Text to lines
-            ax.text(0.02 * (ax.get_xlim()[1] - ax.get_xlim()[0]) + ax.get_xlim()[0], hLine,
-                    hText, rotation=0, rotation_mode='anchor',
-                    horizontalalignment='left', verticalalignment='bottom',
-                    fontsize='x-small')
     # Save plot
     if savePlt == True:
         try:
@@ -222,149 +240,14 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
 # ----------------------------------------------------------------------
 
 
-def sample_1(*, showPlt=True, fig=None, ax=None):
-    # FIRST PLOT
-    # only show plot with custom size and linewidth, add a vertical line
-    # Example for DIN A4 Page with left and right margin of 2.5cm
-    # figure size is always in inches (1 in = 2.54 cm)
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "Test Title"
-
-    vLines = [np.mean(x)]
-    vTexts = ['test description']
-
-    hLines = [np.std(y)]
-    hTexts = ['test description']
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
-
-    # plot2D w/ all available options
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title, legend=None,
-                     dir_fileName=None, vLines=vLines, vTexts=vTexts, hLines=hLines, hTexts=hTexts,
-                     xlim=[], ylim=[], xscale='linear', yscale='linear',
-                     style_dict=style_dict, mpl='_2D', colorScheme='UniS', variation='color', customCycler=None,
-                     savePlt=False, savePkl=False, showPlt=showPlt, saveTex=False,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
 def sample_2(*, showPlt=True, fig=None, ax=None):
-    # SECOND PLOT
-    # save in this folder as .pdf  and show plot
-    # plot without a line but only with different markers
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 8, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    style_dict = {"lines.linewidth": 0,
-                  "savefig.format": "pdf"}
-
-    legend = ["testdata1", "testdata2", "testdata3", "testdata4",
-              "testdata5", "testdata6", "testdata7", "testdata8"]
-
-    # Change to current file location
-    os.chdir(os.path.dirname(sys.argv[0]))
-
-    dir_fileName = "plot_as_pdf_example"
-    # plot2D w/ only specified options, save as .pdf
-    fig, ax = plot2D([x, x, x, x, x, x, x, x], y, legend=legend,
-                     dir_fileName=dir_fileName,
-                     style_dict=style_dict, variation='marker',
-                     showPlt=showPlt, savePlt=True,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
-def sample_3(*, showPlt=True, fig=None, ax=None):
-    # THIRD PLOT
-    # save in this folder as .pdf_tex for latex and show plot
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "LaTeX (.pdf\_tex) example \n legend w/ LaTeX Code to be compiled"
-
-    legend = [r"\$\sin x\$", r"\$\sin x + \frac{\pi}{2}\$",
-              r"\footnotesize{testdata3}", r"\bfseries{testdata4}"]
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 2, "figure.figsize": figSize}
-
-    # Change to current file location
-    os.chdir(os.path.dirname(sys.argv[0]))
-
-    dir_fileName = "plot_as_pdftex_example"
-    # plot2D w/ only specified options, save as .pdf_tex
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
-                     legend=legend, dir_fileName=dir_fileName,
-                     style_dict=style_dict, variation='color',
-                     showPlt=showPlt, saveTex=True,
-                     fig=fig, ax=ax)
-
-    return fig, ax
-
-
-def sample_4(*, showPlt=True, fig=None, ax=None):
-    # FOURTH PLOT
-    # Use seaborn color scheme & show plot
-    # For searborn color schemes see:
-    # https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
-
-    # Any other (custom) color scheme can be used by creating a cycler
-    # See also: https://matplotlib.org/stable/tutorials/intermediate/color_cycle.html
-
-    x = np.linspace(0, 2 * np.pi, 50)
-    offsets = np.linspace(0, 2 * np.pi, 4, endpoint=False)
-    y = [np.sin(x + phi) for phi in offsets]
-
-    xlabel = "Test X Axis"
-    ylabel = "Test Y Axis"
-
-    title = "Seaborn Color Scheme \"OrRd_r\""
-
-    figSize = plotHelpers.calcFigSize()
-
-    style_dict = {"lines.linewidth": 5, "figure.figsize": figSize}
-
-    # Creating a custom cycler with predefined searborn color scheme
-    import seaborn as sns
-    from cycler import cycler
-
-    N_colors = 5            # Number of colors
-    paletteName = "OrRd_r"  # Name of seaborn color palette
-
-    # Create the color palette ...
-    customColorPalette = sns.color_palette(
-        palette=paletteName, as_cmap=True)(np.linspace(0, 1, N_colors))
-
-    # ... and create a cycler from it
-    customCycler = cycler(color=customColorPalette)
-
-    # plot2D w/ only specified options, save as .pdf_tex
-    fig, ax = plot2D([x, x, x, x], y, xlabel=xlabel, ylabel=ylabel, title=title,
-                     style_dict=style_dict, customCycler=customCycler,
-                     showPlt=showPlt,
-                     fig=fig, ax=ax)
+    x = [0.7, 1.3, 1.5, 1.8]
+    xlim = [0, 2]
+    fig, ax = plot1D(x, showPlt=showPlt, xlim=xlim,
+                     xlabel='x', ylabel='$f_{1,k}$', fig=fig, ax=ax)
 
     return fig, ax
 
 
 if __name__ == "__main__":
-    sample_1()
     sample_2()
-    sample_3()
-    sample_4()

@@ -1,17 +1,25 @@
 # mpl plot Styles
 *.mplstyle
+!_1D.mplstyle
 !_2D.mplstyle
+!_3D.mplstyle
 !_barchart_v.mplstyle
 !_barchart_h.mplstyle
 !_piechart.mplstyle
+!_scatter.mplstyle
 
 # Exclude all .py
 *.py
 
 # keep plotters
+!plot1D.py
 !plot2D.py
+!plot3D_surf.py
+!plot3D_trisurf.py
+!plot4D_surf.py
 !plotBarChart.py
 !plotPieChart.py
+!plotScatter.py
 !plotHelpers.py
 !mergePicklePlots.py
 
