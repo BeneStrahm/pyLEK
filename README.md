@@ -138,11 +138,10 @@ When adding new functions always respect the following template and the style gu
 https://www.python.org/dev/peps/pep-0008/
 
 ## Import modules / usage
-1. Add the path of this folder (e.g. if the pyLEK folder is located under C:\Users\ac123456\GitHub\pyLEK use the path C:\Users\ac123456\GitHub) to PYTHONPATH  (Umgebungsvariable -> Nutzervariablen). 
-Now you don't have to add the full path for import statements.
-https://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages
-
-2. import modules, z.B: from pyLEK.helpers import pyExtras
+1. Open CLI (e.g. "cmd")
+2. Navigate to the folder where pyLEK is located
+3. Install using "pip install ." 
+4. import modules, z.B: from pyLEK.helpers import pyExtras
 
 ## .gitignore / Custom scripts
 Ignored files are usually build artifacts and machine generated files that can be derived from your repository source or should otherwise not be committed. Some common examples are:
