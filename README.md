@@ -138,9 +138,9 @@ When adding new functions always respect the following template and the style gu
 https://www.python.org/dev/peps/pep-0008/
 
 ## Import modules / usage
-1. Open CLI (e.g. "cmd")
+1. Clone using "git clone https://github.com/BeneStrahm/pyLEK.git --branch v0.1.0"
 2. Navigate to the folder where pyLEK is located
-3. Install using "pip install ." 
+3. Install using "pip install pyLEK/" 
 4. import modules, z.B: from pyLEK.helpers import pyExtras
 
 ## .gitignore / Custom scripts
