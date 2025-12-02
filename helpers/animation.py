@@ -17,13 +17,14 @@ from pyLEK.helpers import filemanager
 
 def getFiles(*, inFolder=None):
     if inFolder == None:
-        inFolder = filemanager.folderDialog(title="Choose the folder containing the files to be converted")
+        inFolder = filemanager.folderDialog(
+            title="Choose the folder containing the files to be converted")
 
     # Select as current wkdir
     os.chdir(inFolder)
 
     # Walk through selected folder and scan for all files
-    dirpath, dirnames, filenames = filemanager.scanFolderForFiles(os.getcwd())
+    _, _, filenames = filemanager.scanFolder(os.getcwd())
 
     return inFolder, filenames
 
@@ -49,7 +50,8 @@ def pngToMp4(*, inFolder=None):
                 image = imageio.imread(filename)
                 writer.append_data(image)
 
-    print('.. were converted to \"' + outFile + '.mp4\" in path \"' + inFolder + '\"')
+    print('.. were converted to \"' + outFile +
+          '.mp4\" in path \"' + inFolder + '\"')
 
 
 def pngToGif(*, inFolder=None):
@@ -72,7 +74,9 @@ def pngToGif(*, inFolder=None):
                 image = imageio.imread(filename)
                 writer.append_data(image)
 
-    print('.. were converted to \"' + outFile + '.gif\" in path \"' + inFolder + '\"')
+    print('.. were converted to \"' + outFile +
+          '.gif\" in path \"' + inFolder + '\"')
+
 
 if __name__ == "__main__":
     # Opens user dialog to select functions from predefined list
@@ -84,4 +88,3 @@ if __name__ == "__main__":
         'pngToMp4':  pngToMp4,
         'pngToGif':  pngToGif,
     }.get(option)()
-

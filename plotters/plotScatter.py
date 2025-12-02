@@ -193,7 +193,6 @@ def plotScatter(x, y, s=None, c=None, *, xlabel=None, ylabel=None, title=None, l
     if savePlt == True:
         try:
             plt.savefig(dir_fileName)
-            plt.savefig(dir_fileName + ".png")
         except ValueError:
             print("Error saving plot: To save plot specify a file name")
 

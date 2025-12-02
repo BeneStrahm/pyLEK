@@ -91,10 +91,11 @@ def scanSubdirsForFilesWithExtension(dirpath, extension):
     filepaths = []
     for root, directories, file in os.walk(dirpath):
         for file in file:
-            if(file.endswith(extension)):
+            if (file.endswith(extension)):
                 filenames.append(file)
                 filepaths.append(os.path.join(root, file))
     return filenames, filepaths
+
 
 def folderDialog(title=None):
     """Opens dialog to choose a folder

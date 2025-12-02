@@ -9,6 +9,7 @@
 # ------------------------------------------------------------------------------
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
 import pickle as pkl
 import numpy as np
 import matplotlib.ticker as mtick
@@ -32,7 +33,7 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
                  barChart='stacked', annotations=None, annotations_position='above',
                  orientation='vertical', bar_width=0.8, bar_spacing=0.2,
                  dir_fileName=None, vLines=None, vTexts=None,  hLines=None, hTexts=None,
-                 xlim=[], ylim=[], xscale='linear', yscale='linear',
+                 xlim=[], ylim=[], xscale='linear', yscale='linear', xlabelformat='%.1f', ylabelformat='%.1f',
                  style_dict={}, mpl='_barchart_v', colorScheme='Monochrome', variation='color', customCycler=None,
                  savePlt=False, savePkl=False, showPlt=False, saveTex=False,
                  fig=None, ax=None):
@@ -119,6 +120,12 @@ def plotBarChart(y, *, xlabel=None, ylabel=None, title=None, legend=None,
     # Setting the x-axis / y-axis scale of the axe-object
     ax.set_xscale(xscale)
     ax.set_yscale(yscale)
+
+    # Setting the x-axis / y-axis label format of the axe-object
+    if xlabelformat:
+        ax.xaxis.set_major_formatter(FormatStrFormatter(xlabelformat))
+    if ylabelformat:
+        ax.yaxis.set_major_formatter(FormatStrFormatter(ylabelformat))
 
     # Create color / linestyles
     if customCycler is None:

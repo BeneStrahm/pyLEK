@@ -12,7 +12,7 @@
    1. [Style guideline](#style-guideline)
    1. [Import modules / usage](#import-modules--usage)
    1. [.gitignore / Custom scripts](#gitignore--custom-scripts)
-   1. [Linked Repositories (Submodules)](#linked-repositories-submodules)
+   1. [Linked Repositories](#linked-repositories)
    1. [Delete Repo from local machine](#delete-repo-from-local-machine)
 
 <a name="headers"/>
@@ -158,30 +158,15 @@ Ignored files are tracked in a special file named .gitignore that is checked in 
 
 .gitignore also offers support for custom files. All files named with the prefix *custom*, eg "custom_plot2D.py" will be ignored for upload but will remain on your local machine. Saying you want to create your own plot2D.py, just copy the file and rename it as "custom_plot2D.py", and it will not be uploaded to the repository.
 
-## Linked Repositories (Submodules)
-The repository is using linked repositories created by other authors. In order to setup new submodules check out https://git-scm.com/book/en/v2/Git-Tools-Submodules
-
-When cloning the pyLEK-Repo, by default you get the directories that contain submodules, but none of the files within them yet.
-
-Too pull submodules, from the root of the repo just run `<git submodule init>` to initialize your local configuration file, and `<git submodule update>` to fetch all the data from that project. 
-
-Submodules are linked to a certain commit of the submodule. In case the submodule has been updated, the link in the project has to be updated manually. In order to do so, execute `<git submodule update --remote --merge>` from the project folder.
+## Linked Repositories 
+The repository is using linked repositories created by other authors. 
 
 ### silaxer/LaTeX
 The ILEK-LaTeX template for theses, see https://github.com/Silaxer/Vorlage_Abschlussarbeiten
 
-In order to use just copy the folder.
-
 ### robbievanleeuwen/feastruct
 Structural finite element analysis, the pythonic way, see https://github.com/robbievanleeuwen/feastruct/
 
-In order to use the module:
-
-1. Open "cmd" as Administrator
-2. With "cd" navigate to your local GitHub-Folder (e.g. C:\Users\Username\GitHub\pyLEK\feastruct) 
-3. Install with py setup.py install
-
-For the usage check out feastruct/examples
 ## Delete Repo from local machine
 
 In order to delete the repository from your local machine, simply delete the folder. Make sure you uploaded all your changes before deleting. 

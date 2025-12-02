@@ -185,7 +185,6 @@ def plot2D(x, y, *, xlabel=None, ylabel=None, title=None, legend=None,
     if savePlt == True:
         try:
             plt.savefig(dir_fileName)
-            plt.savefig(dir_fileName + ".png")
         except ValueError:
             print("Error saving plot: To save plot specify a file name")
 
