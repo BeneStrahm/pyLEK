@@ -23,6 +23,9 @@
 !plotHelpers.py
 !mergePicklePlots.py
 
+# keep __init__
+!__init__
+
 # keep plotStyle 
 !colorCycler.py
 !mplStyle.py
