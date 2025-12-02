@@ -22,6 +22,7 @@ def findPlotStyle(mpl):
     import pathlib
     import os
     import sys
+
     # 1) Look in pyLEK for choosen mpstyle
     try:
         # Get path of this file (..pyLEK/plotStyle)
@@ -31,67 +32,83 @@ def findPlotStyle(mpl):
         mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
             thisDir, ".mplstyle")
 
-        i = mplStyles.index(mpl + ".mplstyle")
-        mplPath = mplPaths[i]
-        mplPath = os.path.splitext(mplPath)[0]
-        print('Using pyLEK-default .mplstyle: ' + mplPath)
-        return mplPath
-    except:
+        if mpl + ".mplstyle" in mplStyles:
+            i = mplStyles.index(mpl + ".mplstyle")
+            mplPath = mplPaths[i]
+            mplPath = os.path.splitext(mplPath)[0]
+            print('Using pyLEK-default .mplstyle: ' + mplPath)
+            return mplPath
+    except Exception:
+        # ignore and continue searching other locations
+        pass
 
-        # 2) Look in path of __main__ file for choosen mpstyle
-        try:
-            # Get path of __main__ file
-            mainFolder = pathlib.Path(__main__.__file__).parent.resolve()
+    # 2) Look in path of __main__ file for choosen mpstyle
+    try:
+        main_file = getattr(__main__, "__file__", None)
+        if main_file:
+            mainFolder = str(pathlib.Path(main_file).parent.resolve())
 
             # Search in the folder and subfolders of __main__
             mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
                 mainFolder, ".mplstyle")
 
-            i = mplStyles.index(mpl + ".mplstyle")
-            mplPath = mplPaths[i]
-            mplPath = os.path.splitext(mplPath)[0]
-            print('Using custom .mplstyle: ' + mplPath)
-            return mplPath
-        except:
+            if mpl + ".mplstyle" in mplStyles:
+                i = mplStyles.index(mpl + ".mplstyle")
+                mplPath = mplPaths[i]
+                mplPath = os.path.splitext(mplPath)[0]
+                print('Using custom .mplstyle: ' + mplPath)
+                return mplPath
+    except Exception:
+        pass
 
-            # 3) Look in PYTHONPATH for choosen mpstyle
+    # 3) Look in PYTHONPATH for choosen mpstyle
+    pythonPath = os.environ.get('PYTHONPATH', '')
+    if pythonPath:
+        for path in pythonPath.split(os.pathsep):
             try:
-                # Get all paths in PYTHONPATH
-                pythonPath = os.environ['PYTHONPATH'].split(os.pathsep)
+                # Search in the folder and subfolders of PYTHONPATH
+                mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+                    path, ".mplstyle")
 
-                for path in pythonPath:
-                    # Search in the folder and subfolders of PYTHONPATH
-                    mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
-                        path, ".mplstyle")
+                if mpl + ".mplstyle" in mplStyles:
+                    i = mplStyles.index(mpl + ".mplstyle")
+                    mplPath = mplPaths[i]
+                    mplPath = os.path.splitext(mplPath)[0]
+                    print('Using PYTHONPATH .mplstyle: ' + mplPath)
+                    return mplPath
+            except Exception:
+                continue
 
-                    if mpl + ".mplstyle" in mplStyles:
-                        i = mplStyles.index(mpl + ".mplstyle")
-                        mplPath = mplPaths[i]
-                        mplPath = os.path.splitext(mplPath)[0]
-                        print('Using PYTHONPATH .mplstyle: ' + mplPath)
-                        return mplPath
-            except:
+    # 4) Look in installed site-packages or sys.path for choosen mpstyle
+    try:
+        import site
+        try:
+            sitePaths = site.getsitepackages()
+        except Exception:
+            sitePaths = []
 
-                # 4) Look in installed site-packages for choosen mpstyle
-                try:
-                    import site
-                    sitePaths = site.getsitepackages()
+        # include sys.path as a fallback search space
+        search_paths = list(sitePaths) + list(sys.path)
 
-                    for sitePath in sitePaths:
-                        # Search in the folder and subfolders of site-packages
-                        mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
-                            sitePath, ".mplstyle")
+        for sitePath in search_paths:
+            try:
+                # Search in the folder and subfolders of site-packages / sys.path entries
+                mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+                    sitePath, ".mplstyle")
 
-                        if mpl + ".mplstyle" in mplStyles:
-                            i = mplStyles.index(mpl + ".mplstyle")
-                            mplPath = mplPaths[i]
-                            mplPath = os.path.splitext(mplPath)[0]
-                            print('Using site-packages .mplstyle: ' + mplPath)
-                            return mplPath
+                if mpl + ".mplstyle" in mplStyles:
+                    i = mplStyles.index(mpl + ".mplstyle")
+                    mplPath = mplPaths[i]
+                    mplPath = os.path.splitext(mplPath)[0]
+                    print('Using site-packages .mplstyle: ' + mplPath)
+                    return mplPath
+            except Exception:
+                continue
+    except Exception:
+        pass
 
-                except:
-                    raise FileNotFoundError(
-                        f".mplstyle '{mpl}.mplstyle' not found. Please specify a valid .mplstyle")
+    raise FileNotFoundError(
+        f".mplstyle '{mpl}.mplstyle' not found. Please specify a valid .mplstyle")
 
 
 def retrievePlotStyle(style_dict, mplpath):
