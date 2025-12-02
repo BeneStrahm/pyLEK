@@ -70,12 +70,28 @@ def findPlotStyle(mpl):
                         mplPath = os.path.splitext(mplPath)[0]
                         print('Using PYTHONPATH .mplstyle: ' + mplPath)
                         return mplPath
-
             except:
-                print(
-                    'Error Plotting: .mplstyle not found! Please specify a valid .mplstyle.')
-                print('Exiting Python-Code')
-                sys.exit(1)
+
+                # 4) Look in installed site-packages for choosen mpstyle
+                try:
+                    import site
+                    sitePaths = site.getsitepackages()
+
+                    for sitePath in sitePaths:
+                        # Search in the folder and subfolders of site-packages
+                        mplStyles, mplPaths = filemanager.scanSubdirsForFilesWithExtension(
+                            sitePath, ".mplstyle")
+
+                        if mpl + ".mplstyle" in mplStyles:
+                            i = mplStyles.index(mpl + ".mplstyle")
+                            mplPath = mplPaths[i]
+                            mplPath = os.path.splitext(mplPath)[0]
+                            print('Using site-packages .mplstyle: ' + mplPath)
+                            return mplPath
+
+                except:
+                    raise FileNotFoundError(
+                        f".mplstyle '{mpl}.mplstyle' not found. Please specify a valid .mplstyle")
 
 
 def retrievePlotStyle(style_dict, mplpath):
