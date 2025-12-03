@@ -32,9 +32,12 @@ dependencies = [
 
 [tool.setuptools]
 include-package-data = true
-packages = ["pyLEK"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["inkscape*", "sampleCode*", "snippets*"]
 
 [tool.setuptools.package-data]
-pyLEK = [
-    "*.json", "*.csv", "*.txt", "*.md", "*.yml", "*.yaml", "*.ini", "*.cfg", "*.npz", "*.npy", "*.mplstyle", "*.mustache"
+* = [
+    "*.mplstyle", "*.md", "*.mustache"
 ]

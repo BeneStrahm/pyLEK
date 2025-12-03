@@ -4,7 +4,10 @@ include LICENSE
 include pyproject.toml
 
 # Package data (common non-code assets)
-recursive-include pyLEK *.json *.csv *.txt *.md *.yml *.yaml *.ini *.cfg *.npz *.npy *.mplstyle *.md *.mustache
+recursive-include pyLEK/helpers *.mustache
+recursive-include pyLEK/helpers *.md
+recursive-include pyLEK/plotters *.md
+recursive-include pyLEK/plotters/plotstyle *.mplstyle
 
 # Exclusions
 global-exclude *.py[cod] __pycache__ *.so *.dylib .DS_Store Thumbs.db
