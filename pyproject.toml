@@ -38,6 +38,4 @@ where = ["."]
 exclude = ["inkscape*", "sampleCode*", "snippets*"]
 
 [tool.setuptools.package-data]
-* = [
-    "*.mplstyle", "*.md", "*.mustache"
-]
+"*" = ["*.mplstyle", "*.md", "*.mustache"]
